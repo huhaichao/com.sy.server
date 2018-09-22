@@ -1,0 +1,458 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>用户管理</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"></meta>
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css"></link><!-- 弹出窗口 -->
+<link rel="stylesheet" href="../css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../css/pubcss/tab.css"></link>
+<link rel="stylesheet" href="../css/pubcss/chg.css"></link>
+<script src="../tempalte/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../tempalte/js/charts/Chart.js"></script>
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		init();
+		    //var $("#empUserList") = $('#table').bootstrapTable({url: API_URL}),
+		   // $('#addrole').modal({show: false});
+		   // $('#editrole').modal({show: false});
+		   // $('.alert-msg').hide();
+			//querys();
+			//initcreate(); 
+	 });
+    
+    
+    
+    
+    function init() {  
+	    $("#hacker").bootstrapTable({  
+	        url: 'init',                    //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 12,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            queryParamsType : "undefined",
+            queryParams: function queryParams(params) {   //设置查询参数
+            	var array=$("#date2").val().split(" - ");
+                var param = {
+                        //这里是在ajax发送请求的时候设置一些参数 params有什么东西，自己看看源码就知道了
+                        pageNo: params.pageNumber,
+                        pageSize: params.pageSize,
+                        starDate:array[0],
+                        endDate:array[1],
+                        roleName:$("#role2").val()
+                      };
+                      return param;
+                    },
+            strictSearch: true,
+            clickToSelect: true,                //是否启用点击选中行
+            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "tSyRoleId",              //每一行的唯一标识，一般为主键列
+            cardView: false,                    //是否显示详细视图
+            detailView: false,   
+	        columns : [{  
+	            field : 'id',  
+	            checkbox : true,  
+	            align : 'center',  
+	            valign : 'middle'  
+	        }, {  
+	            title : '序号',  
+	            field : 'tSyRoleId', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        },{  
+	            title : '用户名',  
+	            field : 'tSyRoleName', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        }, {  
+	            title : '密码',  
+	            field : 'tSyRoleCreatedate',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '角色',  
+	            field : 'tSyRoleCreatedate',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        },{  
+	            title : '备注',  
+	            field : 'tSyRoleDescription',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        } ,{  
+	            title : '操作',  
+	            field : 'tSyRoleDescription',  
+	            align : 'center',  
+	            events : 'operateEvents',
+	            formatter: operateFormatter	           
+	        } 	        
+	        ],  
+	        responseHandler : function(res) {  
+	            return {  
+	                total : res.total,  
+	                rows : res.records  	                
+	            };  
+	        },  
+	        onCheck:function(){  
+	            return false;
+	        },  
+	        onCheckAll:function(){  
+	        	return false;
+	        },  
+	        onUncheckAll:function(){ 
+	        	return false;
+	        },  
+	        onUncheck:function(){  
+	        	return false;
+	        }  
+	    })  
+	}  
+
+    function operateFormatter(value,row,index){
+    	var del="";
+    	var edit="";
+
+    	del='<a><button type="button" id="del" class="check btn btn-default"></button></a>';
+        edit='<a><button type="button" id="edit" class="check btn btn-default"></button></a>';
+        
+        return [del,edit].join('');
+    	
+     }
+       
+    
+</script>
+
+
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <!--<div class="tabList">
+        <ul>
+          <li class="cur">数据库日志</li>
+          <li>文本日志</li>
+        </ul>
+      </div> -->
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+                <td><b>管理员：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="manage" class="form-control" />
+                </td>
+                <td>&nbsp;&nbsp;<b>级别：</b> </td>
+                <td valign="middle"><select name="manageType" style=" width:100px;" class="form-control">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="button"  class="btn btn-success btn-sm" value="  查   询  "></input>
+                </td>
+				<td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="add" value="  新  增 " class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#add_qx_Info"></input>
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" border="1" class="table table-striped">
+            <tr style=" background: #FFCC66; height:28px; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户名 </td>
+              <td> 密码 </td>
+              <td> 角色 </td>
+              <td> 备注 </td>
+			  <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td> 1 </td>
+              <td> admin </td>
+              <td> ###### </td>
+              <td> 高级管理员 </td>
+              <td> 可创建、管理下级管理员的权限！</td>
+			  <td>&nbsp; 
+			  	
+			  </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 2 </td>
+              <td> tom </td>
+              <td> ###### </td>
+              <td> 中级管理员 </td>
+              <td> 管理后台 </td>
+			  <td> 
+			  	<input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+			  	<input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+				<input type="button" name="dj" value="  冻 结  " class="btn btn-primary btn-sm"/>
+				<input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+				<input type="button" name="sq" value="  授 权  " class="btn btn-warning btn-sm" data-toggle="modal" data-target="#sq_qx_Info"/>
+			  </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 3 </td>
+              <td> jerry </td>
+              <td> ###### </td>
+              <td> 中级管理员 </td>
+              <td> 管理后台 </td>
+			  <td> 
+			  	<input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+			  	<input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+				<input type="button" name="dj" value="  冻 结  " class="btn btn-primary btn-sm"/>
+				<input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+				<input type="button" name="sq" value="  授 权  " class="btn btn-warning btn-sm" data-toggle="modal" data-target="#sq_qx_Info"/>
+			  </td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- 查看窗口 start -->
+<div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">浏览角色</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户名：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="yhm" class="form-control" value="tom" disabled="disabled"/>
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>密码：</b> </td>
+                <td valign="middle">
+					<input type="password" style=" width:220px;" name="mm" class="form-control"  value="######" disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>角色：</b> </td>
+                <td valign="middle">
+					<select name="jstype" style=" width:220px;" class="form-control" disabled="disabled">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+				</td>
+				</tr>
+			  <tr>
+                <td valign="middle">&nbsp;&nbsp;<b>备注：</b> </td>
+				<td valign="middle">
+					<textarea cols="50" rows="6" name="bz" disabled="disabled">管理后台</textarea>
+				</td>
+              </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 查看窗口 end -->
+  <!-- 新增窗口 start -->
+  <div class="modal fade" id="add_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">新增后台用户</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户名：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="yhm" class="form-control"  /> </td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>密码：</b> </td>
+                <td valign="middle">
+					<input type="password" style=" width:220px;" name="mm" class="form-control"  />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>角色：</b> </td>
+                <td valign="middle">
+					<select name="jstype" style=" width:220px;" class="form-control">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+				</td>
+				</tr>
+				<tr>
+                <td valign="middle">&nbsp;&nbsp;<b>备注：</b> </td>
+				<td valign="middle">
+					<textarea cols="50" rows="6" name="bz"></textarea>
+				</td>
+              </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+            <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 新增窗口 end -->
+  <!-- 修改窗口 start -->
+  <div class="modal fade" id="mod_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">修改后台用户</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户名：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="yhm" class="form-control" value="tom" />
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>密码：</b> </td>
+                <td valign="middle">
+					<input type="password" style=" width:220px;" name="mm" class="form-control"  value="######"  />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>角色：</b> </td>
+                <td valign="middle">
+					<select name="jstype" style=" width:220px;" class="form-control">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+				</td>
+				</tr>
+			  <tr>
+                <td valign="middle">&nbsp;&nbsp;<b>备注：</b> </td>
+				<td valign="middle">
+					<textarea cols="50" rows="6" name="bz">管理后台</textarea>
+				</td>
+              </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+             <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 修改窗口 end -->
+   <!-- 授权窗口 start -->
+  <div class="modal fade" id="sq_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">授权后台用户</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>授权用户</b> </td>
+                <td valign="middle">
+					tom
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>角色：</b> </td>
+                <td valign="middle">
+					<select name="jstype" style=" width:220px;" class="form-control">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+             <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 授权窗口 end -->
+</body>
+</html>

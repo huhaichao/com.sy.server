@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyCashAccountMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.bean.SyCashAccount">
+    <id column="T_SY_CASH_ACCOUNT_ID" jdbcType="INTEGER" property="tSyCashAccountId" />
+    <result column="T_SY_ACCOUNT" jdbcType="VARCHAR" property="tSyAccount" />
+    <result column="T_SY_CASH_ACCOUNT_NO" jdbcType="VARCHAR" property="tSyCashAccountNo" />
+    <result column="T_SY_CASH_AMOUNT" jdbcType="DOUBLE" property="tSyCashAmount" />
+    <result column="T_SY_CASH_TYPE" jdbcType="VARCHAR" property="tSyCashType" />
+    <result column="T_SY_CASH_OUTORIN_STATUS" jdbcType="VARCHAR" property="tSyCashOutorinStatus" />
+    <result column="T_SY_TREAD_TREADNO" jdbcType="VARCHAR" property="tSyTreadTreadno" />
+    <result column="T_SY_PS_ORDERNO" jdbcType="VARCHAR" property="tSyPsOrderno" />
+    <result column="T_SY_CASH_CREATE_DATE" jdbcType="DATE" property="tSyCashCreateDate" />
+    <result column="T_SY_MESSAGE_ID" jdbcType="VARCHAR" property="tSyMessageId" />
+    <result column="T_SY_DELETE_DATE" jdbcType="DATE" property="tSyDeleteDate" />
+    <result column="T_SY_DELETE_STATUS" jdbcType="VARCHAR" property="tSyDeleteStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_CASH_ACCOUNT_ID, T_SY_ACCOUNT, T_SY_CASH_ACCOUNT_NO, T_SY_CASH_AMOUNT, T_SY_CASH_TYPE, 
+    T_SY_CASH_OUTORIN_STATUS, T_SY_TREAD_TREADNO, T_SY_PS_ORDERNO, T_SY_CASH_CREATE_DATE, 
+    T_SY_MESSAGE_ID, T_SY_DELETE_DATE, T_SY_DELETE_STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.bean.SyCashAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_cash_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_cash_account
+    where T_SY_CASH_ACCOUNT_ID = #{tSyCashAccountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_cash_account
+    where T_SY_CASH_ACCOUNT_ID = #{tSyCashAccountId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.bean.SyCashAccountExample">
+    delete from t_sy_cash_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.bean.SyCashAccount">
+    insert into t_sy_cash_account (T_SY_CASH_ACCOUNT_ID, T_SY_ACCOUNT, T_SY_CASH_ACCOUNT_NO, 
+      T_SY_CASH_AMOUNT, T_SY_CASH_TYPE, T_SY_CASH_OUTORIN_STATUS, 
+      T_SY_TREAD_TREADNO, T_SY_PS_ORDERNO, T_SY_CASH_CREATE_DATE, 
+      T_SY_MESSAGE_ID, T_SY_DELETE_DATE, T_SY_DELETE_STATUS
+      )
+    values (#{tSyCashAccountId,jdbcType=INTEGER}, #{tSyAccount,jdbcType=VARCHAR}, #{tSyCashAccountNo,jdbcType=VARCHAR}, 
+      #{tSyCashAmount,jdbcType=DOUBLE}, #{tSyCashType,jdbcType=VARCHAR}, #{tSyCashOutorinStatus,jdbcType=VARCHAR}, 
+      #{tSyTreadTreadno,jdbcType=VARCHAR}, #{tSyPsOrderno,jdbcType=VARCHAR}, #{tSyCashCreateDate,jdbcType=DATE}, 
+      #{tSyMessageId,jdbcType=VARCHAR}, #{tSyDeleteDate,jdbcType=DATE}, #{tSyDeleteStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.bean.SyCashAccount">
+    insert into t_sy_cash_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyCashAccountId != null">
+        T_SY_CASH_ACCOUNT_ID,
+      </if>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT,
+      </if>
+      <if test="tSyCashAccountNo != null">
+        T_SY_CASH_ACCOUNT_NO,
+      </if>
+      <if test="tSyCashAmount != null">
+        T_SY_CASH_AMOUNT,
+      </if>
+      <if test="tSyCashType != null">
+        T_SY_CASH_TYPE,
+      </if>
+      <if test="tSyCashOutorinStatus != null">
+        T_SY_CASH_OUTORIN_STATUS,
+      </if>
+      <if test="tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO,
+      </if>
+      <if test="tSyPsOrderno != null">
+        T_SY_PS_ORDERNO,
+      </if>
+      <if test="tSyCashCreateDate != null">
+        T_SY_CASH_CREATE_DATE,
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID,
+      </if>
+      <if test="tSyDeleteDate != null">
+        T_SY_DELETE_DATE,
+      </if>
+      <if test="tSyDeleteStatus != null">
+        T_SY_DELETE_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyCashAccountId != null">
+        #{tSyCashAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyAccount != null">
+        #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashAccountNo != null">
+        #{tSyCashAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashAmount != null">
+        #{tSyCashAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tSyCashType != null">
+        #{tSyCashType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashOutorinStatus != null">
+        #{tSyCashOutorinStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadTreadno != null">
+        #{tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOrderno != null">
+        #{tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashCreateDate != null">
+        #{tSyCashCreateDate,jdbcType=DATE},
+      </if>
+      <if test="tSyMessageId != null">
+        #{tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDeleteDate != null">
+        #{tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="tSyDeleteStatus != null">
+        #{tSyDeleteStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.bean.SyCashAccountExample" resultType="java.lang.Long">
+    select count(*) from t_sy_cash_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_cash_account
+    <set>
+      <if test="record.tSyCashAccountId != null">
+        T_SY_CASH_ACCOUNT_ID = #{record.tSyCashAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyAccount != null">
+        T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCashAccountNo != null">
+        T_SY_CASH_ACCOUNT_NO = #{record.tSyCashAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCashAmount != null">
+        T_SY_CASH_AMOUNT = #{record.tSyCashAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tSyCashType != null">
+        T_SY_CASH_TYPE = #{record.tSyCashType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCashOutorinStatus != null">
+        T_SY_CASH_OUTORIN_STATUS = #{record.tSyCashOutorinStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO = #{record.tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsOrderno != null">
+        T_SY_PS_ORDERNO = #{record.tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCashCreateDate != null">
+        T_SY_CASH_CREATE_DATE = #{record.tSyCashCreateDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDeleteDate != null">
+        T_SY_DELETE_DATE = #{record.tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyDeleteStatus != null">
+        T_SY_DELETE_STATUS = #{record.tSyDeleteStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_cash_account
+    set T_SY_CASH_ACCOUNT_ID = #{record.tSyCashAccountId,jdbcType=INTEGER},
+      T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      T_SY_CASH_ACCOUNT_NO = #{record.tSyCashAccountNo,jdbcType=VARCHAR},
+      T_SY_CASH_AMOUNT = #{record.tSyCashAmount,jdbcType=DOUBLE},
+      T_SY_CASH_TYPE = #{record.tSyCashType,jdbcType=VARCHAR},
+      T_SY_CASH_OUTORIN_STATUS = #{record.tSyCashOutorinStatus,jdbcType=VARCHAR},
+      T_SY_TREAD_TREADNO = #{record.tSyTreadTreadno,jdbcType=VARCHAR},
+      T_SY_PS_ORDERNO = #{record.tSyPsOrderno,jdbcType=VARCHAR},
+      T_SY_CASH_CREATE_DATE = #{record.tSyCashCreateDate,jdbcType=DATE},
+      T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=VARCHAR},
+      T_SY_DELETE_DATE = #{record.tSyDeleteDate,jdbcType=DATE},
+      T_SY_DELETE_STATUS = #{record.tSyDeleteStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.bean.SyCashAccount">
+    update t_sy_cash_account
+    <set>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashAccountNo != null">
+        T_SY_CASH_ACCOUNT_NO = #{tSyCashAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashAmount != null">
+        T_SY_CASH_AMOUNT = #{tSyCashAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tSyCashType != null">
+        T_SY_CASH_TYPE = #{tSyCashType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashOutorinStatus != null">
+        T_SY_CASH_OUTORIN_STATUS = #{tSyCashOutorinStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO = #{tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOrderno != null">
+        T_SY_PS_ORDERNO = #{tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCashCreateDate != null">
+        T_SY_CASH_CREATE_DATE = #{tSyCashCreateDate,jdbcType=DATE},
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDeleteDate != null">
+        T_SY_DELETE_DATE = #{tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="tSyDeleteStatus != null">
+        T_SY_DELETE_STATUS = #{tSyDeleteStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_CASH_ACCOUNT_ID = #{tSyCashAccountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.bean.SyCashAccount">
+    update t_sy_cash_account
+    set T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      T_SY_CASH_ACCOUNT_NO = #{tSyCashAccountNo,jdbcType=VARCHAR},
+      T_SY_CASH_AMOUNT = #{tSyCashAmount,jdbcType=DOUBLE},
+      T_SY_CASH_TYPE = #{tSyCashType,jdbcType=VARCHAR},
+      T_SY_CASH_OUTORIN_STATUS = #{tSyCashOutorinStatus,jdbcType=VARCHAR},
+      T_SY_TREAD_TREADNO = #{tSyTreadTreadno,jdbcType=VARCHAR},
+      T_SY_PS_ORDERNO = #{tSyPsOrderno,jdbcType=VARCHAR},
+      T_SY_CASH_CREATE_DATE = #{tSyCashCreateDate,jdbcType=DATE},
+      T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=VARCHAR},
+      T_SY_DELETE_DATE = #{tSyDeleteDate,jdbcType=DATE},
+      T_SY_DELETE_STATUS = #{tSyDeleteStatus,jdbcType=VARCHAR}
+    where T_SY_CASH_ACCOUNT_ID = #{tSyCashAccountId,jdbcType=INTEGER}
+  </update>
+</mapper>

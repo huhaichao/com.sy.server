@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyUserroleMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyUserrole">
+    <id column="T_SY_USERROLE_ID" jdbcType="VARCHAR" property="tSyUserroleId" />
+    <result column="T_SY_USER_ID" jdbcType="VARCHAR" property="tSyUserId" />
+    <result column="T_SY_ROLE_ID" jdbcType="VARCHAR" property="tSyRoleId" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_USERROLE_ID, T_SY_USER_ID, T_SY_ROLE_ID, T_SY_BZ1, T_SY_BZ2
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyUserroleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_userrole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_userrole
+    where T_SY_USERROLE_ID = #{tSyUserroleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_sy_userrole
+    where T_SY_USERROLE_ID = #{tSyUserroleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyUserroleExample">
+    delete from t_sy_userrole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyUserrole">
+    insert into t_sy_userrole (T_SY_USERROLE_ID, T_SY_USER_ID, T_SY_ROLE_ID, 
+      T_SY_BZ1, T_SY_BZ2)
+    values (#{tSyUserroleId,jdbcType=VARCHAR}, #{tSyUserId,jdbcType=VARCHAR}, #{tSyRoleId,jdbcType=VARCHAR}, 
+      #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyUserrole">
+    insert into t_sy_userrole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyUserroleId != null">
+        T_SY_USERROLE_ID,
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyRoleId != null">
+        T_SY_ROLE_ID,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyUserroleId != null">
+        #{tSyUserroleId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyRoleId != null">
+        #{tSyRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyUserroleExample" resultType="java.lang.Long">
+    select count(*) from t_sy_userrole
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_userrole
+    <set>
+      <if test="record.tSyUserroleId != null">
+        T_SY_USERROLE_ID = #{record.tSyUserroleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyRoleId != null">
+        T_SY_ROLE_ID = #{record.tSyRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_userrole
+    set T_SY_USERROLE_ID = #{record.tSyUserroleId,jdbcType=VARCHAR},
+      T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      T_SY_ROLE_ID = #{record.tSyRoleId,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyUserrole">
+    update t_sy_userrole
+    <set>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyRoleId != null">
+        T_SY_ROLE_ID = #{tSyRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_USERROLE_ID = #{tSyUserroleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyUserrole">
+    update t_sy_userrole
+    set T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      T_SY_ROLE_ID = #{tSyRoleId,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR}
+    where T_SY_USERROLE_ID = #{tSyUserroleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

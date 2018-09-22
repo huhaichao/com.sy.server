@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyDictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyDictionary">
+    <id column="T_SY_DICTIONARY_ID" jdbcType="INTEGER" property="tSyDictionaryId" />
+    <result column="T_SY_DICTIONARY_TYPE" jdbcType="VARCHAR" property="tSyDictionaryType" />
+    <result column="T_SY_IDENTIFY_CONTENT" jdbcType="VARCHAR" property="tSyIdentifyContent" />
+    <result column="T_SY_CONVERT_CONTENT" jdbcType="VARCHAR" property="tSyConvertContent" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_DICTIONARY_ID, T_SY_DICTIONARY_TYPE, T_SY_IDENTIFY_CONTENT, T_SY_CONVERT_CONTENT, 
+    T_SY_BZ1, T_SY_BZ2
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyDictionaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from "t_sy_dictionary"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "t_sy_dictionary"
+    where T_SY_DICTIONARY_ID = #{tSyDictionaryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_sy_dictionary"
+    where T_SY_DICTIONARY_ID = #{tSyDictionaryId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyDictionaryExample">
+    delete from "t_sy_dictionary"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyDictionary">
+    insert into "t_sy_dictionary" (T_SY_DICTIONARY_ID, T_SY_DICTIONARY_TYPE, 
+      T_SY_IDENTIFY_CONTENT, T_SY_CONVERT_CONTENT, 
+      T_SY_BZ1, T_SY_BZ2)
+    values (#{tSyDictionaryId,jdbcType=INTEGER}, #{tSyDictionaryType,jdbcType=VARCHAR}, 
+      #{tSyIdentifyContent,jdbcType=VARCHAR}, #{tSyConvertContent,jdbcType=VARCHAR}, 
+      #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyDictionary">
+    insert into "t_sy_dictionary"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyDictionaryId != null">
+        T_SY_DICTIONARY_ID,
+      </if>
+      <if test="tSyDictionaryType != null">
+        T_SY_DICTIONARY_TYPE,
+      </if>
+      <if test="tSyIdentifyContent != null">
+        T_SY_IDENTIFY_CONTENT,
+      </if>
+      <if test="tSyConvertContent != null">
+        T_SY_CONVERT_CONTENT,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyDictionaryId != null">
+        #{tSyDictionaryId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDictionaryType != null">
+        #{tSyDictionaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyIdentifyContent != null">
+        #{tSyIdentifyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyConvertContent != null">
+        #{tSyConvertContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyDictionaryExample" resultType="java.lang.Long">
+    select count(*) from "t_sy_dictionary"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update "t_sy_dictionary"
+    <set>
+      <if test="record.tSyDictionaryId != null">
+        T_SY_DICTIONARY_ID = #{record.tSyDictionaryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyDictionaryType != null">
+        T_SY_DICTIONARY_TYPE = #{record.tSyDictionaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyIdentifyContent != null">
+        T_SY_IDENTIFY_CONTENT = #{record.tSyIdentifyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyConvertContent != null">
+        T_SY_CONVERT_CONTENT = #{record.tSyConvertContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update "t_sy_dictionary"
+    set T_SY_DICTIONARY_ID = #{record.tSyDictionaryId,jdbcType=INTEGER},
+      T_SY_DICTIONARY_TYPE = #{record.tSyDictionaryType,jdbcType=VARCHAR},
+      T_SY_IDENTIFY_CONTENT = #{record.tSyIdentifyContent,jdbcType=VARCHAR},
+      T_SY_CONVERT_CONTENT = #{record.tSyConvertContent,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyDictionary">
+    update "t_sy_dictionary"
+    <set>
+      <if test="tSyDictionaryType != null">
+        T_SY_DICTIONARY_TYPE = #{tSyDictionaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyIdentifyContent != null">
+        T_SY_IDENTIFY_CONTENT = #{tSyIdentifyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyConvertContent != null">
+        T_SY_CONVERT_CONTENT = #{tSyConvertContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_DICTIONARY_ID = #{tSyDictionaryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyDictionary">
+    update "t_sy_dictionary"
+    set T_SY_DICTIONARY_TYPE = #{tSyDictionaryType,jdbcType=VARCHAR},
+      T_SY_IDENTIFY_CONTENT = #{tSyIdentifyContent,jdbcType=VARCHAR},
+      T_SY_CONVERT_CONTENT = #{tSyConvertContent,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR}
+    where T_SY_DICTIONARY_ID = #{tSyDictionaryId,jdbcType=INTEGER}
+  </update>
+</mapper>

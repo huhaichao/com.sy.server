@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyMessageMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyMessage">
+    <id column="T_SY_MESSAGE_ID" jdbcType="INTEGER" property="tSyMessageId" />
+    <result column="T_SY_USER_ID" jdbcType="INTEGER" property="tSyUserId" />
+    <result column="T_SY_THINGS_NAME" jdbcType="VARCHAR" property="tSyThingsName" />
+    <result column="T_SY_THINGS_TYPE" jdbcType="VARCHAR" property="tSyThingsType" />
+    <result column="T_SY_MESSAGE_TYPE" jdbcType="VARCHAR" property="tSyMessageType" />
+    <result column="T_SY_PASSWORD" jdbcType="VARCHAR" property="tSyPassword" />
+    <result column="T_SY_MESSAGE_STATE" jdbcType="INTEGER" property="tSyMessageState" />
+    <result column="T_SY_SEND_TYPE" jdbcType="INTEGER" property="tSySendType" />
+    <result column="T_SY_DATE" jdbcType="DATE" property="tSyDate" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+    <result column="T_SY_ENDDATE" jdbcType="DATE" property="tSyEnddate" />
+    <result column="T_SY_EXPIRATION_DATE" jdbcType="DATE" property="tSyExpirationDate" />
+    <result column="T_SY_STATUS" jdbcType="VARCHAR" property="tSyStatus" />
+    <result column="T_SY_DEL_STATUS" jdbcType="VARCHAR" property="tSyDelStatus" />
+    <result column="T_SY_DEL_DATE" jdbcType="DATE" property="tSyDelDate" />
+    <result column="T_SY_CHECK" jdbcType="VARCHAR" property="tSyCheck" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_MESSAGE_ID, T_SY_USER_ID, T_SY_THINGS_NAME, T_SY_THINGS_TYPE, T_SY_MESSAGE_TYPE, 
+    T_SY_PASSWORD, T_SY_MESSAGE_STATE, T_SY_SEND_TYPE, T_SY_DATE, T_SY_BZ1, T_SY_BZ2, 
+    T_SY_ENDDATE, T_SY_EXPIRATION_DATE, T_SY_STATUS, T_SY_DEL_STATUS, T_SY_DEL_DATE, 
+    T_SY_CHECK
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from "t_sy_message"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_message
+    where T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_sy_message"
+    where T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyMessageExample">
+    delete from "t_sy_message"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyMessage" useGeneratedKeys="true" keyProperty="tSyMessageId">
+    <selectKey keyProperty="tSyMessageId" resultType="java.lang.Integer" order="AFTER">
+            select LAST_INSERT_ID()
+    </selectKey>
+    insert into t_sy_message ( T_SY_USER_ID, T_SY_THINGS_NAME, 
+      T_SY_THINGS_TYPE, T_SY_MESSAGE_TYPE, T_SY_PASSWORD, 
+      T_SY_MESSAGE_STATE, T_SY_SEND_TYPE, T_SY_DATE, 
+      T_SY_BZ1, T_SY_BZ2, T_SY_ENDDATE, 
+      T_SY_EXPIRATION_DATE, T_SY_STATUS, T_SY_DEL_STATUS, 
+      T_SY_DEL_DATE, T_SY_CHECK)
+    values (#{tSyUserId,jdbcType=INTEGER}, #{tSyThingsName,jdbcType=VARCHAR}, 
+      #{tSyThingsType,jdbcType=INTEGER}, #{tSyMessageType,jdbcType=INTEGER}, #{tSyPassword,jdbcType=VARCHAR}, 
+      #{tSyMessageState,jdbcType=INTEGER}, #{tSySendType,jdbcType=INTEGER}, #{tSyDate,jdbcType=DATE}, 
+      #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR}, #{tSyEnddate,jdbcType=DATE}, 
+      #{tSyExpirationDate,jdbcType=DATE}, #{tSyStatus,jdbcType=VARCHAR}, #{tSyDelStatus,jdbcType=VARCHAR}, 
+      #{tSyDelDate,jdbcType=DATE}, #{tSyCheck,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyMessage">
+    insert into "t_sy_message"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID,
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyThingsName != null">
+        T_SY_THINGS_NAME,
+      </if>
+      <if test="tSyThingsType != null">
+        T_SY_THINGS_TYPE,
+      </if>
+      <if test="tSyMessageType != null">
+        T_SY_MESSAGE_TYPE,
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD,
+      </if>
+      <if test="tSyMessageState != null">
+        T_SY_MESSAGE_STATE,
+      </if>
+      <if test="tSySendType != null">
+        T_SY_SEND_TYPE,
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+      <if test="tSyEnddate != null">
+        T_SY_ENDDATE,
+      </if>
+      <if test="tSyExpirationDate != null">
+        T_SY_EXPIRATION_DATE,
+      </if>
+      <if test="tSyStatus != null">
+        T_SY_STATUS,
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS,
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE,
+      </if>
+      <if test="tSyCheck != null">
+        T_SY_CHECK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyMessageId != null">
+        #{tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyThingsName != null">
+        #{tSyThingsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyThingsType != null">
+        #{tSyThingsType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageType != null">
+        #{tSyMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPassword != null">
+        #{tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageState != null">
+        #{tSyMessageState,jdbcType=INTEGER},
+      </if>
+      <if test="tSySendType != null">
+        #{tSySendType,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDate != null">
+        #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyEnddate != null">
+        #{tSyEnddate,jdbcType=DATE},
+      </if>
+      <if test="tSyExpirationDate != null">
+        #{tSyExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="tSyStatus != null">
+        #{tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        #{tSyDelDate,jdbcType=DATE},
+      </if>
+      <if test="tSyCheck != null">
+        #{tSyCheck,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyMessageExample" resultType="java.lang.Long">
+    select count(*) from "t_sy_message"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update "t_sy_message"
+    <set>
+      <if test="record.tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyThingsName != null">
+        T_SY_THINGS_NAME = #{record.tSyThingsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyThingsType != null">
+        T_SY_THINGS_TYPE = #{record.tSyThingsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMessageType != null">
+        T_SY_MESSAGE_TYPE = #{record.tSyMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPassword != null">
+        T_SY_PASSWORD = #{record.tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMessageState != null">
+        T_SY_MESSAGE_STATE = #{record.tSyMessageState,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSySendType != null">
+        T_SY_SEND_TYPE = #{record.tSySendType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyDate != null">
+        T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyEnddate != null">
+        T_SY_ENDDATE = #{record.tSyEnddate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyExpirationDate != null">
+        T_SY_EXPIRATION_DATE = #{record.tSyExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyStatus != null">
+        T_SY_STATUS = #{record.tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelDate != null">
+        T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyCheck != null">
+        T_SY_CHECK = #{record.tSyCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update "t_sy_message"
+    set T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      T_SY_THINGS_NAME = #{record.tSyThingsName,jdbcType=VARCHAR},
+      T_SY_THINGS_TYPE = #{record.tSyThingsType,jdbcType=VARCHAR},
+      T_SY_MESSAGE_TYPE = #{record.tSyMessageType,jdbcType=VARCHAR},
+      T_SY_PASSWORD = #{record.tSyPassword,jdbcType=VARCHAR},
+      T_SY_MESSAGE_STATE = #{record.tSyMessageState,jdbcType=INTEGER},
+      T_SY_SEND_TYPE = #{record.tSySendType,jdbcType=INTEGER},
+      T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      T_SY_ENDDATE = #{record.tSyEnddate,jdbcType=DATE},
+      T_SY_EXPIRATION_DATE = #{record.tSyExpirationDate,jdbcType=DATE},
+      T_SY_STATUS = #{record.tSyStatus,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE},
+      T_SY_CHECK = #{record.tSyCheck,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyMessage">
+    update "t_sy_message"
+    <set>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyThingsName != null">
+        T_SY_THINGS_NAME = #{tSyThingsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyThingsType != null">
+        T_SY_THINGS_TYPE = #{tSyThingsType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageType != null">
+        T_SY_MESSAGE_TYPE = #{tSyMessageType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD = #{tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageState != null">
+        T_SY_MESSAGE_STATE = #{tSyMessageState,jdbcType=INTEGER},
+      </if>
+      <if test="tSySendType != null">
+        T_SY_SEND_TYPE = #{tSySendType,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyEnddate != null">
+        T_SY_ENDDATE = #{tSyEnddate,jdbcType=DATE},
+      </if>
+      <if test="tSyExpirationDate != null">
+        T_SY_EXPIRATION_DATE = #{tSyExpirationDate,jdbcType=DATE},
+      </if>
+      <if test="tSyStatus != null">
+        T_SY_STATUS = #{tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE},
+      </if>
+      <if test="tSyCheck != null">
+        T_SY_CHECK = #{tSyCheck,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyMessage">
+    update t_sy_message
+    set T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER},
+      T_SY_THINGS_NAME = #{tSyThingsName,jdbcType=VARCHAR},
+      T_SY_THINGS_TYPE = #{tSyThingsType,jdbcType=VARCHAR},
+      T_SY_MESSAGE_TYPE = #{tSyMessageType,jdbcType=VARCHAR},
+      T_SY_PASSWORD = #{tSyPassword,jdbcType=VARCHAR},
+      T_SY_MESSAGE_STATE = #{tSyMessageState,jdbcType=INTEGER},
+      T_SY_SEND_TYPE = #{tSySendType,jdbcType=INTEGER},
+      T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      T_SY_ENDDATE = #{tSyEnddate,jdbcType=DATE},
+      T_SY_EXPIRATION_DATE = #{tSyExpirationDate,jdbcType=DATE},
+      T_SY_STATUS = #{tSyStatus,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE},
+      T_SY_CHECK = #{tSyCheck,jdbcType=VARCHAR}
+    where T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByItems" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select T_SY_IMGPATH,T_SY_LOSE_ADDRESS,T_SY_PUBLISHED_DATE,T_SY_ITEM_NAME,T_SY_BOUNTY_MONEY 
+    from (select * from t_sy_message 
+        where 
+      T_SY_DEL_STATUS=1
+     <if test="record.uid != null">
+       and T_SY_USER_ID = #{record.uid,jdbcType=VARCHAR}
+     </if>
+      <if test="record.msgtype!= null">
+       and T_SY_MESSAGE_TYPE = #{record.msgtype,jdbcType=INTEGER}
+     </if> 
+    ) a 
+    join 
+    (select * from  t_sy_item_information) b 
+    on 
+    a.t_sy_message_id=b.t_sy_message_id
+  </select>
+  
+  
+  
+  <update id="delMessage" parameterType="com.sy.common.annotation.MapUtil">
+    update t_sy_message set  T_SY_DEL_STATUS = 1 where T_SY_MESSAGE_ID = #{record.msgid} and T_SY_USER_ID = #{record.uid}
+  </update>
+  
+  
+  
+  
+  
+    
+   <select id="selectBySyPeopleInformationsMap" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select 
+     b.T_SY_MESSAGE_ID,T_SY_NAME,T_SY_LOST_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_STATUS,T_SY_IMGPATH from ( 
+      select T_SY_MESSAGE_ID,T_SY_NAME,T_SY_LOST_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_IMGPATH,T_SY_LOST_DATE
+    from t_sy_people_information
+    where 
+    1=1
+  <if test="record.minlat!= null">
+      and  (T_SY_X BETWEEN #{record.minlat,jdbcType=VARCHAR} AND  #{record.maxlat,jdbcType=VARCHAR})
+    and (T_SY_Y BETWEEN #{record.minlng,jdbcType=VARCHAR} AND  #{record.maxlng,jdbcType=VARCHAR})
+    </if>
+   <if test="record.searchtype != null">
+      and T_SY_SEX= #{record.searchtype}
+    </if>
+   
+    <if test="record.tSwtypeMx != null">
+     and T_SY_SEX = #{record.tSwtypeMx}
+    </if>
+    <if test="record.searchname != null">
+     and T_SY_ITEM_NAME like '%'||#{record.searchname}||'%'
+    </if>		
+    
+    <if test="record.tSyDate != null">
+     and T_SY_LOST_DATE = #{record.tSyDate}
+    </if>	
+    
+    
+   <if test="record.uid != null">
+      and T_SY_USER_ID = #{record.uid}
+    </if>
+    
+     <if test="record.msgid != null">
+      and T_SY_MESSAGE_ID = #{record.msgid}
+    </if>
+    )
+    a join (
+    select T_SY_MESSAGE_ID,T_SY_STATUS from t_sy_message T_SY_DEL_STATUS=0
+    <if test="record.msgtype!=null">
+    and T_SY_MESSAGE_TYPE=#{record.msgtype}
+    </if>
+    )b 
+     join
+     (select aa.T_SY_MESSAGE_ID, T_SY_STATUS from (select T_SY_MESSAGE_ID,T_SY_STATUS from t_sy_message where T_SY_DEL_STATUS=0) aa  join (select T_SY_MESSAGE_ID from T_SY_BROWSE where T_SY_USER_ID=#{record.uid}) bb on aa.T_SY_MESSAGE_ID=bb.T_SY_MESSAGE_ID)b
+    on a.t_sy_message_id=b.t_sy_message_id and a.T_SY_USER_ID=b.T_SY_USER_ID  order by T_SY_LOST_DATE desc limit #{record.page},2
+  </select> 
+  
+  
+  
+  <select id="selectByItemMap" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select 
+     b.T_SY_MESSAGE_ID,T_SY_ITEM_NAME,T_SY_LOSE_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_STATUS,T_SY_IMGPATH from ( 
+     select T_SY_MESSAGE_ID,T_SY_ITEM_NAME,T_SY_LOSE_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_IMGPATH,T_SY_LOSE_DATE 
+    from t_sy_item_information
+    where 
+    1=1
+   <if test="record.minlat != null">
+      and  (T_SY_Y BETWEEN #{record.minlat} AND  #{record.maxlat})
+      and (T_SY_X BETWEEN #{record.minlng} AND  #{record.maxlng})
+    </if>
+    <if test="record.tSwtype != null">
+     and T_SY_PUB_TYPE = #{record.tSwtype}
+    </if>
+    <if test="record.tSwtypeMx != null">
+     and T_SY_ITEM_TYPE = #{record.tSwtypeMx}
+    </if>
+    
+     <if test="record.searchname != null">
+     and T_SY_ITEM_NAME like '%'||#{record.searchname}||'%'
+    </if>	
+    
+     <if test="record.tSyDate != null">
+      and T_SY_LOSE_DATE = #{record.tSyDate}
+    </if>
+
+     <if test="record.uid != null">
+      and T_SY_USER_ID = #{record.uid}
+    </if>
+    
+     <if test="record.msgid != null">
+      and T_SY_MESSAGE_ID = #{record.msgid}
+    </if>   
+    )a join
+    (select aa.T_SY_MESSAGE_ID, T_SY_STATUS from (select T_SY_MESSAGE_ID,T_SY_STATUS from t_sy_message where T_SY_DEL_STATUS=0) aa  join (select T_SY_MESSAGE_ID from T_SY_BROWSE where T_SY_USER_ID=#{record.uid}) bb on aa.T_SY_MESSAGE_ID=bb.T_SY_MESSAGE_ID)b 
+     on a.t_sy_message_id=b.t_sy_message_id and a.T_SY_USER_ID=b.T_SY_USER_ID   order by T_SY_LOSE_DATE desc limit #{record.page},2 
+  </select>
+  
+  <select id="getListMessages" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select * from t_sy_message 
+  </select>
+<select id="selectByMessages" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+   select T_SY_MESSAGE_ID,T_SY_ITEM_NAME,T_SY_LOSE_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_STATUS,T_SY_IMGPATH,T_SY_SEND_TYPE from  T_SY_MESSAGE_VIEW where T_SY_MESSAGE_TYPE=#{record.msgtype} and T_SY_USER_ID=#{record.uid} and T_SY_DEL_STATUS=0 
+   order by T_SY_LOST_DATE desc limit #{record.page},#{record.pageSize} 
+  </select>
+  
+  
+  <select id="selectByBrowse" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+   select a.T_SY_MESSAGE_ID,T_SY_ITEM_NAME,T_SY_LOSE_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_STATUS,T_SY_IMGPATH,T_SY_SEND_TYPE  from (select * from T_SY_MESSAGE_VIEW where T_SY_USER_ID=#{record.uid} and T_SY_DEL_STATUS=0) a  join (select t_sy_message_id from T_SY_BROWSE) b on  a.t_sy_message_id = b.t_sy_message_id
+   order by T_SY_LOST_DATE desc limit #{record.page},#{record.pageSize} 
+  </select>
+  
+  
+  <select id="selectByMessageIdFromView" parameterType="java.lang.Integer" resultType="java.util.Map">
+    select * from T_SY_MESSAGE_VIEW tsv where tsv.T_SY_MESSAGE_ID = #{messageId,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="selectByItemMx" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select a.T_SY_ITEM_INFORMATION_ID, a.T_SY_MESSAGE_ID, a.T_SY_USER_ID, a.T_SY_ITEM_NAME, a.T_SY_ITEM_TYPE, 
+    a.T_SY_PUB_TYPE, a.T_SY_LOSE_DATE, a.T_SY_BOUNTY_MONEY, a.T_SY_LOSE_ADDRESS, a.T_SY_ITEM_DESCRIBE, 
+    a.T_SY_ITEM_PASSWORD, a.T_SY_PUBLISHED_DATE, a.T_SY_X, a.T_SY_Y, T_SY_IMGPATH, a.T_SY_BZ1, 
+    a.T_SY_BZ2,b.T_SY_EXPIRATION_DATE
+    from t_sy_item_information a right join t_sy_message b on a.T_SY_MESSAGE_ID=b.T_SY_MESSAGE_ID
+    where 
+    1=1
+   <if test="record.minlat != null">
+      and  (a.T_SY_Y BETWEEN #{record.minlat} AND  #{record.maxlat})
+      and (a.T_SY_X BETWEEN #{record.minlng} AND  #{record.maxlng})
+    </if>
+    <if test="record.tSwtype != null">
+     and a.T_SY_PUB_TYPE = #{record.tSwtype}
+    </if>
+    <if test="record.tSwtypeMx != null">
+     and a.T_SY_ITEM_TYPE = #{record.tSwtypeMx}
+    </if>
+    
+     <if test="record.searchname != null">
+     and a.T_SY_ITEM_NAME like '%'||#{record.searchname}||'%'
+    </if>	
+    
+     <if test="record.tSyDate != null">
+      and a.T_SY_LOSE_DATE = #{record.tSyDate}
+    </if>
+
+     <if test="record.msgid != null">
+      and a.T_SY_MESSAGE_ID = #{record.msgid}
+    </if>    
+    </select>
+   
+   
+    
+      
+  <select id="selectByPeopleMx" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select 
+    a.T_SY_PEOPLE_INFORMATION_ID, a.T_SY_MESSAGE_ID, a.T_SY_USER_ID, a.T_SY_NAME, a.T_SY_AGE, a.T_SY_SEX, 
+    a.T_SY_NATION, a.T_SY_CARD_ID, a.T_SY_CARD_TYPE, a.T_SY_PLACE, a.T_SY_LOST_DATE, a.T_SY_LOST_ADDRESS, 
+    a.T_SY_BOUNTY_MONEY, a.T_SY_PASSWORD, a.T_SY_FEATURES, a.T_SY_PROVE_FILE, a.T_SY_PUBLISHED_DATE, 
+    a.T_SY_X, a.T_SY_Y, a.T_SY_IMGPATH, a.T_SY_BZ1, a.T_SY_BZ2,b.T_SY_EXPIRATION_DATE
+    from t_sy_people_information a right join t_sy_message b on a.T_SY_MESSAGE_ID=b.T_SY_MESSAGE_ID  where  a.T_SY_MESSAGE_ID = #{record.msgid}
+     
+  </select>
+  
+  <select id="selectByDetailItem" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    T_SY_PEOPLE_INFORMATION_ID, T_SY_MESSAGE_ID, T_SY_USER_ID, T_SY_NAME, T_SY_AGE, T_SY_SEX, 
+    T_SY_NATION, T_SY_CARD_ID, T_SY_CARD_TYPE, T_SY_PLACE, T_SY_LOST_DATE, T_SY_LOST_ADDRESS, 
+    T_SY_BOUNTY_MONEY, T_SY_PASSWORD, T_SY_FEATURES, T_SY_PROVE_FILE, T_SY_PUBLISHED_DATE, 
+    T_SY_X, T_SY_Y, T_SY_IMGPATH, T_SY_BZ1, T_SY_BZ2
+    from t_sy_people_information
+    where 
+    1=1
+  <if test="record.minlat!= null">
+      and  (T_SY_X BETWEEN #{record.minlat,jdbcType=VARCHAR} AND  #{record.maxlat,jdbcType=VARCHAR})
+    and (T_SY_Y BETWEEN #{record.minlng,jdbcType=VARCHAR} AND  #{record.maxlng,jdbcType=VARCHAR})
+    </if>
+   <if test="record.searchtype != null">
+      and T_SY_SEX= #{record.searchtype}
+    </if>
+   
+    <if test="record.tSwtypeMx != null">
+     and T_SY_SEX = #{record.tSwtypeMx}
+    </if>
+    <if test="record.searchname != null">
+     and T_SY_ITEM_NAME like '%'||#{record.searchname}||'%'
+    </if>		
+    
+    <if test="record.tSyDate != null">
+     and T_SY_LOST_DATE = #{record.tSyDate}
+    </if>	
+    
+    
+   <if test="record.uid != null">
+      and T_SY_USER_ID = #{record.uid}
+    </if>
+    
+     <if test="record.msgid != null">
+      and T_SY_MESSAGE_ID = #{record.msgid}
+    </if>
+    
+    order by T_SY_LOST_DATE desc limit #{record.page},20
+  </select>
+</mapper>

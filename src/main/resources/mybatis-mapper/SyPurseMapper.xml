@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyPurseMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.bean.SyPurse">
+    <id column="T_SY_PURSE_ID" jdbcType="INTEGER" property="tSyPurseId" />
+    <result column="T_SY_ACCOUNT" jdbcType="VARCHAR" property="tSyAccount" />
+    <result column="T_SY_BUSINESS_TYPE" jdbcType="VARCHAR" property="tSyBusinessType" />
+    <result column="T_SY_MONEY" jdbcType="DECIMAL" property="tSyMoney" />
+    <result column="T_SY_MUSTS_BALANCE" jdbcType="DECIMAL" property="tSyMustsBalance" />
+    <result column="T_SY_FINANCED_ACCOUNT" jdbcType="VARCHAR" property="tSyFinancedAccount" />
+    <result column="T_SY_FINANCED" jdbcType="VARCHAR" property="tSyFinanced" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+    <result column="T_SY_PS_ORDERNO" jdbcType="VARCHAR" property="tSyPsOrderno" />
+    <result column="T_SY_PS_TREADNO" jdbcType="VARCHAR" property="tSyPsTreadno" />
+    <result column="T_SY_PS_CTRATETIME" jdbcType="DATE" property="tSyPsCtratetime" />
+    <result column="T_SY_PS_COMPLETETIME" jdbcType="DATE" property="tSyPsCompletetime" />
+    <result column="T_SY_PS_STATUS" jdbcType="VARCHAR" property="tSyPsStatus" />
+    <result column="T_SY_PS_OUTACCOUNT" jdbcType="VARCHAR" property="tSyPsOutaccount" />
+    <result column="T_SY_PS_DELETE" jdbcType="VARCHAR" property="tSyPsDelete" />
+    <result column="T_SY_PS_REFUND_STATUS" jdbcType="VARCHAR" property="tSyPsRefundStatus" />
+    <result column="T_SY_PS_REFUND_MONEY" jdbcType="DECIMAL" property="tSyPsRefundMoney" />
+    <result column="T_SY_PS_REFUND_DATE" jdbcType="DATE" property="tSyPsRefundDate" />
+    <result column="T_SY_PS_REFUND_ORDERNO" jdbcType="VARCHAR" property="tSyPsRefundOrderno" />
+    <result column="T_SY_PS_REFUND_WAY" jdbcType="VARCHAR" property="tSyPsRrefundWay" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_PURSE_ID, T_SY_ACCOUNT, T_SY_BUSINESS_TYPE, T_SY_MONEY, T_SY_MUSTS_BALANCE, 
+    T_SY_FINANCED_ACCOUNT, T_SY_FINANCED, T_SY_BZ1, T_SY_BZ2, T_SY_PS_ORDERNO, T_SY_PS_TREADNO, 
+    T_SY_PS_CTRATETIME, T_SY_PS_COMPLETETIME, T_SY_PS_STATUS, T_SY_PS_OUTACCOUNT, T_SY_PS_DELETE, 
+    T_SY_PS_REFUND_STATUS, T_SY_PS_REFUND_MONEY, T_SY_PS_REFUND_DATE, T_SY_PS_REFUND_ORDERNO,T_SY_PS_REFUND_WAY
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.bean.SyPurseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_purse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_purse
+    where T_SY_PURSE_ID = #{tSyPurseId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectWithdraw" parameterType="com.sy.common.bean.SyPurse" resultMap="BaseResultMap">
+		   SELECT
+			tsp.T_SY_ACCOUNT ,
+			tsp.T_SY_BUSINESS_TYPE ,
+			tsp.T_SY_FINANCED ,
+			tsp.T_SY_FINANCED_ACCOUNT,
+			tsp.T_SY_PS_ORDERNO,
+			tsp.T_SY_PS_TREADNO
+		FROM
+			t_sy_purse tsp
+		WHERE
+			tsp.T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR}
+		AND tsp.T_SY_MONEY >= #{tSyMoney,jdbcType=DECIMAL} AND tsp.T_SY_PS_STATUS IN ('success', 'settle')
+		AND tsp.T_SY_BUSINESS_TYPE = '0'
+		AND tsp.T_SY_FINANCED = '2'  AND tsp.T_SY_PS_REFUND_STATUS = '2'
+		AND tsp.T_SY_PS_CTRATETIME > DATE_SUB(NOW(), INTERVAL 365 DAY)
+		ORDER BY
+			tsp.T_SY_MONEY ASC,
+			tsp.T_SY_PS_CTRATETIME DESC
+		LIMIT 1
+		
+		UNION ALL
+		
+		SELECT
+			tsp.T_SY_ACCOUNT ,
+			tsp.T_SY_BUSINESS_TYPE ,
+			tsp.T_SY_FINANCED ,
+			tsp.T_SY_FINANCED_ACCOUNT,
+			tsp.T_SY_PS_ORDERNO,
+			tsp.T_SY_PS_TREADNO
+		FROM
+			t_sy_purse tsp
+		WHERE
+			tsp.T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR}
+		AND tsp.T_SY_MONEY >= #{tSyMoney,jdbcType=DECIMAL} AND tsp.T_SY_PS_STATUS IN ('success', 'settle')
+		AND tsp.T_SY_BUSINESS_TYPE = '0'
+		AND tsp.T_SY_FINANCED = '1'  AND tsp.T_SY_PS_REFUND_STATUS = '2'
+		AND tsp.T_SY_PS_CTRATETIME > DATE_SUB(NOW(), INTERVAL 365 DAY)
+		ORDER BY
+			tsp.T_SY_MONEY ASC,
+			tsp.T_SY_PS_CTRATETIME DESC
+		LIMIT 1
+		
+		
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_purse
+    where T_SY_PURSE_ID = #{tSyPurseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.bean.SyPurseExample">
+    delete from t_sy_purse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.bean.SyPurse">
+    insert into t_sy_purse (T_SY_PURSE_ID, T_SY_ACCOUNT, T_SY_BUSINESS_TYPE, 
+      T_SY_MONEY, T_SY_MUSTS_BALANCE, T_SY_FINANCED_ACCOUNT, 
+      T_SY_FINANCED, T_SY_BZ1, T_SY_BZ2, 
+      T_SY_PS_ORDERNO, T_SY_PS_TREADNO, T_SY_PS_CTRATETIME, 
+      T_SY_PS_COMPLETETIME, T_SY_PS_STATUS, T_SY_PS_OUTACCOUNT, 
+      T_SY_PS_DELETE, T_SY_PS_REFUND_STATUS, T_SY_PS_REFUND_MONEY, 
+      T_SY_PS_REFUND_DATE, T_SY_PS_REFUND_ORDERNO,T_SY_PS_REFUND_WAY)
+    values (#{tSyPurseId,jdbcType=INTEGER}, #{tSyAccount,jdbcType=VARCHAR}, #{tSyBusinessType,jdbcType=VARCHAR}, 
+      #{tSyMoney,jdbcType=DECIMAL}, #{tSyMustsBalance,jdbcType=DECIMAL}, #{tSyFinancedAccount,jdbcType=VARCHAR}, 
+      #{tSyFinanced,jdbcType=VARCHAR}, #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR}, 
+      #{tSyPsOrderno,jdbcType=VARCHAR}, #{tSyPsTreadno,jdbcType=VARCHAR}, #{tSyPsCtratetime,jdbcType=DATE}, 
+      #{tSyPsCompletetime,jdbcType=DATE}, #{tSyPsStatus,jdbcType=VARCHAR}, #{tSyPsOutaccount,jdbcType=VARCHAR}, 
+      #{tSyPsDelete,jdbcType=VARCHAR}, #{tSyPsRefundStatus,jdbcType=VARCHAR}, #{tSyPsRefundMoney,jdbcType=DECIMAL}, 
+      #{tSyPsRefundDate,jdbcType=DATE}, #{tSyPsRefundOrderno,jdbcType=VARCHAR},#{tSyPsRrefundWay,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.bean.SyPurse">
+    insert into t_sy_purse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyPurseId != null">
+        T_SY_PURSE_ID,
+      </if>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT,
+      </if>
+      <if test="tSyBusinessType != null">
+        T_SY_BUSINESS_TYPE,
+      </if>
+      <if test="tSyMoney != null">
+        T_SY_MONEY,
+      </if>
+      <if test="tSyMustsBalance != null">
+        T_SY_MUSTS_BALANCE,
+      </if>
+      <if test="tSyFinancedAccount != null">
+        T_SY_FINANCED_ACCOUNT,
+      </if>
+      <if test="tSyFinanced != null">
+        T_SY_FINANCED,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+      <if test="tSyPsOrderno != null">
+        T_SY_PS_ORDERNO,
+      </if>
+      <if test="tSyPsTreadno != null">
+        T_SY_PS_TREADNO,
+      </if>
+      <if test="tSyPsCtratetime != null">
+        T_SY_PS_CTRATETIME,
+      </if>
+      <if test="tSyPsCompletetime != null">
+        T_SY_PS_COMPLETETIME,
+      </if>
+      <if test="tSyPsStatus != null">
+        T_SY_PS_STATUS,
+      </if>
+      <if test="tSyPsOutaccount != null">
+        T_SY_PS_OUTACCOUNT,
+      </if>
+      <if test="tSyPsDelete != null">
+        T_SY_PS_DELETE,
+      </if>
+      <if test="tSyPsRefundStatus != null">
+        T_SY_PS_REFUND_STATUS,
+      </if>
+      <if test="tSyPsRefundMoney != null">
+        T_SY_PS_REFUND_MONEY,
+      </if>
+      <if test="tSyPsRefundDate != null">
+        T_SY_PS_REFUND_DATE,
+      </if>
+      <if test="tSyPsRefundOrderno != null">
+        T_SY_PS_REFUND_ORDERNO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyPurseId != null">
+        #{tSyPurseId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyAccount != null">
+        #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBusinessType != null">
+        #{tSyBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMoney != null">
+        #{tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyMustsBalance != null">
+        #{tSyMustsBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyFinancedAccount != null">
+        #{tSyFinancedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyFinanced != null">
+        #{tSyFinanced,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOrderno != null">
+        #{tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsTreadno != null">
+        #{tSyPsTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsCtratetime != null">
+        #{tSyPsCtratetime,jdbcType=DATE},
+      </if>
+      <if test="tSyPsCompletetime != null">
+        #{tSyPsCompletetime,jdbcType=DATE},
+      </if>
+      <if test="tSyPsStatus != null">
+        #{tSyPsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOutaccount != null">
+        #{tSyPsOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsDelete != null">
+        #{tSyPsDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundStatus != null">
+        #{tSyPsRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundMoney != null">
+        #{tSyPsRefundMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyPsRefundDate != null">
+        #{tSyPsRefundDate,jdbcType=DATE},
+      </if>
+      <if test="tSyPsRefundOrderno != null">
+        #{tSyPsRefundOrderno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.bean.SyPurseExample" resultType="java.lang.Long">
+    select count(*) from t_sy_purse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_purse
+    <set>
+      <if test="record.tSyPurseId != null">
+        T_SY_PURSE_ID = #{record.tSyPurseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyAccount != null">
+        T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBusinessType != null">
+        T_SY_BUSINESS_TYPE = #{record.tSyBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMoney != null">
+        T_SY_MONEY = #{record.tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyMustsBalance != null">
+        T_SY_MUSTS_BALANCE = #{record.tSyMustsBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyFinancedAccount != null">
+        T_SY_FINANCED_ACCOUNT = #{record.tSyFinancedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyFinanced != null">
+        T_SY_FINANCED = #{record.tSyFinanced,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsOrderno != null">
+        T_SY_PS_ORDERNO = #{record.tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsTreadno != null">
+        T_SY_PS_TREADNO = #{record.tSyPsTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsCtratetime != null">
+        T_SY_PS_CTRATETIME = #{record.tSyPsCtratetime,jdbcType=DATE},
+      </if>
+      <if test="record.tSyPsCompletetime != null">
+        T_SY_PS_COMPLETETIME = #{record.tSyPsCompletetime,jdbcType=DATE},
+      </if>
+      <if test="record.tSyPsStatus != null">
+        T_SY_PS_STATUS = #{record.tSyPsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsOutaccount != null">
+        T_SY_PS_OUTACCOUNT = #{record.tSyPsOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsDelete != null">
+        T_SY_PS_DELETE = #{record.tSyPsDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsRefundStatus != null">
+        T_SY_PS_REFUND_STATUS = #{record.tSyPsRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPsRefundMoney != null">
+        T_SY_PS_REFUND_MONEY = #{record.tSyPsRefundMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyPsRefundDate != null">
+        T_SY_PS_REFUND_DATE = #{record.tSyPsRefundDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyPsRefundOrderno != null">
+        T_SY_PS_REFUND_ORDERNO = #{record.tSyPsRefundOrderno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_purse
+    set T_SY_PURSE_ID = #{record.tSyPurseId,jdbcType=INTEGER},
+      T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      T_SY_BUSINESS_TYPE = #{record.tSyBusinessType,jdbcType=VARCHAR},
+      T_SY_MONEY = #{record.tSyMoney,jdbcType=DECIMAL},
+      T_SY_MUSTS_BALANCE = #{record.tSyMustsBalance,jdbcType=DECIMAL},
+      T_SY_FINANCED_ACCOUNT = #{record.tSyFinancedAccount,jdbcType=VARCHAR},
+      T_SY_FINANCED = #{record.tSyFinanced,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      T_SY_PS_ORDERNO = #{record.tSyPsOrderno,jdbcType=VARCHAR},
+      T_SY_PS_TREADNO = #{record.tSyPsTreadno,jdbcType=VARCHAR},
+      T_SY_PS_CTRATETIME = #{record.tSyPsCtratetime,jdbcType=DATE},
+      T_SY_PS_COMPLETETIME = #{record.tSyPsCompletetime,jdbcType=DATE},
+      T_SY_PS_STATUS = #{record.tSyPsStatus,jdbcType=VARCHAR},
+      T_SY_PS_OUTACCOUNT = #{record.tSyPsOutaccount,jdbcType=VARCHAR},
+      T_SY_PS_DELETE = #{record.tSyPsDelete,jdbcType=VARCHAR},
+      T_SY_PS_REFUND_STATUS = #{record.tSyPsRefundStatus,jdbcType=VARCHAR},
+      T_SY_PS_REFUND_MONEY = #{record.tSyPsRefundMoney,jdbcType=DECIMAL},
+      T_SY_PS_REFUND_DATE = #{record.tSyPsRefundDate,jdbcType=DATE},
+      T_SY_PS_REFUND_ORDERNO = #{record.tSyPsRefundOrderno,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.bean.SyPurse">
+    update t_sy_purse
+    <set>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBusinessType != null">
+        T_SY_BUSINESS_TYPE = #{tSyBusinessType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMoney != null">
+        T_SY_MONEY = #{tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyMustsBalance != null">
+        T_SY_MUSTS_BALANCE = #{tSyMustsBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyFinancedAccount != null">
+        T_SY_FINANCED_ACCOUNT = #{tSyFinancedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyFinanced != null">
+        T_SY_FINANCED = #{tSyFinanced,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOrderno != null">
+        T_SY_PS_ORDERNO = #{tSyPsOrderno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsTreadno != null">
+        T_SY_PS_TREADNO = #{tSyPsTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsCtratetime != null">
+        T_SY_PS_CTRATETIME = #{tSyPsCtratetime,jdbcType=DATE},
+      </if>
+      <if test="tSyPsCompletetime != null">
+        T_SY_PS_COMPLETETIME = #{tSyPsCompletetime,jdbcType=DATE},
+      </if>
+      <if test="tSyPsStatus != null">
+        T_SY_PS_STATUS = #{tSyPsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOutaccount != null">
+        T_SY_PS_OUTACCOUNT = #{tSyPsOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsDelete != null">
+        T_SY_PS_DELETE = #{tSyPsDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundStatus != null">
+        T_SY_PS_REFUND_STATUS = #{tSyPsRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundMoney != null">
+        T_SY_PS_REFUND_MONEY = #{tSyPsRefundMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyPsRefundDate != null">
+        T_SY_PS_REFUND_DATE = #{tSyPsRefundDate,jdbcType=DATE},
+      </if>
+      <if test="tSyPsRefundOrderno != null">
+        T_SY_PS_REFUND_ORDERNO = #{tSyPsRefundOrderno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_PURSE_ID = #{tSyPurseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.bean.SyPurse">
+    update t_sy_purse
+    set T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      T_SY_BUSINESS_TYPE = #{tSyBusinessType,jdbcType=VARCHAR},
+      T_SY_MONEY = #{tSyMoney,jdbcType=DECIMAL},
+      T_SY_MUSTS_BALANCE = #{tSyMustsBalance,jdbcType=DECIMAL},
+      T_SY_FINANCED_ACCOUNT = #{tSyFinancedAccount,jdbcType=VARCHAR},
+      T_SY_FINANCED = #{tSyFinanced,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      T_SY_PS_ORDERNO = #{tSyPsOrderno,jdbcType=VARCHAR},
+      T_SY_PS_TREADNO = #{tSyPsTreadno,jdbcType=VARCHAR},
+      T_SY_PS_CTRATETIME = #{tSyPsCtratetime,jdbcType=DATE},
+      T_SY_PS_COMPLETETIME = #{tSyPsCompletetime,jdbcType=DATE},
+      T_SY_PS_STATUS = #{tSyPsStatus,jdbcType=VARCHAR},
+      T_SY_PS_OUTACCOUNT = #{tSyPsOutaccount,jdbcType=VARCHAR},
+      T_SY_PS_DELETE = #{tSyPsDelete,jdbcType=VARCHAR},
+      T_SY_PS_REFUND_STATUS = #{tSyPsRefundStatus,jdbcType=VARCHAR},
+      T_SY_PS_REFUND_MONEY = #{tSyPsRefundMoney,jdbcType=DECIMAL},
+      T_SY_PS_REFUND_DATE = #{tSyPsRefundDate,jdbcType=DATE},
+      T_SY_PS_REFUND_ORDERNO = #{tSyPsRefundOrderno,jdbcType=VARCHAR}
+    where T_SY_PURSE_ID = #{tSyPurseId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByTsypsorderno" parameterType="com.sy.common.bean.SyPurse">
+    update t_sy_purse
+    <set>
+      <if test="tSyFinancedAccount != null">
+        T_SY_FINANCED_ACCOUNT = #{tSyFinancedAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsTreadno != null">
+        T_SY_PS_TREADNO = #{tSyPsTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsCompletetime != null">
+        T_SY_PS_COMPLETETIME = #{tSyPsCompletetime,jdbcType=DATE},
+      </if>
+      <if test="tSyPsStatus != null">
+        T_SY_PS_STATUS = #{tSyPsStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsOutaccount != null">
+        T_SY_PS_OUTACCOUNT = #{tSyPsOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsDelete != null">
+        T_SY_PS_DELETE = #{tSyPsDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundStatus != null">
+        T_SY_PS_REFUND_STATUS = #{tSyPsRefundStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPsRefundMoney != null">
+        T_SY_PS_REFUND_MONEY = #{tSyPsRefundMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyPsRefundDate != null">
+        T_SY_PS_REFUND_DATE = #{tSyPsRefundDate,jdbcType=DATE},
+      </if>
+      <if test="tSyPsRefundOrderno != null">
+        T_SY_PS_REFUND_ORDERNO = #{tSyPsRefundOrderno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_PS_ORDERNO = #{tSyPsOrderno,jdbcType=VARCHAR}  and T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

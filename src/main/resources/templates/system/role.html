@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>角色信息</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap.min.css"></link>
+<link href="../../webjars/bootstrap-table/1.9.1/bootstrap-table.css" rel="stylesheet"></link>
+<!-- 弹出窗口 -->
+<link rel="stylesheet" href="../../css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/chg.css"></link>
+<!-- 日期控件调用 start -->
+<link rel="stylesheet" href="../../date_js_css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../../date_js_css/daterangepicker-bs3.css"></link>
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<!-- <script  src="../../js/jquery/jQuery-2.2.0.min.js"></script> -->
+<script  src="../../js/jquery/jquery.min.js"></script>
+<script  src="../../js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/bootstrap-table.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../../js/pubjs/tab.js"></script>
+<script src="../../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<!-- <script type="text/javascript" src="../../date_js_css/jquery-1.8.3.min.js"></script> -->
+<script type="text/javascript" src="../../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../../date_js_css/daterangepicker.js"></script>
+<!-- 日期控件调用 end -->
+
+<script type="text/javascript">
+        $(document).ready(function() {
+           $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			  $('#date3').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date4').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             }); 
+			  //var $("#empUserList") = $('#table').bootstrapTable({url: API_URL}),
+		    $('#addrole').modal({show: false});
+		    $('#editrole').modal({show: false});
+		    $('.alert-msg').hide();
+			querys();
+			initcreate();
+        });
+        
+  function initcreate() {
+      $('.create').click(function () {
+          showModal($(this).text());
+      });
+      $('.edit').click(function () {
+    	  var selectRow = $("#empUserList").bootstrapTable('getSelections'); 
+    	  if(selectRow.length==1){
+    		  showUpModal($(this).text(),"edit");
+    	  }else{
+    		  return false;
+    	  }  
+      });
+      $('#addrole').find('.submit').click(function () {
+          var row = {};
+
+          $('#addrole').find('input[name]').each(function () {
+              row[$(this).attr('name')] = $(this).val();
+          });
+          $('#addrole').find('textarea[name]').each(function (){
+              row[$(this).attr('name')] = $(this).val();
+          });
+          $.ajax({
+              url:"add",
+              type:'POST',
+              data:{data:JSON.stringify(row)},
+              success: function () {
+                  $('#addrole').modal('hide');
+                  $("#empUserList").bootstrapTable('refresh');
+                 // alert("新增成功！");
+                  getMessage("新增成功！");
+              },
+              error: function () {
+                  $('#addrole').modal('hide');
+                 // alert("新增失败！");
+                  getMessage("新增失败！");
+              }
+          });
+      });
+      
+      $('#editrole').find('.submit').click(function () {
+          var row = {};
+
+          $('#editrole').find('input[name]').each(function () {
+              row[$(this).attr('name')] = $(this).val();
+          });
+          $('#editrole').find('textarea[name]').each(function (){
+              row[$(this).attr('name')] = $(this).val();
+          });
+          $.ajax({
+              url:"update",
+              type:'POST',
+              data:{data:JSON.stringify(row)},
+              success: function () {
+                  $('#editrole').modal('hide');
+                  $("#empUserList").bootstrapTable('refresh');
+                  $('#editrole3').modal('show');
+              },
+              error: function () {
+                  $('#editrole').modal('hide');
+                  getMessage("修改失败！");
+                 // alert("修改失败！");
+              }
+          });
+      });
+
+  }
+
+ 
+  function showModal(title, row) {
+      row = row || {
+          id: '',
+          jsmc: '',
+          jsms: '',
+          data3:''
+      }; // default row value
+
+      $('#addrole').data('id', row.id);
+      $('#addrole').find('.modal-title').text(title);
+      for (var name in row) {
+          $('#addrole').find('input[name="' + name + '"]').val(row[name]);
+      }
+      $('#addrole').modal('show');
+  } 
+  
+  //展示修改层信息
+  function showUpModal(title, row) {
+      row = row || {
+          id: '',
+          upFzid: '',
+          upJsmc: '',
+          upDate4:'',
+          upJsms:''
+          
+      }; // default row value
+
+      $('#editrole').data('id', row.id);
+      $('#editrole').find('.modal-title').text(title);
+      for (var name in row) {
+          $('#editrole').find('input[name="' + name + '"]').val(row[name]);
+      }
+      $('#editrole').modal('show');
+  } 
+  function querys() {  
+	    $("#empUserList").bootstrapTable({  
+	        url: 'roleserch',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 12,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            queryParamsType : "undefined",
+            queryParams: function queryParams(params) {   //设置查询参数
+            	var array=$("#date2").val().split(" - ");
+                var param = {
+                        //这里是在ajax发送请求的时候设置一些参数 params有什么东西，自己看看源码就知道了
+                        pageNo: params.pageNumber,
+                        pageSize: params.pageSize,
+                        starDate:array[0],
+                        endDate:array[1],
+                        roleName:$("#role2").val()
+                      };
+                      return param;
+                    },
+            strictSearch: true,
+            clickToSelect: true,                //是否启用点击选中行
+            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "tSyRoleId",                     //每一行的唯一标识，一般为主键列
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+	        columns : [{  
+	            field : 'id',  
+	            checkbox : true,  
+	            align : 'center',  
+	            valign : 'middle'  
+	        }, {  
+	            title : '序号',  
+	            field : 'tSyRoleId', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        },{  
+	            title : '角色名',  
+	            field : 'tSyRoleName', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        }, {  
+	            title : '创建日期',  
+	            field : 'tSyRoleCreatedate',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '描述',  
+	            field : 'tSyRoleDescription',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        } ],  
+	        responseHandler : function(res) {  
+	            return {  
+	                total : res.total,  
+	                rows : res.records  
+	                
+
+	            };  
+	        },  
+	        onCheck:function(){  
+	            return false;
+	        },  
+	        onCheckAll:function(){  
+	        	return false;
+	        },  
+	        onUncheckAll:function(){ 
+	        	return false;
+	        },  
+	        onUncheck:function(){  
+	        	return false;
+	        }  
+	    })  
+	}  
+
+
+	/** 刷新页面 */  
+	function refresh() {  
+	    $('#empUserList').bootstrapTable('refresh');  
+	} 
+	
+	
+	/** 编辑数据 */  
+	function editHr() { 
+	    var selectRow = $("#empUserList").bootstrapTable('getSelections');   
+	    if (selectRow.length > 1||selectRow.length==0) {  
+	       // layer.alert('请选择并只能选择一条数据进行编辑！', {icon: 2});  
+	       getMessage("请选择并只能选择一条数据进行编辑！");
+	       //alert('请选择并只能选择一条数据进行编辑！');
+	        return false;  
+	    } else {  
+	        //window.location = createUrl("admin/hrEmployee/view?username=" + selectRow[0].userName);  
+	        $('#upFzid').val(selectRow[0].tSyRoleId);
+	        $('#upJsmc').val(selectRow[0].tSyRoleName);
+	        $('#upDate4').val(selectRow[0].tSyRoleCreatedate);
+	        $('#upJsms').val(selectRow[0].tSyRoleDescription);
+	        
+	    }  
+	    
+	}
+
+	/** 
+	 * 删除数据 
+	 */  
+	function deleteHr() {  
+		 var hrs = $("#empUserList").bootstrapTable('getSelections');  
+			
+		  if(hrs.length==0){
+			  getMessage("请选择需要删除的数据！");
+			  //alert("请选择需要删除的数据！");
+		  }else{
+			  var tSyRoleIds = [];  
+			  //var syRoleid={};
+			  for(var i=0;hrs.length>i;i++){
+				  tSyRoleIds.push(hrs[i].tSyRoleId); 
+			  }
+			 // var data="id:"+tSyRoleIds;
+			 //getMessage("请选择需要删除的数据！");
+			  //alert("拼接的数组是："+tSyRoleIds)
+			  $.ajax({
+	              url:"delete",
+	              type:'POST',
+	              data:{tSyRoleId:tSyRoleIds},  
+	              //contentType:'application/json',
+	              success: function () {
+	            	  //alert("1");
+	                 // $('#editrole').modal('hide');
+	                 //alert("修改成功！");
+	                 getMessage("修改成功！");
+	                  $("#empUserList").bootstrapTable('refresh');
+	                  
+	              },
+	              error: function () {
+	            	  //alert("2");
+	                  //$('#editrole').modal('hide');
+	                   getMessage("修改失败！");
+	                  //alert("修改失败！！");
+	              }
+	          });
+		  }
+	}  
+
+//根据条件查询方法	
+function roleSerch(){
+	$("#empUserList").bootstrapTable('refresh');
+}
+
+//弹出框问题修改
+function getMessage(message){
+	$('#message').html(message);
+	$('#editrole3').modal('show');
+	
+}
+</script>
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%; margin-top: 40px;" class="container-fluid">
+	<form action="#">
+            <table class="glyphicon-italic">
+              <tr>
+                <td><b>创建日期：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26"/>
+                </td>
+                <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+                <td valign="middle"><select name="role2" id="role2" style=" width:230px;" class="form-control">
+                    <option value="all" selected="selected">全部</option>
+                    <option value="0">高级管理员</option>
+                    <option value="1">中级管理员</option>
+                    <option value="2">初级管理员</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a><button type="button" onclick="roleSerch();" id="search" class="search btn btn-default"> <i class="glyphicon glyphicon-search"></i> </button></a>
+                    <a><button type="button" id="add" class="create btn btn-default"> <i class="glyphicon glyphicon-plus"></i> </button></a>  
+            		<a><button type="button" onclick="editHr();" id="edit" class="edit btn btn-default">  <i class="glyphicon glyphicon-pencil"></i></button></a>  
+            		<a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">  <i class="glyphicon glyphicon-trash"></i></button></a>  
+                </td>
+              </tr>
+            </table>
+          </form>
+          <div> 
+        	<table id="empUserList" >  
+        	</table>  <!-- 留意-->  
+      	</div>
+</div>
+      	  
+<!-- 查看窗口 start -->
+<!-- <div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">浏览角色</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="fzid" class="form-control" value="001"  disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jsmc" class="form-control"  value="高级管理员"  disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date5" id="date5" class="form-control" value="2016-12-26" disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+              <td valign="middle"><textarea cols="50" rows="6" name="jsms" disabled="disabled">管理后台</textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>排序：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sort" class="form-control"  value="1"  disabled="disabled"/>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭 </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- 查看窗口 end -->
+<!-- 新增窗口 start -->
+ <div class="modal fade" id="addrole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">新增角色</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="addfzid" id="addfzid" class="form-control"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="addjsmc" id="addjsmc" class="form-control"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2016-12-26"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+              <td valign="middle"><textarea cols="50" rows="6" name="addJsms" id="addJsms"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>排序：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sort" class="form-control"/>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+         <button type="button" class="btn btn-primary submit">提交</button>
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- 新增窗口 end -->
+
+<div id="addrole1" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>角色名称：</label>
+                        <input type="text" class="form-control" name="jsmc" placeholder="jsmc"/>
+                    </div>
+                    <div class="form-group">
+                        <label>角色描述：</label>
+                        <input type="number" class="form-control" name="jsms" placeholder="jsmc"/>
+                    </div>
+                    <div class="form-group">
+                        <label>创建时间：</label>
+                       <input type="text" style=" width:220px;" name="date3" class="form-control" value="2016-12-26"/>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Description">
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary submit">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+ <!-- 修改窗口 start -->
+<div class="modal fade" id="editrole" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">修改角色</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upFzid" id="upFzid" class="form-control" value="001"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upJsmc" id="upJsmc" class="form-control"  value="高级管理员"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upDate4" id="upDate4" class="form-control" value="2016-12-26"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+              <td valign="middle"><textarea cols="50" rows="6" name="upJsms">管理后台</textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>排序：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upSort" id="upSort" class="form-control"  value="1"/>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success submit"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editrole3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">提示信息</b> </h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

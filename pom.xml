@@ -1,0 +1,235 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.sy.parent</groupId>
+    <artifactId>com.sy.parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.sy.server</groupId>
+  <artifactId>com.sy.server</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>server.sy.com</name>
+  <description>sy app server</description>
+  <packaging>jar</packaging>
+   <properties>
+    <java.version>1.8</java.version>
+  </properties>
+  <dependencies>
+       <dependency>
+            <!-- Import dependency management from Spring Boot -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>1.4.2.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+       </dependency>
+      
+        <!-- 
+		    模板、缓存
+		 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-devtools</artifactId>
+	        <version>1.4.2.RELEASE</version>
+      </dependency>
+		<!-- 
+		   web mvc
+		 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-web</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency>
+		
+        <!-- 使用模板技术 替代jsp
+        <dependency>
+           <groupId>javax.servlet</groupId>
+           <artifactId>jstl</artifactId>
+           <version>1.2</version>
+       </dependency>
+        
+        <dependency>
+           <groupId>javax.servlet</groupId>
+           <artifactId>javax.servlet-api</artifactId>
+           <version>3.1.0</version>
+           <scope>provided</scope>
+       </dependency>
+       
+       <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>1.4.2.RELEASE</version>
+            <scope>provided</scope>
+        </dependency> 
+       
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <version>9.0.0.M13</version>
+		    <scope>provided</scope>
+		</dependency> -->
+		
+		<!-- spring aop -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency>
+		
+		<!-- spring test -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-test</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency>
+		
+		<!-- spring jdbc -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-jdbc</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency>
+		<!--  
+		   mybaties  
+		-->
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		<!-- 
+		    mysql 驱动
+		 -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.38</version>
+		</dependency>
+		<dependency>
+		    <groupId>com</groupId>
+		    <artifactId>http</artifactId>
+		    <version>1.0</version>
+		</dependency>
+		<!-- redis -->
+		<!-- <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-redis</artifactId>
+		    <version>1.4.2.RELEASE</version>
+		</dependency> -->
+        		
+		<dependency>
+		  <groupId>com.sy.common</groupId>
+          <artifactId>com.sy.common</artifactId>
+          <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- 添加缓存支持 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+            <version>1.4.2.RELEASE</version>
+        </dependency>
+		
+		<!-- ehcache 缓存技术 -->
+		<dependency>
+		    <groupId>net.sf.ehcache</groupId>
+		    <artifactId>ehcache</artifactId>
+		    <version>2.10.3</version>
+		</dependency>
+		<!-- 引入静态资源 -->
+		<dependency>
+		  <groupId>com.sy.webjars</groupId>
+		  <artifactId>com.sy.webjars</artifactId>
+		  <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>bootstrap-table</artifactId>
+		    <version>1.9.1</version>
+         </dependency>
+         
+          <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
+		<dependency>
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib</artifactId>
+		    <version>2.4</version>
+		    <classifier>jdk15</classifier>
+		</dependency>
+		
+		<dependency>
+			  <groupId>com.alipay</groupId>
+			  <artifactId>alipay-sdk-java</artifactId>
+			  <version>20170511115337</version>
+         </dependency>
+         
+         <dependency>
+		  <groupId>com.qiniu</groupId>
+		  <artifactId>qiniu-java-sdk</artifactId>
+		  <version>[7.0.0, 7.2.99]</version>
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+            <version>1.4.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+         
+  </dependencies>
+  
+  <build>
+    
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+             <configuration>  
+                         <source>1.8</source>  
+				         <target>1.8</target>  
+				         <encoding>UTF-8</encoding>    
+             </configuration>  
+        </plugin>
+        
+        <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <!-- not append assembly id in release file name -->
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>release.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>assembly</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+           </plugin>
+        <!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
+			</plugin> -->
+    </plugins>
+ </build>
+  
+</project>

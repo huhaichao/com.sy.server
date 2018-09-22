@@ -1,0 +1,736 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>发布寻人</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../publish/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date3').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date4').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date5').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date6').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <!--<div class="tabList">
+        <ul>
+          <li class="cur">发布寻人</li>
+        </ul>
+      </div> -->
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+                <td valign="middle">&nbsp;&nbsp; <b>发布时间：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+                <td valign="middle">&nbsp;&nbsp; <b>性别：</b> </td>
+                <td valign="middle"><select name="sex" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">男</option>
+                    <option id="1">女</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp;<b>年龄：</b> </td>
+                <td valign="middle"><select name="age" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">18-30</option>
+                    <option id="1">30-50</option>
+                    <option id="2">50-70</option>
+                    <option id="3">70-100</option>
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;<b>审核状态：</b> </td>
+                <td valign="middle"><select name="chk" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">已审核</option>
+                    <option id="1">未审核</option>
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;<b>状态：</b> </td>
+                <td valign="middle"><select name="chk" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">完成</option>
+                    <option id="1">有效</option>
+                    <option id="2">激活</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td valign="middle">&nbsp;&nbsp; <b>用户：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="user2" class="form-control"  /></td>
+                <td valign="middle">&nbsp;&nbsp; <b>地域：</b> </td>
+                <td valign="middle"  colspan="7"><input type="text" style=" width:590px;" name="dy" class="form-control"  /></td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="sel" value="  查   询  " class="btn btn-success btn-sm">
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="add" value="  新  增 " class="btn btn-primary" data-toggle="modal" data-target="#add_qx_Info">
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" class="table table-striped">
+            <tr style=" background: #FFCC66; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户 </td>
+              <td> 姓名 </td>
+              <td> 性别 </td>
+              <td> 走失地点 </td>
+              <td> 走失日期 </td>
+              <td> 发布日期 </td>
+              <td> 状态 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>1</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市公安局通州分局梨园派出所</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-success">完成</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>2</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-danger">激活</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" /></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>3</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-danger">激活</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>4</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-primary">有效</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>5</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-primary">有效</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>6</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-primary">有效</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审  核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>7</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-success">完成</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  反审核  " class="btn btn-warning btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>8</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-success">完成</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  反审核  " class="btn btn-warning btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>9</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td align="center"><span class="label label-success">完成</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  反审核  " class="btn btn-warning btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看窗口 start -->
+<div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">浏览发布寻人</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+           <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="yhid" class="form-control" value="1002" readonly="true"/></td>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" value="周杰伦" readonly="true"/></td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:220px;" class="form-control" disabled="disabled">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>年龄：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="age" class="form-control"   value="36" readonly="true"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>证件类型：</b> </td>
+              <td valign="middle"><select name="zjlx" style=" width:220px;" class="form-control" disabled="disabled">
+                  <option id="0" selected="selected">身份证</option>
+                  <option id="1">军官证</option>
+                  <option id="2">港澳通行证</option>
+                  <option id="3">驾驶证</option>
+                </select>
+              </td>
+              <td valign="middle">&nbsp;&nbsp;<b>证件号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="zjh" class="form-control"   value="130429197609180971" readonly="true"/></td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>民族：</b> </td>
+              <td valign="middle"><select name="mz" style=" width:220px;" class="form-control" disabled="disabled">
+                  <option value="汉族">汉族</option>
+                  <option value="蒙古族">蒙古族</option>
+                  <option value="彝族">彝族</option>
+                  <option value="侗族">侗族</option>
+                  <option value="哈萨克族">哈萨克族</option>
+                  <option value="畲族">畲族</option>
+                  <option value="纳西族">纳西族</option>
+                  <option value="仫佬族">仫佬族</option>
+                  <option value="仡佬族">仡佬族</option>
+                  <option value="怒族">怒族</option>
+                  <option value="保安族">保安族</option>
+                  <option value="鄂伦春族">鄂伦春族</option>
+                  <option value="回族">回族</option>
+                  <option value="壮族">壮族</option>
+                  <option value="瑶族">瑶族</option>
+                  <option value="傣族">傣族</option>
+                  <option value="高山族">高山族</option>
+                  <option value="景颇族">景颇族</option>
+                  <option value="羌族">羌族</option>
+                  <option value="锡伯族">锡伯族</option>
+                  <option value="乌孜别克族">乌孜别克族</option>
+                  <option value="裕固族">裕固族</option>
+                  <option value="赫哲族">赫哲族</option>
+                  <option value="藏族">藏族</option>
+                  <option value="布依族">布依族</option>
+                  <option value="白族">白族</option>
+                  <option value="黎族">黎族</option>
+                  <option value="拉祜族">拉祜族</option>
+                  <option value="柯尔克孜族">柯尔克孜族</option>
+                  <option value="布朗族">布朗族</option>
+                  <option value="阿昌族">阿昌族</option>
+                  <option value="俄罗斯族">俄罗斯族</option>
+                  <option value="京族">京族</option>
+                  <option value="门巴族">门巴族</option>
+                  <option value="维吾尔族">维吾尔族</option>
+                  <option value="朝鲜族">朝鲜族</option>
+                  <option value="土家族">土家族</option>
+                  <option value="傈僳族">傈僳族</option>
+                  <option value="水族">水族</option>
+                  <option value="土族">土族</option>
+                  <option value="撒拉族">撒拉族</option>
+                  <option value="普米族">普米族</option>
+                  <option value="鄂温克族">鄂温克族</option>
+                  <option value="塔塔尔族">塔塔尔族</option>
+                  <option value="珞巴族">珞巴族</option>
+                  <option value="苗族">苗族</option>
+                  <option value="满族">满族</option>
+                  <option value="哈尼族">哈尼族</option>
+                  <option value="佤族">佤族</option>
+                  <option value="东乡族">东乡族</option>
+                  <option value="达斡尔族">达斡尔族</option>
+                  <option value="毛南族">毛南族</option>
+                  <option value="塔吉克族">塔吉克族</option>
+                  <option value="德昂族">德昂族</option>
+                  <option value="独龙族">独龙族</option>
+                  <option value="基诺族">基诺族</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>贯籍：</b> </td>
+              <td valign="middle" colspan="3"><input type="text" style=" width:645px;" name="gj" class="form-control"  value="台湾省"  readonly="true"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date7" id="date7" class="form-control" value="2016-12-26" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>失效日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date8" id="date8" class="form-control" value="2016-12-26" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>口令：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="kl" class="form-control"  value="2389076"  readonly="true"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xsje" class="form-control"  value="￥10000" readonly="true"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>经度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jd" class="form-control"  value="120" readonly="true"/></td>
+              <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="wd" class="form-control"  value="118" readonly="true"/></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失地址：</b> </td>
+              <td valign="middle" colspan="5"><input type="text" style=" width:600px;" name="zsdz" class="form-control"   value="北京市公安局通州分局梨园派出所" readonly="true"/></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>公安证明文件：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="gazmwj" class="form-control"  value="../save/zm.jpg" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="tpdz" class="form-control"  value="../save/zm.jpg"disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>体貌特征：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="137" rows="6" name="tmtz" disabled="disabled">身高178，上衣T桖，牛仔裤！</textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭 </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看窗口 end -->
+<!-- 新增窗口 start -->
+<div class="modal fade" id="add_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">新增发布寻人</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="yhid" class="form-control" /></td>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" /></td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:220px;" class="form-control">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>年龄：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="age" class="form-control"  />
+              </td>
+              <td>&nbsp;&nbsp;<b>证件类型：</b> </td>
+              <td valign="middle"><select name="zjlx" style=" width:220px;" class="form-control">
+                  <option id="0" selected="selected">身份证</option>
+                  <option id="1">军官证</option>
+                  <option id="2">港澳通行证</option>
+                  <option id="3">驾驶证</option>
+                </select>
+              </td>
+              <td valign="middle">&nbsp;&nbsp;<b>证件号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="zjh" class="form-control"  /></td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>民族：</b> </td>
+              <td valign="middle"><select name="mz" style=" width:220px;" class="form-control">
+                  <option value="汉族">汉族</option>
+                  <option value="蒙古族">蒙古族</option>
+                  <option value="彝族">彝族</option>
+                  <option value="侗族">侗族</option>
+                  <option value="哈萨克族">哈萨克族</option>
+                  <option value="畲族">畲族</option>
+                  <option value="纳西族">纳西族</option>
+                  <option value="仫佬族">仫佬族</option>
+                  <option value="仡佬族">仡佬族</option>
+                  <option value="怒族">怒族</option>
+                  <option value="保安族">保安族</option>
+                  <option value="鄂伦春族">鄂伦春族</option>
+                  <option value="回族">回族</option>
+                  <option value="壮族">壮族</option>
+                  <option value="瑶族">瑶族</option>
+                  <option value="傣族">傣族</option>
+                  <option value="高山族">高山族</option>
+                  <option value="景颇族">景颇族</option>
+                  <option value="羌族">羌族</option>
+                  <option value="锡伯族">锡伯族</option>
+                  <option value="乌孜别克族">乌孜别克族</option>
+                  <option value="裕固族">裕固族</option>
+                  <option value="赫哲族">赫哲族</option>
+                  <option value="藏族">藏族</option>
+                  <option value="布依族">布依族</option>
+                  <option value="白族">白族</option>
+                  <option value="黎族">黎族</option>
+                  <option value="拉祜族">拉祜族</option>
+                  <option value="柯尔克孜族">柯尔克孜族</option>
+                  <option value="布朗族">布朗族</option>
+                  <option value="阿昌族">阿昌族</option>
+                  <option value="俄罗斯族">俄罗斯族</option>
+                  <option value="京族">京族</option>
+                  <option value="门巴族">门巴族</option>
+                  <option value="维吾尔族">维吾尔族</option>
+                  <option value="朝鲜族">朝鲜族</option>
+                  <option value="土家族">土家族</option>
+                  <option value="傈僳族">傈僳族</option>
+                  <option value="水族">水族</option>
+                  <option value="土族">土族</option>
+                  <option value="撒拉族">撒拉族</option>
+                  <option value="普米族">普米族</option>
+                  <option value="鄂温克族">鄂温克族</option>
+                  <option value="塔塔尔族">塔塔尔族</option>
+                  <option value="珞巴族">珞巴族</option>
+                  <option value="苗族">苗族</option>
+                  <option value="满族">满族</option>
+                  <option value="哈尼族">哈尼族</option>
+                  <option value="佤族">佤族</option>
+                  <option value="东乡族">东乡族</option>
+                  <option value="达斡尔族">达斡尔族</option>
+                  <option value="毛南族">毛南族</option>
+                  <option value="塔吉克族">塔吉克族</option>
+                  <option value="德昂族">德昂族</option>
+                  <option value="独龙族">独龙族</option>
+                  <option value="基诺族">基诺族</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>贯籍：</b> </td>
+              <td valign="middle" colspan="3"><input type="text" style=" width:645px;" name="gj" class="form-control"  />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2016-12-26" />
+              </td>
+              <td>&nbsp;&nbsp;<b>失效日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date4" id="date4" class="form-control" value="2016-12-26" />
+              </td>
+              <td>&nbsp;&nbsp;<b>口令：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="kl" class="form-control"  />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xsje" class="form-control"  value="0"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>经度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jd" class="form-control" /></td>
+              <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="wd" class="form-control" /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失地址：</b> </td>
+              <td valign="middle" colspan="5"><input type="text" style=" width:600px;" name="zsdz" class="form-control"  /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>公安证明文件：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="gazmwj" class="form-control" />
+              </td>
+              <td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="tpdz" class="form-control" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>体貌特征：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="137" rows="6" name="tmtz"></textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新增窗口 end -->
+<!-- 修改窗口 start -->
+<div class="modal fade" id="mod_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">修改发布寻人</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="yhid" class="form-control" value="1002"/></td>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" value="周杰伦"/></td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:220px;" class="form-control">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>年龄：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="age" class="form-control"   value="36"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>证件类型：</b> </td>
+              <td valign="middle"><select name="zjlx" style=" width:220px;" class="form-control">
+                  <option id="0" selected="selected">身份证</option>
+                  <option id="1">军官证</option>
+                  <option id="2">港澳通行证</option>
+                  <option id="3">驾驶证</option>
+                </select>
+              </td>
+              <td valign="middle">&nbsp;&nbsp;<b>证件号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="zjh" class="form-control"   value="130429197609180971"/></td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>民族：</b> </td>
+              <td valign="middle"><select name="mz" style=" width:220px;" class="form-control">
+                  <option value="汉族">汉族</option>
+                  <option value="蒙古族">蒙古族</option>
+                  <option value="彝族">彝族</option>
+                  <option value="侗族">侗族</option>
+                  <option value="哈萨克族">哈萨克族</option>
+                  <option value="畲族">畲族</option>
+                  <option value="纳西族">纳西族</option>
+                  <option value="仫佬族">仫佬族</option>
+                  <option value="仡佬族">仡佬族</option>
+                  <option value="怒族">怒族</option>
+                  <option value="保安族">保安族</option>
+                  <option value="鄂伦春族">鄂伦春族</option>
+                  <option value="回族">回族</option>
+                  <option value="壮族">壮族</option>
+                  <option value="瑶族">瑶族</option>
+                  <option value="傣族">傣族</option>
+                  <option value="高山族">高山族</option>
+                  <option value="景颇族">景颇族</option>
+                  <option value="羌族">羌族</option>
+                  <option value="锡伯族">锡伯族</option>
+                  <option value="乌孜别克族">乌孜别克族</option>
+                  <option value="裕固族">裕固族</option>
+                  <option value="赫哲族">赫哲族</option>
+                  <option value="藏族">藏族</option>
+                  <option value="布依族">布依族</option>
+                  <option value="白族">白族</option>
+                  <option value="黎族">黎族</option>
+                  <option value="拉祜族">拉祜族</option>
+                  <option value="柯尔克孜族">柯尔克孜族</option>
+                  <option value="布朗族">布朗族</option>
+                  <option value="阿昌族">阿昌族</option>
+                  <option value="俄罗斯族">俄罗斯族</option>
+                  <option value="京族">京族</option>
+                  <option value="门巴族">门巴族</option>
+                  <option value="维吾尔族">维吾尔族</option>
+                  <option value="朝鲜族">朝鲜族</option>
+                  <option value="土家族">土家族</option>
+                  <option value="傈僳族">傈僳族</option>
+                  <option value="水族">水族</option>
+                  <option value="土族">土族</option>
+                  <option value="撒拉族">撒拉族</option>
+                  <option value="普米族">普米族</option>
+                  <option value="鄂温克族">鄂温克族</option>
+                  <option value="塔塔尔族">塔塔尔族</option>
+                  <option value="珞巴族">珞巴族</option>
+                  <option value="苗族">苗族</option>
+                  <option value="满族">满族</option>
+                  <option value="哈尼族">哈尼族</option>
+                  <option value="佤族">佤族</option>
+                  <option value="东乡族">东乡族</option>
+                  <option value="达斡尔族">达斡尔族</option>
+                  <option value="毛南族">毛南族</option>
+                  <option value="塔吉克族">塔吉克族</option>
+                  <option value="德昂族">德昂族</option>
+                  <option value="独龙族">独龙族</option>
+                  <option value="基诺族">基诺族</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>贯籍：</b> </td>
+              <td valign="middle" colspan="3"><input type="text" style=" width:645px;" name="gj" class="form-control"  value="台湾省" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date5" id="date5" class="form-control" value="2016-12-26" />
+              </td>
+              <td>&nbsp;&nbsp;<b>失效日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date6" id="date6" class="form-control" value="2016-12-26" />
+              </td>
+              <td>&nbsp;&nbsp;<b>口令：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="kl" class="form-control"  value="2389076" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xsje" class="form-control"  value="￥10000"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>经度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jd" class="form-control"  value="120"/></td>
+              <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="wd" class="form-control"  value="118"/></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>走失地址：</b> </td>
+              <td valign="middle" colspan="5"><input type="text" style=" width:600px;" name="zsdz" class="form-control"   value="北京市公安局通州分局梨园派出所"/></td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>公安证明文件：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="gazmwj" class="form-control"  value="../save/zm.jpg"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              <td valign="middle" colspan="2"><input type="file" style=" width:320px;" name="tpdz" class="form-control"  value="../save/zm.jpg"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>体貌特征：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="137" rows="6" name="tmtz">身高178，上衣T桖，牛仔裤！</textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 修改窗口 end -->
+</body>
+</html>

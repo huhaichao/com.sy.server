@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>跑马信息信息</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"/>
+<script src="../../tempalte/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../../tempalte/js/charts/Chart.js"></script>
+<script src="../../js/pubjs/tab.js"></script>
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div class="alert alert-danger" style=" margin-top:20px; margin-left:20px; margin-right:20px;">格式：恭喜 XXX 通过平台找到 XXX !</div>
+    <div class="well" style="  margin-left:20px; margin-right:20px;">
+      <form action="#">
+        <table style="width:80%; margin-top:20px; margin-left:20px; margin-right:20px; border: 1px solid #fff;" >
+          <tr>
+            <td> 类型： </td>
+            <td><select name="type2" style=" width:200px;"  class="form-control">
+                <option id="0" selected="selected">人</option>
+                <option id="1">物</option>
+              </select>
+            </td>
+            <td valign="middle">&nbsp;&nbsp;值： </td>
+            <td valign="middle"><input type="text" style=" width:200px;" name="typeValue"  class="form-control" />
+            </td>
+			<td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td> 用户： </td>
+            <td><select name="user2" style=" width:200px;"  class="form-control">
+                <option id="0" selected="selected">刀郎</option>
+                <option id="1">周传雄</option>
+                <option id="2">周杰伦</option>
+                <option id="3">陈奕迅</option>
+                <option id="4">孙子含</option>
+                <option id="5">庞龙</option>
+              </select>
+            </td>
+            <td valign="middle">&nbsp;&nbsp;值： </td>
+            <td valign="middle"><input type="text" style=" width:200px;" name="typeValue"  class="form-control" />
+            </td>
+			<td><input type="checkbox" name="auto2" checked="checked"/> 自动保存滚动信息</td>
+          </tr>
+          <tr>
+            <td> 姓名/物品名称： </td>
+            <td><select name="name2" style=" width:200px;"  class="form-control">
+                <option id="0" selected="selected">笔记本电脑</option>
+                <option id="1">硬盘</option>
+				<option id="2">自行车</option>
+              </select>
+            </td>
+            <td valign="middle">&nbsp;&nbsp;值： </td>
+            <td valign="middle"><input type="text" style=" width:200px;" name="typeValue"  class="form-control" />
+            </td>
+			<td> 
+				<input type="button" name="sel" value="  保  存  " class="btn btn-success btn-sm"/>
+			</td>
+          </tr>
+        </table>
+      </form>
+    </div>
+		<div class="alert alert-info" style=" height:400px; margin-top:20px; margin-left:20px; margin-right:20px;">展示滚动信息！</div>
+  </div>
+</div>
+</body>
+</html>

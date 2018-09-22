@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyUserGuideMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyUserGuide">
+    <id column="t_sy_userGuide_ID" jdbcType="INTEGER" property="tSyUserguideId" />
+    <result column="T_SY_PLAT_CODE" jdbcType="VARCHAR" property="tSyPlatCode" />
+    <result column="T_SY_VERSION_NUMBER" jdbcType="VARCHAR" property="tSyVersionNumber" />
+    <result column="t_sy_userGuide_NAME" jdbcType="VARCHAR" property="tSyUserguideName" />
+    <result column="t_sy_userGuide_CODE" jdbcType="VARCHAR" property="tSyUserguideCode" />
+    <result column="t_sy_userGuidef_ID" jdbcType="VARCHAR" property="tSyUserguidefId" />
+    <result column="t_sy_userGuide_usertext" jdbcType="VARCHAR" property="tSyUserguideUsertext" />
+    <result column="t_sy_userGuide_context" jdbcType="VARCHAR" property="tSyUserguideContext" />
+    <result column="t_sy_userGuide_state" jdbcType="INTEGER" property="tSyUserguideState" />
+    <result column="t_sy_userGuide_check" jdbcType="INTEGER" property="tSyUserguideCheck" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+  </resultMap>
+  <select id="selectByItem" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_userGuide
+    where (T_SY_PLAT_CODE = #{versionType,jdbcType=VARCHAR}) and (T_SY_VERSION_NUMBER = #{versionNum,jdbcType=VARCHAR})
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    t_sy_userGuide_ID, T_SY_PLAT_CODE, T_SY_VERSION_NUMBER, t_sy_userGuide_NAME, t_sy_userGuide_CODE, 
+    t_sy_userGuidef_ID, t_sy_userGuide_usertext, t_sy_userGuide_context, t_sy_userGuide_state, 
+    t_sy_userGuide_check, T_SY_BZ1, T_SY_BZ2
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyUserGuideExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from "t_sy_userguide"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "t_sy_userguide"
+    where t_sy_userGuide_ID = #{tSyUserguideId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_sy_userguide"
+    where t_sy_userGuide_ID = #{tSyUserguideId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyUserGuideExample">
+    delete from "t_sy_userguide"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyUserGuide">
+    insert into "t_sy_userguide" (t_sy_userGuide_ID, T_SY_PLAT_CODE, T_SY_VERSION_NUMBER, 
+      t_sy_userGuide_NAME, t_sy_userGuide_CODE, t_sy_userGuidef_ID, 
+      t_sy_userGuide_usertext, t_sy_userGuide_context, 
+      t_sy_userGuide_state, t_sy_userGuide_check, T_SY_BZ1, 
+      T_SY_BZ2)
+    values (#{tSyUserguideId,jdbcType=INTEGER}, #{tSyPlatCode,jdbcType=VARCHAR}, #{tSyVersionNumber,jdbcType=VARCHAR}, 
+      #{tSyUserguideName,jdbcType=VARCHAR}, #{tSyUserguideCode,jdbcType=VARCHAR}, #{tSyUserguidefId,jdbcType=VARCHAR}, 
+      #{tSyUserguideUsertext,jdbcType=VARCHAR}, #{tSyUserguideContext,jdbcType=VARCHAR}, 
+      #{tSyUserguideState,jdbcType=INTEGER}, #{tSyUserguideCheck,jdbcType=INTEGER}, #{tSyBz1,jdbcType=VARCHAR}, 
+      #{tSyBz2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyUserGuide">
+    insert into "t_sy_userguide"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyUserguideId != null">
+        t_sy_userGuide_ID,
+      </if>
+      <if test="tSyPlatCode != null">
+        T_SY_PLAT_CODE,
+      </if>
+      <if test="tSyVersionNumber != null">
+        T_SY_VERSION_NUMBER,
+      </if>
+      <if test="tSyUserguideName != null">
+        t_sy_userGuide_NAME,
+      </if>
+      <if test="tSyUserguideCode != null">
+        t_sy_userGuide_CODE,
+      </if>
+      <if test="tSyUserguidefId != null">
+        t_sy_userGuidef_ID,
+      </if>
+      <if test="tSyUserguideUsertext != null">
+        t_sy_userGuide_usertext,
+      </if>
+      <if test="tSyUserguideContext != null">
+        t_sy_userGuide_context,
+      </if>
+      <if test="tSyUserguideState != null">
+        t_sy_userGuide_state,
+      </if>
+      <if test="tSyUserguideCheck != null">
+        t_sy_userGuide_check,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyUserguideId != null">
+        #{tSyUserguideId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyPlatCode != null">
+        #{tSyPlatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyVersionNumber != null">
+        #{tSyVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideName != null">
+        #{tSyUserguideName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideCode != null">
+        #{tSyUserguideCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguidefId != null">
+        #{tSyUserguidefId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideUsertext != null">
+        #{tSyUserguideUsertext,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideContext != null">
+        #{tSyUserguideContext,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideState != null">
+        #{tSyUserguideState,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserguideCheck != null">
+        #{tSyUserguideCheck,jdbcType=INTEGER},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyUserGuideExample" resultType="java.lang.Long">
+    select count(*) from "t_sy_userguide"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update "t_sy_userguide"
+    <set>
+      <if test="record.tSyUserguideId != null">
+        t_sy_userGuide_ID = #{record.tSyUserguideId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyPlatCode != null">
+        T_SY_PLAT_CODE = #{record.tSyPlatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyVersionNumber != null">
+        T_SY_VERSION_NUMBER = #{record.tSyVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguideName != null">
+        t_sy_userGuide_NAME = #{record.tSyUserguideName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguideCode != null">
+        t_sy_userGuide_CODE = #{record.tSyUserguideCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguidefId != null">
+        t_sy_userGuidef_ID = #{record.tSyUserguidefId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguideUsertext != null">
+        t_sy_userGuide_usertext = #{record.tSyUserguideUsertext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguideContext != null">
+        t_sy_userGuide_context = #{record.tSyUserguideContext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserguideState != null">
+        t_sy_userGuide_state = #{record.tSyUserguideState,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyUserguideCheck != null">
+        t_sy_userGuide_check = #{record.tSyUserguideCheck,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update "t_sy_userguide"
+    set t_sy_userGuide_ID = #{record.tSyUserguideId,jdbcType=INTEGER},
+      T_SY_PLAT_CODE = #{record.tSyPlatCode,jdbcType=VARCHAR},
+      T_SY_VERSION_NUMBER = #{record.tSyVersionNumber,jdbcType=VARCHAR},
+      t_sy_userGuide_NAME = #{record.tSyUserguideName,jdbcType=VARCHAR},
+      t_sy_userGuide_CODE = #{record.tSyUserguideCode,jdbcType=VARCHAR},
+      t_sy_userGuidef_ID = #{record.tSyUserguidefId,jdbcType=VARCHAR},
+      t_sy_userGuide_usertext = #{record.tSyUserguideUsertext,jdbcType=VARCHAR},
+      t_sy_userGuide_context = #{record.tSyUserguideContext,jdbcType=VARCHAR},
+      t_sy_userGuide_state = #{record.tSyUserguideState,jdbcType=INTEGER},
+      t_sy_userGuide_check = #{record.tSyUserguideCheck,jdbcType=INTEGER},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyUserGuide">
+    update "t_sy_userguide"
+    <set>
+      <if test="tSyPlatCode != null">
+        T_SY_PLAT_CODE = #{tSyPlatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyVersionNumber != null">
+        T_SY_VERSION_NUMBER = #{tSyVersionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideName != null">
+        t_sy_userGuide_NAME = #{tSyUserguideName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideCode != null">
+        t_sy_userGuide_CODE = #{tSyUserguideCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguidefId != null">
+        t_sy_userGuidef_ID = #{tSyUserguidefId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideUsertext != null">
+        t_sy_userGuide_usertext = #{tSyUserguideUsertext,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideContext != null">
+        t_sy_userGuide_context = #{tSyUserguideContext,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserguideState != null">
+        t_sy_userGuide_state = #{tSyUserguideState,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserguideCheck != null">
+        t_sy_userGuide_check = #{tSyUserguideCheck,jdbcType=INTEGER},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_sy_userGuide_ID = #{tSyUserguideId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyUserGuide">
+    update "t_sy_userguide"
+    set T_SY_PLAT_CODE = #{tSyPlatCode,jdbcType=VARCHAR},
+      T_SY_VERSION_NUMBER = #{tSyVersionNumber,jdbcType=VARCHAR},
+      t_sy_userGuide_NAME = #{tSyUserguideName,jdbcType=VARCHAR},
+      t_sy_userGuide_CODE = #{tSyUserguideCode,jdbcType=VARCHAR},
+      t_sy_userGuidef_ID = #{tSyUserguidefId,jdbcType=VARCHAR},
+      t_sy_userGuide_usertext = #{tSyUserguideUsertext,jdbcType=VARCHAR},
+      t_sy_userGuide_context = #{tSyUserguideContext,jdbcType=VARCHAR},
+      t_sy_userGuide_state = #{tSyUserguideState,jdbcType=INTEGER},
+      t_sy_userGuide_check = #{tSyUserguideCheck,jdbcType=INTEGER},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR}
+    where t_sy_userGuide_ID = #{tSyUserguideId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

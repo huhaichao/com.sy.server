@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>优惠券</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<!-- 弹出窗口 -->
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    	优惠券
+		<br/>
+		<input type="button" name="fh" value="  返 回  " class="btn btn-primary btn-sm" onClick="history.go(-1);"/>
+  </div>
+</div>
+</body>
+</html>

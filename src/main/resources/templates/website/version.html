@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>升级版本</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap.min.css"></link>
+<link href="../../webjars/bootstrap-table/1.9.1/bootstrap-table.css" rel="stylesheet"></link>
+<!-- 弹出窗口 -->
+<link rel="stylesheet" href="../../css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/chg.css"></link>
+<!-- 日期控件调用 start -->
+<link rel="stylesheet" href="../../date_js_css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../../date_js_css/daterangepicker-bs3.css"></link>
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../../js/jquery/jquery.min.js"></script>
+<script  src="../../js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/bootstrap-table.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.js"></script>
+<!-- 弹出窗口 end -->
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../../date_js_css/daterangepicker.js"></script>
+<!-- 日期控件调用 end -->
+
+<script  src="../../js/syUtil.js"></script>
+
+<script type="text/javascript">
+		
+		//拼接修改串
+		var updmap={"upid":"tSyVersionId","upcjr":"tSyCreateuser","upDate4":"tSyCreatedate","upsjxx":"tSyCreateinfo",
+		 "upbbh":"tSyVersionNumber"};
+		 
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+            $('#date3').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#upDate4').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             }); 
+            $('#addversion').modal({show: false});
+		    $('#editversion').modal({show: false});
+		    sendFrom("create","addversion","add","empUserList");//新增保存
+		    sendFrom("edit","editversion","update","empUserList",updmap);//修改保存
+			querys();
+        });
+        
+        //根据条件查询返回到页面展示
+        function querys() { 
+    	    $("#empUserList").bootstrapTable({  
+    	        url: 'versionserch',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                contentType: "application/x-www-form-urlencoded",
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortable: false,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                       //初始化加载第一页，默认第一页
+                pageSize: 15,                       //每页的记录行数（*）
+                pageList: [15, 30, 45, 60, 75, 90],        //可供选择的每页的行数（*）
+                queryParamsType : "undefined",
+                queryParams: function queryParams(params) {   //设置查询参数
+                	var array=$("#date2").val().split(" - ");
+                    var param = {
+                            //这里是在ajax发送请求的时候设置一些参数 params有什么东西，自己看看源码就知道了
+                            pageNo: params.pageNumber,
+                            pageSize: params.pageSize,
+                            starDate:array[0],
+                            endDate:array[1],
+                            versionNo:$("#sel_version").val()
+                          };
+                          return param;
+                        },
+                strictSearch: true,
+                clickToSelect: true,                //是否启用点击选中行
+                height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "tSyVersionId",                     //每一行的唯一标识，一般为主键列
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+    	        columns : [{  
+    	            field : 'id',  
+    	            checkbox : true,  
+    	            align : 'center',  
+    	            valign : 'middle'  
+    	        }, {  
+    	            title : '序号',  
+    	            field : 'tSyVersionId', // 字段  
+    	            align : 'center', // 对齐方式（左 中 右）  
+    	            valign : 'middle', //  
+    	            sortable : true  
+    	        },{  
+    	            title : '版本号',  
+    	            field : 'tSyVersionNumber', // 字段  
+    	            align : 'center', // 对齐方式（左 中 右）  
+    	            valign : 'middle', //  
+    	            sortable : true  
+    	        }, {  
+    	            title : '创建人',  
+    	            field : 'tSyCreateuser',  
+    	            align : 'center',  
+    	            valign : 'middle',  
+    	            sortable : true  
+    	        }, {  
+    	            title : '创建日期',  
+    	            field : 'tSyCreatedate',  
+    	            align : 'center',  
+    	            valign : 'middle',  
+    	            sortable : true  
+    	        },{  
+    	            title : '升级信息',  
+    	            field : 'tSyCreateinfo',  
+    	            align : 'center',  
+    	            valign : 'middle',  
+    	            sortable : true  
+    	        } ],  
+    	        responseHandler : function(res) {  
+    	            return {  
+    	                total : res.total,  
+    	                rows : res.records
+    	            };  
+    	        },  
+    	        onCheck:function(){  
+    	            return false;
+    	        },  
+    	        onCheckAll:function(){  
+    	        	return false;
+    	        },  
+    	        onUncheckAll:function(){ 
+    	        	return false;
+    	        },  
+    	        onUncheck:function(){  
+    	        	return false;
+    	        }  
+    	    })  
+    	}
+        
+    	/** 
+    	 * 删除数据 
+    	 */  
+    	function deleteHr() {  
+    		delRow("empUserList","delete","tSyVersionId");
+    	}  
+        
+     
+      //根据条件查询方法	
+        function versionSerch(){
+        	$("#empUserList").bootstrapTable('refresh');
+        }
+      
+      //弹出框问题修改
+        function getMessage(message){
+        	$('#message').html(message);
+        	$('#editrole3').modal('show');
+        	
+        }
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%; margin-top: 40px;" class="container-fluid">
+	<form action="#">
+            <table class="glyphicon-italic">
+              <tr>
+                <td valign="middle">&nbsp;&nbsp; <b>版本号：</b> </td>
+                <td valign="middle"><select name="sel_version" id="sel_version"  class="form-control"  style=" width:100px;">
+                    <option value="all" selected="selected">全部</option>
+                    <option value="1.0">1.0</option>
+                    <option value="1.0.1">1.0.1</option>
+                    <option value="1.0.2">1.0.2</option>
+                    <option value="1.0.3">1.0.3</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp; <b>创建日期：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2017-01-17 - 2017-01-18" />
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a><button type="button" onclick="versionSerch();" id="search" class="search btn btn-default"> <i class="glyphicon glyphicon-search"></i> </button></a>
+                    <a><button type="button" id="add" class="create btn btn-default"> <i class="glyphicon glyphicon-plus"></i> </button></a>  
+            		<a><button type="button" id="edit" class="edit btn btn-default">  <i class="glyphicon glyphicon-pencil"></i></button></a>  
+            		<a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">  <i class="glyphicon glyphicon-trash"></i></button></a>  
+                </td>
+              </tr>
+            </table>
+          </form>
+          <div> 
+        	<table id="empUserList" >  
+        	</table>  <!-- 留意-->  
+      	</div>
+</div>
+<!-- 新增窗口 start -->
+<div class="modal fade" id="addversion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">新增版本</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建人：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="addcjr" class="form-control" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>版本号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="addbbh" class="form-control" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2017-01-17" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>升级信息：</b> </td>
+              <td valign="middle"><textarea cols="50" rows="6" name="addsjxx"></textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="button" class="btn btn-primary submit">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新增窗口 end -->
+<!-- 修改窗口 start -->
+<div class="modal fade" id="editversion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1200px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">修改版本</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+		  	<tr>
+              <td>&nbsp;&nbsp;<b>创建人：</b> </td>
+              <td valign="middle"><input type="hidden" style=" width:220px;" name="upid" id="upid" class="form-control" />
+              <input type="text" style=" width:220px;" name="upcjr" id="upcjr" class="form-control" value="admin"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>版本号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upbbh" id="upbbh" class="form-control" value="1.0"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="upDate4" id="upDate4" class="form-control" value="2016-12-26" />
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle">&nbsp;&nbsp;<b>升级信息：</b> </td>
+              <td valign="middle"><textarea cols="50" rows="6" name="upsjxx" id="upsjxx"> 1.修复部分bug。2.新增部分功能。 </textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success submit"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 修改窗口 end -->
+<div class="modal fade" id="editrole3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">提示信息</b> </h4>
+      </div>
+      <div class="modal-body">
+      <div id="message"></div>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

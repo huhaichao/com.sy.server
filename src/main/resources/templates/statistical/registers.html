@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>注册用户量</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../js/index.css">
+<!-- 日期控件调用 start -->
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../js/charts/Chart.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+<style>
+	.panel-default {
+		border: none;
+		border-radius: 0px;
+		margin-bottom: 0px;
+		box-shadow: none;
+		-webkit-box-shadow: none;
+	}
+		
+	.panel-default > .panel-heading {
+		color: #777;
+		background-color: #fff;
+		border-color: #e6e6e6;
+		padding: 10px 10px;
+	}
+		
+	.panel-default > .panel-body {
+		padding: 10px;
+		padding-bottom: 0px;
+	}
+		
+	.panel-default > .panel-body ul {
+		overflow: hidden;
+		padding: 0;
+		margin: 0px;
+		margin-top: -5px;
+	}
+		
+	.panel-default > .panel-body ul li {
+		line-height: 27px;
+		list-style-type: none;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+		
+	.panel-default > .panel-body ul li .time {
+		color: #a1a1a1;
+		float: right;
+		padding-right: 5px;
+	}
+</style>
+<script>
+	$(function () {
+		Canvas1();
+		Canvas2();
+		Canvas3();
+		Canvas4();
+		Canvas5();
+		Canvas6();
+	});
+	function Canvas1() {
+            var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+            var doughnutData = [
+                {
+                    value: randomScalingFactor(),
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "女"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "男"
+                },
+				{
+                    value: randomScalingFactor(),
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: "无"
+                }
+            ];
+            var ctx = document.getElementById("Canvas1").getContext("2d");
+            window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, { responsive: false });
+        }
+		function Canvas2() {
+            var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+            var doughnutData = [
+                {
+                    value: randomScalingFactor(),
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "18-30"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "31-50"
+                },
+				{
+                    value: randomScalingFactor(),
+                    color: "#FDB45C",
+                    highlight: "#FFC870",
+                    label: ">50"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: ">无"
+                }
+            ];
+            var ctx = document.getElementById("Canvas2").getContext("2d");
+            window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, { responsive: false });
+        }
+		function Canvas3() {
+            var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+            var doughnutData = [
+                {
+                    value: randomScalingFactor(),
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "女"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "男"
+                },
+				{
+                    value: randomScalingFactor(),
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: "无"
+                }
+            ];
+            var ctx = document.getElementById("Canvas3").getContext("2d");
+            window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, { responsive: false });
+        }
+		function Canvas4() {
+            var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+            var doughnutData = [
+                {
+                    value: randomScalingFactor(),
+                    color: "#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "18-30"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "31-50"
+                },
+				{
+                    value: randomScalingFactor(),
+                    color: "#FDB45C",
+                    highlight: "#FFC870",
+                    label: ">50"
+                },
+                {
+                    value: randomScalingFactor(),
+                    color: "#949FB1",
+                    highlight: "#A8B3C5",
+                    label: ">无"
+                }
+            ];
+            var ctx = document.getElementById("Canvas4").getContext("2d");
+            window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, { responsive: false });
+        }
+		<!--地域 -->
+		function Canvas5() {
+		var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+		var lineChartData = {
+			labels: ["东城区","西城区","朝阳区","海淀区","石景山区","丰台区","顺义区","怀柔区","密云县","延庆县","昌平区","平谷区","门头沟区","房山区","通州区"],
+			datasets: [
+				{
+					fillColor: "#CC6600",
+					data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+				}
+			]
+		}
+		var ctx = document.getElementById("Canvas5").getContext("2d");
+		window.myLine = new Chart(ctx).Bar(lineChartData, {
+			bezierCurve: false,
+		 
+		});
+	}
+	function Canvas6() {
+		var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
+		var lineChartData = {
+			labels: ["东城区","西城区","朝阳区","海淀区","石景山区","丰台区","顺义区","怀柔区","密云县","延庆县","昌平区","平谷区","门头沟区","房山区","通州区"],
+			datasets: [
+				{
+					fillColor: "#FF3300",
+					data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(),randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+				}
+			]
+		}
+		var ctx = document.getElementById("Canvas6").getContext("2d");
+		window.myLine = new Chart(ctx).Bar(lineChartData, {
+			bezierCurve: false,
+		 
+		});
+	}
+		
+</script>
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+<div style="height: 800px; border: 1px solid #fff; background-color: #fff;">
+<table id="hacker" width="100%" style=" margin-top:10px; margin-bottom:10px;" class="table table-bordered">
+<!--  <tr>
+    <td style="text-align: center;" colspan="4"><table>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;日期： </td>
+          <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+          </td>
+          <td>&nbsp;&nbsp;&nbsp;
+            <input type="button" name="add"  class="btn btn-success btn-sm" value="  统  计  ">
+          </td>
+        </tr>
+      </table></td>
+  </tr> -->
+  <tr>
+    <td><div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
+      <div style="width: 100%;">
+        <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>PC_注册用户量（性别）</div>
+            <div class="panel-body">
+              <canvas id="Canvas1" style="height: 180px; width: 100%; margin-top: 10px;"></canvas>
+              <div style="text-align: center; padding-top: 15px;"> <span><i class="fa fa-square" style="color: #F7464A; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>女</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #46BFBD; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>男</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #949FB1; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>无</span> </div>
+            </div>
+          </div>
+        </div>
+      </div></td>
+    <td><div style="width: 100%;">
+        <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>PC_注册用户量（年龄）</div>
+            <div class="panel-body">
+              <canvas id="Canvas2" style="height: 180px; width: 100%; margin-top: 10px;"></canvas>
+              <div style="text-align: center; padding-top: 15px;"> <span><i class="fa fa-square" style="color: #F7464A; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>18-30</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #46BFBD; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>31-50</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #FDB45C; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>>50</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #949FB1; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>无</span> </div>
+            </div>
+          </div>
+        </div>
+      </div></td>
+    <td><div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
+      <div style="width: 100%;">
+        <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>APP_注册用户量（性别）</div>
+            <div class="panel-body">
+              <canvas id="Canvas3" style="height: 180px; width: 100%; margin-top: 10px;"></canvas>
+              <div style="text-align: center; padding-top: 15px;"> <span><i class="fa fa-square" style="color: #F7464A; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>女</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #46BFBD; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>男</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #949FB1; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>无</span> </div>
+            </div>
+          </div>
+        </div>
+      </div></td>
+    <td><div style="width: 100%;">
+        <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+          <div class="panel panel-default">
+            <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>APP_注册用户量（年龄）</div>
+            <div class="panel-body">
+              <canvas id="Canvas4" style="height: 180px; width: 100%; margin-top: 10px;"></canvas>
+              <div style="text-align: center; padding-top: 15px;"> <span><i class="fa fa-square" style="color: #F7464A; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>18-30</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #46BFBD; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>31-50</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #FDB45C; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>>50</span> <span style="margin-left: 10px;"><i class="fa fa-square" style="color: #949FB1; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>无</span> </div>
+            </div>
+          </div>
+        </div>
+      </div></td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">&nbsp;
+      PC端注册用户量/（性别）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+    <td style="text-align:center;">&nbsp;
+      PC端注册用户量/（年龄）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+    <td style="text-align:center;">&nbsp;
+      APP端注册用户量/（性别）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+    <td style="text-align:center;">&nbsp;
+      APP端注册用户量/（年龄）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+  </tr>
+  <tr>
+    <td style="width:50%;" colspan="2"><div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
+        <div style="float: left; width: 100%;">
+          <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+            <div class="panel panel-default">
+              <div class="panel-heading"><i class="fa fa-bar-chart fa-lg" style="padding-right: 5px;"></i>PC_注册用户量&nbsp;&nbsp;&nbsp;（地域）</div>
+              <div class="panel-body">
+                <canvas id="Canvas5" style="height: 230px; width: 100%;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </div>
+  </td>
+  </td>
+  <td style="width:50%;" colspan="2"><div class="rows" style="margin-bottom: 0.8%; overflow: hidden;">
+        <div style="float: left; width: 100%;">
+          <div style="height: 290px; border: 1px solid #e6e6e6; background-color: #fff;">
+            <div class="panel panel-default">
+              <div class="panel-heading"><i class="fa fa-bar-chart fa-lg" style="padding-right: 5px;"></i>PC_注册用户量&nbsp;&nbsp;&nbsp;（地域）</div>
+              <div class="panel-body">
+                <canvas id="Canvas6" style="height: 230px; width: 100%;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:center;" colspan="2">&nbsp;
+      PC端注册用户量/（地域）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+    <td style="text-align:center;" colspan="2">&nbsp;
+      APP端注册用户量/（地域）&nbsp;&nbsp;
+      <input type="button" name="see"  class="btn btn-link btn-sm" value="  查 看  " >
+    </td>
+  </tr>
+</table>
+</div>
+</div>
+</body>
+</html>

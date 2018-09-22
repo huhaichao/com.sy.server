@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>用户信息</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"/>
+<link rel="stylesheet" href="../../css/pubcss/chg.css"/>
+<!-- 日期控件调用 start -->
+<link rel="stylesheet" href="../../date_js_css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../../date_js_css/daterangepicker-bs3.css"/>
+<link href="../../webjars/bootstrap-table/1.9.1/bootstrap-table.css" rel="stylesheet"></link>
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<!-- 弹出窗口 -->
+<link rel="stylesheet" href="../../css/font-awesome.min.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"></link>
+<link rel="stylesheet" href="../../css/pubcss/chg.css"></link>
+<script  src="../../js/jquery/jquery.min.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../../js/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../../date_js_css/daterangepicker.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/bootstrap-table.js"></script>
+<script src="../../webjars/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date3').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date4').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 querys();
+        });
+		function newPage(num){
+			if(num==1){
+				window.location.href="../../integral.html";
+			}else if(num==2){
+				window.location.href="../../coupon.html";
+			}else{
+				window.location.href="../../helpinfo.html";
+			}
+		}
+		
+		
+     function querys() {  
+ 	    $("#empUserList").bootstrapTable({  
+	        url: 'userserch',         //请求后台的URL（*）
+            method: 'post',                      //请求方式（*）
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            contentType: "application/x-www-form-urlencoded",
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: false,                     //是否启用排序
+            sortOrder: "asc",                   //排序方式
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 12,                       //每页的记录行数（*）
+            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+            queryParamsType : "undefined",
+            queryParams: function queryParams(params) {   //设置查询参数
+            	var array=$("#date2").val().split(" - ");
+                var param = {
+                        //这里是在ajax发送请求的时候设置一些参数 params有什么东西，自己看看源码就知道了
+                        pageNo: params.pageNumber,
+                        pageSize: params.pageSize,
+                        starDate:array[0],
+                        endDate:array[1],
+                        userName:$("#userName").val(),
+                        userIntegral:$("#integral").val(),
+                        userSex:$("#sex").val(),
+                        userStatus:$("#status").val()
+                      };
+                      return param;
+                    },
+            strictSearch: true,
+            clickToSelect: true,                //是否启用点击选中行
+            height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "tSyUserId",                     //每一行的唯一标识，一般为主键列
+            cardView: false,                    //是否显示详细视图
+            detailView: false,                   //是否显示父子表
+	        columns : [{  
+	            field : 'id',  
+	            checkbox : true,  
+	            align : 'center',  
+	            valign : 'middle'  
+	        }, {  
+	            title : '序号',  
+	            field : 'tSyUserId', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        },{  
+	            title : '姓名',  
+	            field : 'tSyUsername', // 字段  
+	            align : 'center', // 对齐方式（左 中 右）  
+	            valign : 'middle', //  
+	            sortable : true  
+	        }, {  
+	            title : '性别',  
+	            field : 'tSySex',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '昵称',  
+	            field : 'tSyNickname',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '积分',  
+	            field : 'tSyIntegral',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '创建日期',  
+	            field : 'tSyCreateTime',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '是否在线',  
+	            field : 'tSyIsonline',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '账户状态',  
+	            field : 'tSyAccountState',  
+	            align : 'center',  
+	            valign : 'middle',  
+	            sortable : true  
+	        }, {  
+	            title : '操作',  
+	            field : 'PingYouSheDingID',  
+	            align : 'center',  
+	            events: operateEvents,
+	            formatter: operateFormatter
+	        }  ],  
+	        responseHandler : function(res) {  
+	            return {  
+	                total : res.total,  
+	                rows : res.records  
+	                
+
+	            };  
+	        },  
+	        onCheck:function(){  
+	            return false;
+	        },  
+	        onCheckAll:function(){  
+	        	return false;
+	        },  
+	        onUncheckAll:function(){ 
+	        	return false;
+	        },  
+	        onUncheck:function(){  
+	        	return false;
+	        }  
+	    })  
+
+		}  
+     
+	function operateFormatter(value, row, index) {
+		var check ="";
+		var lock="";
+		if(row.tSyAccountState==1){
+			check= '<a><button type="button" onclick="deleteHr();" id="delete" class="check btn btn-default">  <i class="fa fa-toggle-off"></i></button></a> ';
+		}else{
+			check='<a><button type="button" onclick="deleteHr();" id="delete" class="oncheck btn btn-default">  <i class="fa fa-toggle-on"></i></button></a>  ';
+		}
+		
+		if(row.tSyUserStatus==1){
+			lock= '<a><button type="button" onclick="deleteHr();" id="delete" class="onlock btn btn-default">  <i class="fa fa-unlock"></i></button></a>  ';
+		}else{
+			lock='<a><button type="button" onclick="deleteHr();" id="delete" class="lock btn btn-default">  <i class="fa fa-lock"></i></button></a> ';
+		}
+	         return [
+	        	 check,lock
+	         ].join('');
+	     }
+     
+     window.operateEvents = {
+             'click .check': function (e, value, row, index) {
+                 alert("A");            
+          },
+             'click .onCheck': function (e, value, row, index) {
+                 alert("B");            
+          },
+           'click .onlock': function (e, value, row, index) {
+                 alert("C");            
+          },
+             'click .lock': function (e, value, row, index) {
+            	 alert("D");
+                 }
+             }
+     
+//刷新方法
+ function roleSerch(){
+    	 $('#empUserList').bootstrapTable('refresh');  
+     }
+//根据选择的数据进行查看
+ function lookUser(){
+	$('#lookUser').modal('show');
+	
+	alert("进入查询方法");
+ }
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%; margin-top: 40px;" class="container-fluid">
+	<form action="#">
+            <table class="glyphicon-italic">
+              <tr>
+                <td><b>创建日期：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26"/>
+                </td>
+                <td><b>&nbsp;&nbsp;性别：</b></td>
+                    <td valign="middle"><select name="sex" id="sex" style=" width:100px;" class="form-control">
+                    <option value="0" selected="selected">全部</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                  </select>
+                </td>
+                   <td><b>&nbsp;&nbsp;积分：</b></td>
+                    <td valign="middle">
+                     <input type="text" style=" width:100px;" name="integral" id="integral" class="form-control" />
+                </td>
+                <td><b>&nbsp;&nbsp;状态：</b></td>
+                    <td valign="middle"><select name="status" id="status" style=" width:100px;" class="form-control">
+                    <option value="0" selected="selected">全部</option>
+                    <option value="1">冻结</option>
+                    <option value="2">正常</option>
+                  </select>
+                </td>   
+                   <td><b>&nbsp;&nbsp;名称：</b></td>
+                    <td valign="middle">
+                     <input type="text" style=" width:100px;" name="userName" id="userName" class="form-control" />
+                </td> 
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="roleSerch();" id="search" class="search btn btn-default"> <i class="glyphicon glyphicon-search"></i> </button></a></td> 
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="lookUser();" id="look" class="look btn btn-default"> <i class="glyphicon glyphicon-eye-open"></i> </button></a></td>   
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" id="add" class="create btn btn-default"> <i class="glyphicon glyphicon-plus"></i> </button></a> </td>    
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="editHr();" id="edit" class="edit btn btn-default">  <i class="glyphicon glyphicon-pencil"></i></button></a></td>    
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">  <i class="glyphicon glyphicon-trash"></i></button></a> </td>  
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">积分</button></a>  </td> 
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">优惠券</button></a> </td>    
+                <td>&nbsp;&nbsp;</td>  
+                <td><a><button type="button" onclick="deleteHr();" id="delete" class="dele btn btn-default">帮助信息</button></a>  </td>                  
+              </tr>
+            </table>
+          </form>
+          <div> 
+        	<table id="empUserList" >  
+        	</table>  <!-- 留意-->  
+      	</div>
+</div>
+<!-- 查看窗口 start -->
+<div class="modal fade" id="lookUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">浏览用户信息</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" value="周杰伦" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>昵称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="nc" class="form-control"  value="周董" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>密码：</b> </td>
+              <td valign="middle"><input type="password" style=" width:220px;" name="mm" class="form-control"  value="123456" disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>账户：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jsmc" class="form-control"  value="100201" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:100px;" class="form-control" disabled="disabled">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>出生年月：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date5" id="date5" class="form-control" value="2016-12-26" disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>身份证号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sfzh" class="form-control"  value="13042919760001" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>电子邮箱：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="dzyx" class="form-control"  value="zjl@sy.com" disabled="disabled"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>手机号码：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sjhm" class="form-control"  value="18612991000" disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>积分：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jf" class="form-control"  value="100" disabled="disabled"/>
+              </td>
+               <td>&nbsp;&nbsp;<b>用户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="yhzt" style=" width:100px;" class="form-control" disabled="disabled">
+                  <option id="0">有效</option>
+                  <option id="1">无效</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>账户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="zhzt" style=" width:100px;" class="form-control" disabled="disabled">
+                  <option id="0">正常</option>
+                  <option id="1">异常</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色：</b> </td>
+              <td valign="middle"><select name="role2" style=" width:220px;" class="form-control" disabled="disabled">
+                  <option id="0">高级管理员</option>
+                  <option id="1">中级管理员</option>
+                  <option id="2">初级管理员</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>头像地址：</b> </td>
+              <td valign="middle" colspan="3"><input type="file" style=" width:680px;" name="zhzt" class="form-control"  value="../save/txdz.jpg" disabled="disabled"/>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>备注：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="142" rows="6" name="tmtz" disabled="disabled">用于保持模态窗口不可见，直到触发器被触发为止（比如点击在相关的按钮上）。</textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭 </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看窗口 end -->
+<!-- 新增窗口 start -->
+<div class="modal fade" id="add_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">新增用户信息</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" />
+              </td>
+              <td>&nbsp;&nbsp;<b>昵称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="nc" class="form-control"  />
+              </td>
+              <td>&nbsp;&nbsp;<b>密码：</b> </td>
+              <td valign="middle"><input type="password" style=" width:220px;" name="mm" class="form-control"  />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>账户：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jsmc" class="form-control"  />
+              </td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:100px;" class="form-control">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>出生年月：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2016-12-26" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>身份证号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sfzh" class="form-control"  />
+              </td>
+              <td>&nbsp;&nbsp;<b>电子邮箱：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="dzyx" class="form-control"  />
+              </td>
+              <td>&nbsp;&nbsp;<b>手机号码：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sjhm" class="form-control"  />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>积分：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jf" class="form-control"  />
+              </td>
+               <td>&nbsp;&nbsp;<b>用户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="yhzt" style=" width:100px;" class="form-control">
+                  <option id="0">有效</option>
+                  <option id="1">无效</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>账户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="zhzt" style=" width:100px;" class="form-control">
+                  <option id="0">正常</option>
+                  <option id="1">异常</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色：</b> </td>
+              <td valign="middle"><select name="role2" style=" width:220px;" class="form-control">
+                  <option id="0">高级管理员</option>
+                  <option id="1">中级管理员</option>
+                  <option id="2">初级管理员</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>头像地址：</b> </td>
+              <td valign="middle" colspan="3"><input type="file" style=" width:680px;" name="zhzt" class="form-control"  />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>备注：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="142" rows="6" name="tmtz">用于保持模态窗口不可见，直到触发器被触发为止（比如点击在相关的按钮上）。</textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 新增窗口 end -->
+
+<!-- 修改窗口 start -->
+<div class="modal fade" id="mod_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+  <div class="modal-dialog"  style="width:1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> <b style="color: #FF9900;">修改用户信息</b> </h4>
+      </div>
+      <div class="modal-body">
+        <form action="#">
+          <table style="margin-bottom:10px; border: solid 1px #000000;"  class="table table-striped">
+            <tr>
+              <td>&nbsp;&nbsp;<b>姓名：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="xm" class="form-control" value="周杰伦"/>
+              </td>
+              <td>&nbsp;&nbsp;<b>昵称：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="nc" class="form-control"  value="周董" />
+              </td>
+              <td>&nbsp;&nbsp;<b>密码：</b> </td>
+              <td valign="middle"><input type="password" style=" width:220px;" name="mm" class="form-control"  value="123456" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>账户：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jsmc" class="form-control"  value="100201" />
+              </td>
+              <td>&nbsp;&nbsp;<b>性别：</b> </td>
+              <td valign="middle"><select name="sex" style=" width:100px;" class="form-control">
+                  <option id="0">男</option>
+                  <option id="1">女</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>出生年月：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date4" id="date4" class="form-control" value="2016-12-26" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>身份证号：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sfzh" class="form-control"  value="13042919760001" />
+              </td>
+              <td>&nbsp;&nbsp;<b>电子邮箱：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="dzyx" class="form-control"  value="zjl@sy.com" />
+              </td>
+              <td>&nbsp;&nbsp;<b>手机号码：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="sjhm" class="form-control"  value="18612991000" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>积分：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="jf" class="form-control"  value="100" />
+              </td>
+              <td>&nbsp;&nbsp;<b>用户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="yhzt" style=" width:100px;" class="form-control">
+                  <option id="0">有效</option>
+                  <option id="1">无效</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>账户状态：</b> </td>
+              <td valign="middle">
+			  	<select name="zhzt" style=" width:100px;" class="form-control">
+                  <option id="0">正常</option>
+                  <option id="1">异常</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>角色：</b> </td>
+              <td valign="middle"><select name="role2" style=" width:220px;" class="form-control">
+                  <option id="0">高级管理员</option>
+                  <option id="1">中级管理员</option>
+                  <option id="2">初级管理员</option>
+                </select>
+              </td>
+              <td>&nbsp;&nbsp;<b>头像地址：</b> </td>
+              <td valign="middle" colspan="3"><input type="file" style=" width:680px;" name="zhzt" class="form-control"  value="../save/txdz.jpg" />
+              </td>
+            </tr>
+            <tr>
+              <td>&nbsp;&nbsp;<b>备注：</b> </td>
+              <td valign="middle" colspan="5"><textarea cols="142" rows="6" name="tmtz">用于保持模态窗口不可见，直到触发器被触发为止（比如点击在相关的按钮上）。</textarea>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 修改窗口 end -->
+</body>
+</html>

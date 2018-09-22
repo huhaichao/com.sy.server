@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyMessagePushMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyMessagePush">
+    <id column="T_SY_MESSAGE_PUSH_ID" jdbcType="INTEGER" property="tSyMessagePushId" />
+    <result column="T_SY_PUSH_WAS_PEOPLE" jdbcType="VARCHAR" property="tSyPushWasPeople" />
+    <result column="T_SY_PUSH_PEOPLE" jdbcType="VARCHAR" property="tSyPushPeople" />
+    <result column="T_SY_THEME" jdbcType="VARCHAR" property="tSyTheme" />
+    <result column="T_SY_PUSH_DATE" jdbcType="DATE" property="tSyPushDate" />
+    <result column="T_SY_PUSH_CONTENT" jdbcType="VARCHAR" property="tSyPushContent" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+    <result column="T_SY_DEL_STATUS" jdbcType="VARCHAR" property="tSyDelStatus" />
+    <result column="T_SY_DEL_DATE" jdbcType="DATE" property="tSyDelDate" />
+    <result column="T_SY_RW_STATUS" jdbcType="VARCHAR" property="tSyRwStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_MESSAGE_PUSH_ID, T_SY_PUSH_WAS_PEOPLE, T_SY_PUSH_PEOPLE, T_SY_THEME, T_SY_PUSH_DATE, 
+    T_SY_PUSH_CONTENT, T_SY_BZ1, T_SY_BZ2, T_SY_DEL_STATUS, T_SY_DEL_DATE,T_SY_RW_STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyMessagePushExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_message_push
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_message_push
+    where T_SY_MESSAGE_PUSH_ID = #{tSyMessagePushId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_message_push
+    where T_SY_MESSAGE_PUSH_ID = #{tSyMessagePushId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyMessagePushExample">
+    delete from t_sy_message_push
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyMessagePush">
+    insert into t_sy_message_push (T_SY_MESSAGE_PUSH_ID, T_SY_PUSH_WAS_PEOPLE, 
+      T_SY_PUSH_PEOPLE, T_SY_THEME, T_SY_PUSH_DATE, 
+      T_SY_PUSH_CONTENT, T_SY_BZ1, T_SY_BZ2, 
+      T_SY_DEL_STATUS, T_SY_DEL_DATE,T_SY_RW_STATUS)
+    values (#{tSyMessagePushId,jdbcType=INTEGER}, #{tSyPushWasPeople,jdbcType=VARCHAR}, 
+      #{tSyPushPeople,jdbcType=VARCHAR}, #{tSyTheme,jdbcType=VARCHAR}, #{tSyPushDate,jdbcType=DATE}, 
+      #{tSyPushContent,jdbcType=VARCHAR}, #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR}, 
+      #{tSyDelStatus,jdbcType=VARCHAR}, #{tSyDelDate,jdbcType=DATE},#{tSyRwStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyMessagePush">
+    insert into t_sy_message_push
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyMessagePushId != null">
+        T_SY_MESSAGE_PUSH_ID,
+      </if>
+      <if test="tSyPushWasPeople != null">
+        T_SY_PUSH_WAS_PEOPLE,
+      </if>
+      <if test="tSyPushPeople != null">
+        T_SY_PUSH_PEOPLE,
+      </if>
+      <if test="tSyTheme != null">
+        T_SY_THEME,
+      </if>
+      <if test="tSyPushDate != null">
+        T_SY_PUSH_DATE,
+      </if>
+      <if test="tSyPushContent != null">
+        T_SY_PUSH_CONTENT,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS,
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE,
+      </if>
+       <if test="tSyRwStatus != null">
+        T_SY_RW_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyMessagePushId != null">
+        #{tSyMessagePushId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyPushWasPeople != null">
+        #{tSyPushWasPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPushPeople != null">
+        #{tSyPushPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTheme != null">
+        #{tSyTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPushDate != null">
+        #{tSyPushDate,jdbcType=DATE},
+      </if>
+      <if test="tSyPushContent != null">
+        #{tSyPushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        #{tSyDelDate,jdbcType=DATE},
+      </if>
+       <if test="tSyRwStatus != null">
+        #{tSyRwStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyMessagePushExample" resultType="java.lang.Long">
+    select count(*) from t_sy_message_push
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_message_push
+    <set>
+      <if test="record.tSyMessagePushId != null">
+        T_SY_MESSAGE_PUSH_ID = #{record.tSyMessagePushId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyPushWasPeople != null">
+        T_SY_PUSH_WAS_PEOPLE = #{record.tSyPushWasPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPushPeople != null">
+        T_SY_PUSH_PEOPLE = #{record.tSyPushPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyTheme != null">
+        T_SY_THEME = #{record.tSyTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPushDate != null">
+        T_SY_PUSH_DATE = #{record.tSyPushDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyPushContent != null">
+        T_SY_PUSH_CONTENT = #{record.tSyPushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelDate != null">
+        T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE},
+      </if>
+       <if test="record.tSyRwStatus != null">
+        T_SY_RW_STATUS = #{record.tSyRwStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_message_push
+    set T_SY_MESSAGE_PUSH_ID = #{record.tSyMessagePushId,jdbcType=INTEGER},
+      T_SY_PUSH_WAS_PEOPLE = #{record.tSyPushWasPeople,jdbcType=VARCHAR},
+      T_SY_PUSH_PEOPLE = #{record.tSyPushPeople,jdbcType=VARCHAR},
+      T_SY_THEME = #{record.tSyTheme,jdbcType=VARCHAR},
+      T_SY_PUSH_DATE = #{record.tSyPushDate,jdbcType=DATE},
+      T_SY_PUSH_CONTENT = #{record.tSyPushContent,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE},
+      T_SY_RW_STATUS = #{record.tSyRwStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyMessagePush">
+    update t_sy_message_push
+    <set>
+      <if test="tSyPushWasPeople != null">
+        T_SY_PUSH_WAS_PEOPLE = #{tSyPushWasPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPushPeople != null">
+        T_SY_PUSH_PEOPLE = #{tSyPushPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTheme != null">
+        T_SY_THEME = #{tSyTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPushDate != null">
+        T_SY_PUSH_DATE = #{tSyPushDate,jdbcType=DATE},
+      </if>
+      <if test="tSyPushContent != null">
+        T_SY_PUSH_CONTENT = #{tSyPushContent,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE},
+      </if>
+      <if test="tSyRwStatus != null">
+        T_SY_RW_STATUS = #{tSyRwStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_MESSAGE_PUSH_ID = #{tSyMessagePushId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyMessagePush">
+    update t_sy_message_push
+    set T_SY_PUSH_WAS_PEOPLE = #{tSyPushWasPeople,jdbcType=VARCHAR},
+      T_SY_PUSH_PEOPLE = #{tSyPushPeople,jdbcType=VARCHAR},
+      T_SY_THEME = #{tSyTheme,jdbcType=VARCHAR},
+      T_SY_PUSH_DATE = #{tSyPushDate,jdbcType=DATE},
+      T_SY_PUSH_CONTENT = #{tSyPushContent,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE},
+      T_SY_RW_STATUS = #{tSyRwStatus,jdbcType=VARCHAR}
+    where T_SY_MESSAGE_PUSH_ID = #{tSyMessagePushId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectByItem" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select * from t_sy_message_push  where T_SY_PUSH_WAS_PEOPLE = #{uid,jdbcType=VARCHAR} limit #{page,jdbcType=INTEGER},#{pageUp,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByItem" parameterType="com.sy.common.annotation.MapUtil">
+    delete from t_sy_message_push where T_SY_PUSH_WAS_PEOPLE = #{uid,jdbcType=VARCHAR} and T_SY_MESSAGE_PUSH_ID = #{msgid,jdbcType=INTEGER}
+  </delete>
+  
+  
+</mapper>

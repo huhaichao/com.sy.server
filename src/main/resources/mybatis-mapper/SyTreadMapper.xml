@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyTreadMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.bean.SyTread">
+    <id column="T_SY_TREAD_ID" jdbcType="INTEGER" property="tSyTreadId" />
+    <result column="T_SY_TREAD_OUTACCOUNT" jdbcType="VARCHAR" property="tSyTreadOutaccount" />
+    <result column="T_SY_TREAD_INACCOUNT" jdbcType="VARCHAR" property="tSyTreadInaccount" />
+    <result column="T_SY_TREAD_AMOUNT" jdbcType="DOUBLE" property="tSyTreadAmount" />
+    <result column="T_SY_TREAD_CREATEDATE" jdbcType="DATE" property="tSyTreadCreatedate" />
+    <result column="T_SY_TREAD_STATUS" jdbcType="VARCHAR" property="tSyTreadStatus" />
+    <result column="T_SY_TREAD_COMPELETEDATE" jdbcType="DATE" property="tSyTreadCompeletedate" />
+    <result column="T_SY_TREAD_TREADNO" jdbcType="VARCHAR" property="tSyTreadTreadno" />
+    <result column="T_SY_MESSAGE_ID" jdbcType="INTEGER" property="tSyMessageId" />
+    <result column="T_SY_TREAD_TYPE" jdbcType="VARCHAR" property="tSyTreadType" />
+    <result column="T_SY_DELETE_DATE" jdbcType="DATE" property="tSyDeleteDate" />
+    <result column="T_SY_DELELE_STATUS" jdbcType="VARCHAR" property="tSyDeleleStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_TREAD_ID, T_SY_TREAD_OUTACCOUNT, T_SY_TREAD_INACCOUNT, T_SY_TREAD_AMOUNT, T_SY_TREAD_CREATEDATE, 
+    T_SY_TREAD_STATUS, T_SY_TREAD_COMPELETEDATE, T_SY_TREAD_TREADNO, T_SY_MESSAGE_ID, 
+    T_SY_TREAD_TYPE, T_SY_DELETE_DATE, T_SY_DELELE_STATUS
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.bean.SyTreadExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_tread
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_tread
+    where T_SY_TREAD_ID = #{tSyTreadId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_tread
+    where T_SY_TREAD_ID = #{tSyTreadId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.bean.SyTreadExample">
+    delete from t_sy_tread
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.bean.SyTread">
+    insert into t_sy_tread (T_SY_TREAD_ID, T_SY_TREAD_OUTACCOUNT, T_SY_TREAD_INACCOUNT, 
+      T_SY_TREAD_AMOUNT, T_SY_TREAD_CREATEDATE, T_SY_TREAD_STATUS, 
+      T_SY_TREAD_COMPELETEDATE, T_SY_TREAD_TREADNO, T_SY_MESSAGE_ID, 
+      T_SY_TREAD_TYPE, T_SY_DELETE_DATE, T_SY_DELELE_STATUS
+      )
+    values (#{tSyTreadId,jdbcType=INTEGER}, #{tSyTreadOutaccount,jdbcType=VARCHAR}, #{tSyTreadInaccount,jdbcType=VARCHAR}, 
+      #{tSyTreadAmount,jdbcType=DOUBLE}, #{tSyTreadCreatedate,jdbcType=DATE}, #{tSyTreadStatus,jdbcType=VARCHAR}, 
+      #{tSyTreadCompeletedate,jdbcType=DATE}, #{tSyTreadTreadno,jdbcType=VARCHAR}, #{tSyMessageId,jdbcType=INTEGER}, 
+      #{tSyTreadType,jdbcType=VARCHAR}, #{tSyDeleteDate,jdbcType=DATE}, #{tSyDeleleStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.bean.SyTread">
+    insert into t_sy_tread
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyTreadId != null">
+        T_SY_TREAD_ID,
+      </if>
+      <if test="tSyTreadOutaccount != null">
+        T_SY_TREAD_OUTACCOUNT,
+      </if>
+      <if test="tSyTreadInaccount != null">
+        T_SY_TREAD_INACCOUNT,
+      </if>
+      <if test="tSyTreadAmount != null">
+        T_SY_TREAD_AMOUNT,
+      </if>
+      <if test="tSyTreadCreatedate != null">
+        T_SY_TREAD_CREATEDATE,
+      </if>
+      <if test="tSyTreadStatus != null">
+        T_SY_TREAD_STATUS,
+      </if>
+      <if test="tSyTreadCompeletedate != null">
+        T_SY_TREAD_COMPELETEDATE,
+      </if>
+      <if test="tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO,
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID,
+      </if>
+      <if test="tSyTreadType != null">
+        T_SY_TREAD_TYPE,
+      </if>
+      <if test="tSyDeleteDate != null">
+        T_SY_DELETE_DATE,
+      </if>
+      <if test="tSyDeleleStatus != null">
+        T_SY_DELELE_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyTreadId != null">
+        #{tSyTreadId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyTreadOutaccount != null">
+        #{tSyTreadOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadInaccount != null">
+        #{tSyTreadInaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadAmount != null">
+        #{tSyTreadAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tSyTreadCreatedate != null">
+        #{tSyTreadCreatedate,jdbcType=DATE},
+      </if>
+      <if test="tSyTreadStatus != null">
+        #{tSyTreadStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadCompeletedate != null">
+        #{tSyTreadCompeletedate,jdbcType=DATE},
+      </if>
+      <if test="tSyTreadTreadno != null">
+        #{tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageId != null">
+        #{tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyTreadType != null">
+        #{tSyTreadType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDeleteDate != null">
+        #{tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="tSyDeleleStatus != null">
+        #{tSyDeleleStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.bean.SyTreadExample" resultType="java.lang.Long">
+    select count(*) from t_sy_tread
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_tread
+    <set>
+      <if test="record.tSyTreadId != null">
+        T_SY_TREAD_ID = #{record.tSyTreadId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyTreadOutaccount != null">
+        T_SY_TREAD_OUTACCOUNT = #{record.tSyTreadOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyTreadInaccount != null">
+        T_SY_TREAD_INACCOUNT = #{record.tSyTreadInaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyTreadAmount != null">
+        T_SY_TREAD_AMOUNT = #{record.tSyTreadAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tSyTreadCreatedate != null">
+        T_SY_TREAD_CREATEDATE = #{record.tSyTreadCreatedate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyTreadStatus != null">
+        T_SY_TREAD_STATUS = #{record.tSyTreadStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyTreadCompeletedate != null">
+        T_SY_TREAD_COMPELETEDATE = #{record.tSyTreadCompeletedate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO = #{record.tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyTreadType != null">
+        T_SY_TREAD_TYPE = #{record.tSyTreadType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDeleteDate != null">
+        T_SY_DELETE_DATE = #{record.tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyDeleleStatus != null">
+        T_SY_DELELE_STATUS = #{record.tSyDeleleStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_tread
+    set T_SY_TREAD_ID = #{record.tSyTreadId,jdbcType=INTEGER},
+      T_SY_TREAD_OUTACCOUNT = #{record.tSyTreadOutaccount,jdbcType=VARCHAR},
+      T_SY_TREAD_INACCOUNT = #{record.tSyTreadInaccount,jdbcType=VARCHAR},
+      T_SY_TREAD_AMOUNT = #{record.tSyTreadAmount,jdbcType=DOUBLE},
+      T_SY_TREAD_CREATEDATE = #{record.tSyTreadCreatedate,jdbcType=DATE},
+      T_SY_TREAD_STATUS = #{record.tSyTreadStatus,jdbcType=VARCHAR},
+      T_SY_TREAD_COMPELETEDATE = #{record.tSyTreadCompeletedate,jdbcType=DATE},
+      T_SY_TREAD_TREADNO = #{record.tSyTreadTreadno,jdbcType=VARCHAR},
+      T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      T_SY_TREAD_TYPE = #{record.tSyTreadType,jdbcType=VARCHAR},
+      T_SY_DELETE_DATE = #{record.tSyDeleteDate,jdbcType=DATE},
+      T_SY_DELELE_STATUS = #{record.tSyDeleleStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.bean.SyTread">
+    update t_sy_tread
+    <set>
+      <if test="tSyTreadOutaccount != null">
+        T_SY_TREAD_OUTACCOUNT = #{tSyTreadOutaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadInaccount != null">
+        T_SY_TREAD_INACCOUNT = #{tSyTreadInaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadAmount != null">
+        T_SY_TREAD_AMOUNT = #{tSyTreadAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="tSyTreadCreatedate != null">
+        T_SY_TREAD_CREATEDATE = #{tSyTreadCreatedate,jdbcType=DATE},
+      </if>
+      <if test="tSyTreadStatus != null">
+        T_SY_TREAD_STATUS = #{tSyTreadStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyTreadCompeletedate != null">
+        T_SY_TREAD_COMPELETEDATE = #{tSyTreadCompeletedate,jdbcType=DATE},
+      </if>
+      <if test="tSyTreadTreadno != null">
+        T_SY_TREAD_TREADNO = #{tSyTreadTreadno,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyTreadType != null">
+        T_SY_TREAD_TYPE = #{tSyTreadType,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDeleteDate != null">
+        T_SY_DELETE_DATE = #{tSyDeleteDate,jdbcType=DATE},
+      </if>
+      <if test="tSyDeleleStatus != null">
+        T_SY_DELELE_STATUS = #{tSyDeleleStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_TREAD_ID = #{tSyTreadId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.bean.SyTread">
+    update t_sy_tread
+    set T_SY_TREAD_OUTACCOUNT = #{tSyTreadOutaccount,jdbcType=VARCHAR},
+      T_SY_TREAD_INACCOUNT = #{tSyTreadInaccount,jdbcType=VARCHAR},
+      T_SY_TREAD_AMOUNT = #{tSyTreadAmount,jdbcType=DOUBLE},
+      T_SY_TREAD_CREATEDATE = #{tSyTreadCreatedate,jdbcType=DATE},
+      T_SY_TREAD_STATUS = #{tSyTreadStatus,jdbcType=VARCHAR},
+      T_SY_TREAD_COMPELETEDATE = #{tSyTreadCompeletedate,jdbcType=DATE},
+      T_SY_TREAD_TREADNO = #{tSyTreadTreadno,jdbcType=VARCHAR},
+      T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER},
+      T_SY_TREAD_TYPE = #{tSyTreadType,jdbcType=VARCHAR},
+      T_SY_DELETE_DATE = #{tSyDeleteDate,jdbcType=DATE},
+      T_SY_DELELE_STATUS = #{tSyDeleleStatus,jdbcType=VARCHAR}
+    where T_SY_TREAD_ID = #{tSyTreadId,jdbcType=INTEGER}
+  </update>
+</mapper>

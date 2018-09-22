@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<title>测试窗口</title>
+<link rel="stylesheet" type="text/css" href="../js/bootstrap/css/bootstrap.min.css">
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- 查看窗口 start -->
+<div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">浏览角色</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+                <td valign="middle"> 001 </td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+                <td valign="middle">高级管理员 </td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+                <td valign="middle">2016-12-26 </td>
+				</tr>
+				<tr>
+                <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+				<td valign="middle">管理权限 </td>
+              </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>排序：</b> </td>
+                <td valign="middle"> 1 </td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 查看窗口 end -->
+  <!-- 新增窗口 start -->
+  <div class="modal fade" id="add_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">新增角色</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+                <td valign="middle"> 001 </td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="jsmc" class="form-control"  />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2016-12-26 - 2016-12-26" />
+				</td>
+				</tr>
+				<tr>
+                <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+				<td valign="middle">
+					<textarea cols="50" rows="6" name="jsms"></textarea>
+				</td>
+              </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>排序：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="sort" class="form-control"  />
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+            <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 新增窗口 end -->
+  <!-- 修改窗口 start -->
+  <div class="modal fade" id="mod_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">修改角色</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>分组ID：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="fzid" class="form-control" value="001" />
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>角色名称：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="jsmc" class="form-control"  value="高级管理员"  />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>创建时间：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="date4" id="date4" class="form-control" value="2016-12-26 - 2016-12-26" />
+				</td>
+				</tr>
+				<tr>
+                <td valign="middle">&nbsp;&nbsp;<b>角色描述：</b> </td>
+				<td valign="middle">
+					<textarea cols="50" rows="6" name="jsms">管理后台</textarea>
+				</td>
+              </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>排序：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="sort" class="form-control"  value="1"  />
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+             <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 修改窗口 end -->
+</body>
+</html>

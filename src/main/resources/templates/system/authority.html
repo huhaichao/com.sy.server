@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<title>权限管理</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+<link rel="stylesheet" href="../../js/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="../../css/font-awesome.min.css"/>
+<link rel="stylesheet" href="../../css/pubcss/tab.css"/>
+<link rel="stylesheet" href="../../css/pubcss/chg.css"/>
+<script src="../../js/pubjs/tab.js"></script>
+<script src="../../js/pubjs/chg.js"></script>
+<script>
+var a=document.getElementById("nn").value;  
+alert(aa);
+</script>
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 1120px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <!--<div class="tabList">
+        <ul>
+          <li class="cur">角色</li>
+          <li>赋权限</li>
+        </ul>
+      </div> -->
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+                <td><b>角色：</b> </td>
+                <td valign="middle"><select name="js" style=" width:150px;" class="form-control">
+                    <option id="0">高级管理员</option>
+                    <option id="1">中级管理员</option>
+					<option id="2">初级管理员</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="btn" value=" 保  存 " class="btn btn-success"/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="fh" value=" 返  回 " class="btn btn-primary" onClick="history.go(-1);"/>
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" border="1" class="table table-striped">
+            <tr style=" background: #FFCC66; height:28px; width:100%; text-align:center;">
+              <td><input type="checkbox" name="all" />&nbsp;&nbsp;全选/全不选</td>
+              <td><input type="checkbox" name="all_0" />
+                &nbsp;&nbsp;菜单权限 </td>
+              <td><input type="checkbox" name="all_1" />
+                &nbsp;&nbsp;查询 </td>
+              <td><input type="checkbox" name="all_2" />
+                &nbsp;&nbsp;新增 </td>
+              <td><input type="checkbox" name="all_3" />
+                &nbsp;&nbsp;删除 </td>
+              <td><input type="checkbox" name="all_4" />
+                &nbsp;&nbsp;修改 </td>
+              <td><input type="checkbox" name="all_5" />
+                &nbsp;&nbsp;审核 </td>
+              <td><input type="checkbox" name="all_6" />
+                &nbsp;&nbsp;反审核 </td>
+              <td><input type="checkbox" name="all_7" />
+                &nbsp;&nbsp;保存 </td>
+              <td><input type="checkbox" name="all_8" />
+                &nbsp;&nbsp;冻结 </td>
+              <td><input type="checkbox" name="all_9" />
+                &nbsp;&nbsp;解冻 </td>
+              <td><input type="checkbox" name="all_10" />
+                &nbsp;&nbsp;查看 </td>
+              <td><input type="checkbox" name="all_11" />
+                &nbsp;&nbsp;激活 </td>
+            </tr>
+			<tr style=" text-align:center;">
+              <td style=" background: #FFCC66;"> 角色管理 </td>
+              <td><input type="checkbox" name="all_111" />
+              </td>
+              <td><input type="checkbox" name="all_112" />
+              </td>
+              <td><input type="checkbox" name="all_113" />
+              </td>
+              <td><input type="checkbox" name="all_114" />
+              </td>
+              <td><input type="checkbox" name="all_115" />
+              </td>
+              <td><input type="checkbox" name="all_116" />
+              </td>
+              <td><input type="checkbox" name="all_117" />
+              </td>
+              <td><input type="checkbox" name="all_118" />
+              </td>
+              <td><input type="checkbox" name="all_119" />
+              </td>
+              <td><input type="checkbox" name="all_120" />
+              </td>
+              <td><input type="checkbox" name="all_121" />
+              </td>
+              <td><input type="checkbox" name="all_122" />
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td style=" background: #FFCC66;"> 权限管理 </td>
+              <td><input type="checkbox" name="all_111" />
+              </td>
+              <td><input type="checkbox" name="all_112" />
+              </td>
+              <td><input type="checkbox" name="all_113" />
+              </td>
+              <td><input type="checkbox" name="all_114" />
+              </td>
+              <td><input type="checkbox" name="all_115" />
+              </td>
+              <td><input type="checkbox" name="all_116" />
+              </td>
+              <td><input type="checkbox" name="all_117" />
+              </td>
+              <td><input type="checkbox" name="all_118" />
+              </td>
+              <td><input type="checkbox" name="all_119" />
+              </td>
+              <td><input type="checkbox" name="all_120" />
+              </td>
+              <td><input type="checkbox" name="all_121" />
+              </td>
+              <td><input type="checkbox" name="all_122" />
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 用户管理 </td>
+              <td><input type="checkbox" name="all_1111" />
+              </td>
+              <td><input type="checkbox" name="all_1122" />
+              </td>
+              <td><input type="checkbox" name="all_1133" />
+              </td>
+              <td><input type="checkbox" name="all_1144" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1166" />
+              </td>
+              <td><input type="checkbox" name="all_1177" />
+              </td>
+              <td><input type="checkbox" name="all_1188" />
+              </td>
+              <td><input type="checkbox" name="all_1199" />
+              </td>
+              <td><input type="checkbox" name="all_1200" />
+              </td>
+              <td><input type="checkbox" name="all_1211" />
+              </td>
+              <td><input type="checkbox" name="all_1212" />
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 日志信息 </td>
+              <td><input type="checkbox" name="all_1112" />
+              </td>
+              <td><input type="checkbox" name="all_1122" />
+              </td>
+              <td><input type="checkbox" name="all_1132" />
+              </td>
+              <td><input type="checkbox" name="all_1142" />
+              </td>
+              <td><input type="checkbox" name="all_1152" />
+              </td>
+              <td><input type="checkbox" name="all_1162" />
+              </td>
+              <td><input type="checkbox" name="all_1172" />
+              </td>
+              <td><input type="checkbox" name="all_1182" />
+              </td>
+              <td><input type="checkbox" name="all_1192" />
+              </td>
+              <td><input type="checkbox" name="all_1202" />
+              </td>
+              <td><input type="checkbox" name="all_1212" />
+              </td>
+              <td><input type="checkbox" name="all_1222" />
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 映射信息 </td>
+              <td><input type="checkbox" name="all_1113" />
+              </td>
+              <td><input type="checkbox" name="all_1123" />
+              </td>
+              <td><input type="checkbox" name="all_1133" />
+              </td>
+              <td><input type="checkbox" name="all_1143" />
+              </td>
+              <td><input type="checkbox" name="all_1153" />
+              </td>
+              <td><input type="checkbox" name="all_1163" />
+              </td>
+              <td><input type="checkbox" name="all_1173" />
+              </td>
+              <td><input type="checkbox" name="all_1183" />
+              </td>
+              <td><input type="checkbox" name="all_1193" />
+              </td>
+              <td><input type="checkbox" name="all_1203" />
+              </td>
+              <td><input type="checkbox" name="all_1213" />
+              </td>
+              <td><input type="checkbox" name="all_1223" />
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 文件管理 </td>
+              <td><input type="checkbox" name="all_1114" />
+              </td>
+              <td><input type="checkbox" name="all_1124" />
+              </td>
+              <td><input type="checkbox" name="all_1134" />
+              </td>
+              <td><input type="checkbox" name="all_1144" />
+              </td>
+              <td><input type="checkbox" name="all_1154" />
+              </td>
+              <td><input type="checkbox" name="all_1164" />
+              </td>
+              <td><input type="checkbox" name="all_1174" />
+              </td>
+              <td><input type="checkbox" name="all_1184" />
+              </td>
+              <td><input type="checkbox" name="all_1194" />
+              </td>
+              <td><input type="checkbox" name="all_1204" />
+              </td>
+              <td><input type="checkbox" name="all_1214" />
+              </td>
+              <td><input type="checkbox" name="all_1224" />
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 回收站 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 用户管理 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 账户管理 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发布寻人 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发布拾物 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发布失物 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 访问量 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 在线用户量 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 注册用户量 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发布信息量 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 交易额量 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 广告管理 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 地图管理 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 网站信息 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发送页面 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 收件箱 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 发件箱 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 设置 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 升级版本 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              <input id="aa" value="1111"></input>
+              </td>
+            </tr>
+			<tr style=" text-align:center; height:25px;">
+              <td style=" background: #FFCC66;"> 滚动信息 </td>
+              <td><input type="checkbox" name="all_1115" />
+              </td>
+              <td><input type="checkbox" name="all_1125" />
+              </td>
+              <td><input type="checkbox" name="all_1135" />
+              </td>
+              <td><input type="checkbox" name="all_1145" />
+              </td>
+              <td><input type="checkbox" name="all_1155" />
+              </td>
+              <td><input type="checkbox" name="all_1165" />
+              </td>
+              <td><input type="checkbox" name="all_1175" />
+              </td>
+              <td><input type="checkbox" name="all_1185" />
+              </td>
+              <td><input type="checkbox" name="all_1195" />
+              </td>
+              <td><input type="checkbox" name="all_1205" />
+              </td>
+              <td><input type="checkbox" name="all_1215" />
+              </td>
+              <td><input type="checkbox" name="all_1225" />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

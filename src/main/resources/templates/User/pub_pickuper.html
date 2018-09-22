@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>发布拾物</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../publish/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date3').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+			 $('#date4').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <!--<div class="tabList">
+        <ul>
+          <li class="cur">发布拾物</li>
+        </ul>
+      </div> -->
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+                <td valign="middle">&nbsp;&nbsp; <b>发布时间：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+                <td valign="middle">&nbsp;&nbsp; <b>物品类型：</b> </td>
+                <td valign="middle"><select name="sex" style=" width:230px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">电子产品</option>
+                    <option id="1">生活用品</option>
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;<b>审核状态：</b> </td>
+                <td valign="middle"><select name="chk" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">已审核</option>
+                    <option id="1">未审核</option>
+                  </select>
+                </td>
+                <td>&nbsp;&nbsp;<b>状态：</b> </td>
+                <td valign="middle"><select name="chk" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="0">完成</option>
+                    <option id="1">有效</option>
+                    <option id="2">激活</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td valign="middle">&nbsp;&nbsp; <b>用户：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="user2" class="form-control"  /></td>
+                <td valign="middle">&nbsp;&nbsp; <b>地域：</b> </td>
+                <td valign="middle"  colspan="5"><input type="text" style=" width:560px;" name="dy" class="form-control"  /></td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="sel" value="  查   询  " class="btn btn-success btn-sm">
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="add" value="  新  增 " class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_qx_Info">
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" class="table table-striped">
+            <tr style=" background: #FFCC66; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户 </td>
+              <td> 物品姓名 </td>
+              <td> 物品类型 </td>
+              <td> 拾物地点 </td>
+              <td> 拾物日期 </td>
+              <td> 发布日期 </td>
+              <td> 状态 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">1</td>
+              <td align="center"> 张三 </td>
+              <td align="center">Mac笔记本电脑</td>
+              <td align="center">电子产品</td>
+              <td align="center">北京市昌平区</td>
+              <td align="center">2016-11-11</td>
+              <td align="center">2016-11-11</td>
+              <td align="center"><span class="label label-primary">有效</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  反审核  " class="btn btn-warning btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm" disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">2</td>
+              <td align="center"> 张三 </td>
+              <td align="center">钱包</td>
+              <td align="center">生活用品</td>
+              <td align="center">北京市海淀区</td>
+              <td align="center">2016-07-01</td>
+              <td align="center">2016-07-01</td>
+              <td align="center"><span class="label label-success">完成</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  反审核  " class="btn btn-warning btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm"  disabled="disabled"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">3</td>
+              <td align="center"> 张三 </td>
+              <td align="center">自行车</td>
+              <td align="center">生活用品</td>
+              <td align="center">北京市大兴区</td>
+              <td align="center">2016-02-01</td>
+              <td align="center">2016-02-01</td>
+              <td align="center"><span class="label label-danger">激活</span></td>
+              <td><input type="button" name="mdy" value="  修 改  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#mod_qx_Info"/>
+                <input type="button" name="del" value="  删 除  " class="btn btn-danger btn-sm"/>
+                <input type="button" name="see" value="  查 看  " class="btn btn-info btn-sm" data-toggle="modal" data-target="#sel_qx_Info"/>
+                <input type="button" name="chk" value="  审 核  " class="btn btn-success btn-sm"/>
+                <input type="button" name="jh" value="  激 活  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看窗口 start -->
+<div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">浏览发布拾物</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+             <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="yhid" class="form-control" value="1003" disabled="disabled"/> </td>
+				 <td>&nbsp;&nbsp;<b>物品名称：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wpmc" class="form-control" value="Mac笔记本电脑" disabled="disabled"/>
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>物品类型：</b> </td>
+                <td valign="middle">
+					<select name="wplx" style=" width:220px;" class="form-control" disabled="disabled">
+                    <option id="0">电子产品</option>
+                    <option id="1">生活用品</option>
+                  </select>
+				</td>
+				<td>&nbsp;&nbsp;<b>拾物日期：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="date5" id="date5" class="form-control" value="2016-12-26" disabled="disabled" />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="xsje" class="form-control" value="￥100" disabled="disabled"/> </td>
+				 <td>&nbsp;&nbsp;<b>口令：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="kl" class="form-control" value="283907" disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>经度：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="jd" class="form-control" value="120" disabled="disabled"/> </td>
+				 <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wd" class="form-control" value="118" disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td valign="middle">&nbsp;&nbsp;<b>拾物地址：</b> </td>
+				<td valign="middle" colspan="3"><input type="text" style=" width:220px;" name="dsdz" class="form-control" value="北京市" disabled="disabled"/></td>
+              </tr>
+			  <tr>
+			  	<td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              	<td valign="middle" colspan="2"><input type="file" style=" width:420px;" name="tpdz" class="form-control" value="../save/tpdz.jpg" disabled="disabled"/>
+              	</td>
+			  </tr>
+			  <tr>
+			    <td valign="middle">&nbsp;&nbsp;<b>物品描述：</b> </td>
+                <td valign="middle" colspan="3">
+					<textarea cols="108" rows="6" name="wpms" disabled="disabled">Mac 笔记本电脑，白色！</textarea>
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 查看窗口 end -->
+  <!-- 新增窗口 start -->
+  <div class="modal fade" id="add_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">新增发布拾物</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="yhid" class="form-control" /> </td>
+				 <td>&nbsp;&nbsp;<b>物品名称：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wpmc" class="form-control"  />
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>物品类型：</b> </td>
+                <td valign="middle">
+					<select name="wplx" style=" width:220px;" class="form-control">
+                    <option id="0">电子产品</option>
+                    <option id="1">生活用品</option>
+                  </select>
+				</td>
+				<td>&nbsp;&nbsp;<b>拾物日期：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="date3" id="date3" class="form-control" value="2016-12-26" />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="xsje" class="form-control" value="0"/> </td>
+				 <td>&nbsp;&nbsp;<b>口令：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="kl" class="form-control"  />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>经度：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="jd" class="form-control" /> </td>
+				 <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wd" class="form-control"  />
+				</td>
+			  </tr>
+			  <tr>
+				<td valign="middle">&nbsp;&nbsp;<b>拾物地址：</b> </td>
+				<td valign="middle" colspan="3"><input type="text" style=" width:220px;" name="dsdz" class="form-control"  /></td>
+              </tr>
+			  <tr>
+			  	<td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              	<td valign="middle" colspan="2"><input type="file" style=" width:420px;" name="tpdz" class="form-control" />
+              	</td>
+			  </tr>
+			  <tr>
+			    <td valign="middle">&nbsp;&nbsp;<b>物品描述：</b> </td>
+                <td valign="middle" colspan="3">
+					<textarea cols="108" rows="6" name="wpms"></textarea>
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+            <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 新增窗口 end -->
+  <!-- 修改窗口 start -->
+  <div class="modal fade" id="mod_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">修改发布拾物</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+             <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户ID：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="yhid" class="form-control" value="1003"/> </td>
+				 <td>&nbsp;&nbsp;<b>物品名称：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wpmc" class="form-control" value="Mac笔记本电脑" />
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>物品类型：</b> </td>
+                <td valign="middle">
+					<select name="wplx" style=" width:220px;" class="form-control">
+                    <option id="0">电子产品</option>
+                    <option id="1">生活用品</option>
+                  </select>
+				</td>
+				<td>&nbsp;&nbsp;<b>拾物日期：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="date4" id="date4" class="form-control" value="2016-12-26" />
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>悬赏金额：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="xsje" class="form-control" value="￥100"/> </td>
+				 <td>&nbsp;&nbsp;<b>口令：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="kl" class="form-control"  value="283907"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>经度：</b> </td>
+                <td valign="middle"> <input type="text" style=" width:220px;" name="jd" class="form-control" value="120" /> </td>
+				 <td>&nbsp;&nbsp;<b>纬度：</b> </td>
+                <td valign="middle">
+					<input type="text" style=" width:220px;" name="wd" class="form-control" value="118" />
+				</td>
+			  </tr>
+			  <tr>
+				<td valign="middle">&nbsp;&nbsp;<b>拾物地址：</b> </td>
+				<td valign="middle" colspan="3"><input type="text" style=" width:220px;" name="dsdz" class="form-control" value="北京市" /></td>
+              </tr>
+			  <tr>
+			  	<td>&nbsp;&nbsp;<b>图片地址：</b> </td>
+              	<td valign="middle" colspan="2"><input type="file" style=" width:420px;" name="tpdz" class="form-control" value="../save/tpdz.jpg"/>
+              	</td>
+			  </tr>
+			  <tr>
+			    <td valign="middle">&nbsp;&nbsp;<b>物品描述：</b> </td>
+                <td valign="middle" colspan="3">
+					<textarea cols="108" rows="6" name="wpms">Mac 笔记本电脑，白色！</textarea>
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer" style="text-align:center;">
+             <input type="button" name="save_btn" value=" 保  存 " class="btn btn-success"/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" name="reset_btn" value=" 重  置 " class="btn btn-primary"/>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 修改窗口 end -->
+</body>
+</html>

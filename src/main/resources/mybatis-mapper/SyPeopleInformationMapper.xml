@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyPeopleInformationMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyPeopleInformation">
+    <id column="T_SY_PEOPLE_INFORMATION_ID" jdbcType="INTEGER" property="tSyPeopleInformationId" />
+    <result column="T_SY_MESSAGE_ID" jdbcType="INTEGER" property="tSyMessageId" />
+    <result column="T_SY_USER_ID" jdbcType="INTEGER" property="tSyUserId" />
+    <result column="T_SY_NAME" jdbcType="VARCHAR" property="tSyName" />
+    <result column="T_SY_AGE" jdbcType="INTEGER" property="tSyAge" />
+    <result column="T_SY_SEX" jdbcType="INTEGER" property="tSySex" />
+    <result column="T_SY_NATION" jdbcType="INTEGER" property="tSyNation" />
+    <result column="T_SY_CARD_ID" jdbcType="VARCHAR" property="tSyCardId" />
+    <result column="T_SY_CARD_TYPE" jdbcType="INTEGER" property="tSyCardType" />
+    <result column="T_SY_PLACE" jdbcType="VARCHAR" property="tSyPlace" />
+    <result column="T_SY_LOST_DATE" jdbcType="DATE" property="tSyLostDate" />
+    <result column="T_SY_LOST_ADDRESS" jdbcType="VARCHAR" property="tSyLostAddress" />
+    <result column="T_SY_BOUNTY_MONEY" jdbcType="DECIMAL" property="tSyBountyMoney" />
+    <result column="T_SY_PASSWORD" jdbcType="INTEGER" property="tSyPassword" />
+    <result column="T_SY_FEATURES" jdbcType="VARCHAR" property="tSyFeatures" />
+    <result column="T_SY_PROVE_FILE" jdbcType="VARCHAR" property="tSyProveFile" />
+    <result column="T_SY_PUBLISHED_DATE" jdbcType="DATE" property="tSyPublishedDate" />
+    <result column="T_SY_X" jdbcType="VARCHAR" property="tSyX" />
+    <result column="T_SY_Y" jdbcType="VARCHAR" property="tSyY" />
+    <result column="T_SY_IMGPATH" jdbcType="VARCHAR" property="tSyImgpath" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_PEOPLE_INFORMATION_ID, T_SY_MESSAGE_ID, T_SY_USER_ID, T_SY_NAME, T_SY_AGE, T_SY_SEX, 
+    T_SY_NATION, T_SY_CARD_ID, T_SY_CARD_TYPE, T_SY_PLACE, T_SY_LOST_DATE, T_SY_LOST_ADDRESS, 
+    T_SY_BOUNTY_MONEY, T_SY_PASSWORD, T_SY_FEATURES, T_SY_PROVE_FILE, T_SY_PUBLISHED_DATE, 
+    T_SY_X, T_SY_Y, T_SY_IMGPATH, T_SY_BZ1, T_SY_BZ2
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyPeopleInformationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    where T_SY_PEOPLE_INFORMATION_ID = #{tSyPeopleInformationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_people_information
+    where T_SY_PEOPLE_INFORMATION_ID = #{tSyPeopleInformationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyPeopleInformationExample">
+    delete from t_sy_people_information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyPeopleInformation">
+    insert into t_sy_people_information (T_SY_PEOPLE_INFORMATION_ID, T_SY_MESSAGE_ID, 
+      T_SY_USER_ID, T_SY_NAME, T_SY_AGE, 
+      T_SY_SEX, T_SY_NATION, T_SY_CARD_ID, 
+      T_SY_CARD_TYPE, T_SY_PLACE, T_SY_LOST_DATE, 
+      T_SY_LOST_ADDRESS, T_SY_BOUNTY_MONEY, T_SY_PASSWORD, 
+      T_SY_FEATURES, T_SY_PROVE_FILE, T_SY_PUBLISHED_DATE, 
+      T_SY_X, T_SY_Y, T_SY_IMGPATH, 
+      T_SY_BZ1, T_SY_BZ2)
+    values (#{tSyPeopleInformationId,jdbcType=INTEGER}, #{tSyMessageId,jdbcType=INTEGER}, 
+      #{tSyUserId,jdbcType=INTEGER}, #{tSyName,jdbcType=VARCHAR}, #{tSyAge,jdbcType=INTEGER}, 
+      #{tSySex,jdbcType=INTEGER}, #{tSyNation,jdbcType=INTEGER}, #{tSyCardId,jdbcType=VARCHAR}, 
+      #{tSyCardType,jdbcType=INTEGER}, #{tSyPlace,jdbcType=VARCHAR}, #{tSyLostDate,jdbcType=DATE}, 
+      #{tSyLostAddress,jdbcType=VARCHAR}, #{tSyBountyMoney,jdbcType=DECIMAL}, #{tSyPassword,jdbcType=INTEGER}, 
+      #{tSyFeatures,jdbcType=VARCHAR}, #{tSyProveFile,jdbcType=VARCHAR}, #{tSyPublishedDate,jdbcType=DATE}, 
+      #{tSyX,jdbcType=VARCHAR}, #{tSyY,jdbcType=VARCHAR}, #{tSyImgpath,jdbcType=VARCHAR}, 
+      #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyPeopleInformation">
+    insert into t_sy_people_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyPeopleInformationId != null">
+        T_SY_PEOPLE_INFORMATION_ID,
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID,
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyName != null">
+        T_SY_NAME,
+      </if>
+      <if test="tSyAge != null">
+        T_SY_AGE,
+      </if>
+      <if test="tSySex != null">
+        T_SY_SEX,
+      </if>
+      <if test="tSyNation != null">
+        T_SY_NATION,
+      </if>
+      <if test="tSyCardId != null">
+        T_SY_CARD_ID,
+      </if>
+      <if test="tSyCardType != null">
+        T_SY_CARD_TYPE,
+      </if>
+      <if test="tSyPlace != null">
+        T_SY_PLACE,
+      </if>
+      <if test="tSyLostDate != null">
+        T_SY_LOST_DATE,
+      </if>
+      <if test="tSyLostAddress != null">
+        T_SY_LOST_ADDRESS,
+      </if>
+      <if test="tSyBountyMoney != null">
+        T_SY_BOUNTY_MONEY,
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD,
+      </if>
+      <if test="tSyFeatures != null">
+        T_SY_FEATURES,
+      </if>
+      <if test="tSyProveFile != null">
+        T_SY_PROVE_FILE,
+      </if>
+      <if test="tSyPublishedDate != null">
+        T_SY_PUBLISHED_DATE,
+      </if>
+      <if test="tSyX != null">
+        T_SY_X,
+      </if>
+      <if test="tSyY != null">
+        T_SY_Y,
+      </if>
+      <if test="tSyImgpath != null">
+        T_SY_IMGPATH,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyPeopleInformationId != null">
+        #{tSyPeopleInformationId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyMessageId != null">
+        #{tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyName != null">
+        #{tSyName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyAge != null">
+        #{tSyAge,jdbcType=INTEGER},
+      </if>
+      <if test="tSySex != null">
+        #{tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="tSyNation != null">
+        #{tSyNation,jdbcType=INTEGER},
+      </if>
+      <if test="tSyCardId != null">
+        #{tSyCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCardType != null">
+        #{tSyCardType,jdbcType=INTEGER},
+      </if>
+      <if test="tSyPlace != null">
+        #{tSyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyLostDate != null">
+        #{tSyLostDate,jdbcType=DATE},
+      </if>
+      <if test="tSyLostAddress != null">
+        #{tSyLostAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBountyMoney != null">
+        #{tSyBountyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyPassword != null">
+        #{tSyPassword,jdbcType=INTEGER},
+      </if>
+      <if test="tSyFeatures != null">
+        #{tSyFeatures,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyProveFile != null">
+        #{tSyProveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPublishedDate != null">
+        #{tSyPublishedDate,jdbcType=DATE},
+      </if>
+      <if test="tSyX != null">
+        #{tSyX,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyY != null">
+        #{tSyY,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyImgpath != null">
+        #{tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyPeopleInformationExample" resultType="java.lang.Long">
+    select count(*) from t_sy_people_information
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_people_information
+    <set>
+      <if test="record.tSyPeopleInformationId != null">
+        T_SY_PEOPLE_INFORMATION_ID = #{record.tSyPeopleInformationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyName != null">
+        T_SY_NAME = #{record.tSyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyAge != null">
+        T_SY_AGE = #{record.tSyAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSySex != null">
+        T_SY_SEX = #{record.tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyNation != null">
+        T_SY_NATION = #{record.tSyNation,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyCardId != null">
+        T_SY_CARD_ID = #{record.tSyCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCardType != null">
+        T_SY_CARD_TYPE = #{record.tSyCardType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyPlace != null">
+        T_SY_PLACE = #{record.tSyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyLostDate != null">
+        T_SY_LOST_DATE = #{record.tSyLostDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyLostAddress != null">
+        T_SY_LOST_ADDRESS = #{record.tSyLostAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBountyMoney != null">
+        T_SY_BOUNTY_MONEY = #{record.tSyBountyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyPassword != null">
+        T_SY_PASSWORD = #{record.tSyPassword,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyFeatures != null">
+        T_SY_FEATURES = #{record.tSyFeatures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyProveFile != null">
+        T_SY_PROVE_FILE = #{record.tSyProveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPublishedDate != null">
+        T_SY_PUBLISHED_DATE = #{record.tSyPublishedDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyX != null">
+        T_SY_X = #{record.tSyX,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyY != null">
+        T_SY_Y = #{record.tSyY,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyImgpath != null">
+        T_SY_IMGPATH = #{record.tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_people_information
+    set T_SY_PEOPLE_INFORMATION_ID = #{record.tSyPeopleInformationId,jdbcType=INTEGER},
+      T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=INTEGER},
+      T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      T_SY_NAME = #{record.tSyName,jdbcType=VARCHAR},
+      T_SY_AGE = #{record.tSyAge,jdbcType=INTEGER},
+      T_SY_SEX = #{record.tSySex,jdbcType=INTEGER},
+      T_SY_NATION = #{record.tSyNation,jdbcType=INTEGER},
+      T_SY_CARD_ID = #{record.tSyCardId,jdbcType=VARCHAR},
+      T_SY_CARD_TYPE = #{record.tSyCardType,jdbcType=INTEGER},
+      T_SY_PLACE = #{record.tSyPlace,jdbcType=VARCHAR},
+      T_SY_LOST_DATE = #{record.tSyLostDate,jdbcType=DATE},
+      T_SY_LOST_ADDRESS = #{record.tSyLostAddress,jdbcType=VARCHAR},
+      T_SY_BOUNTY_MONEY = #{record.tSyBountyMoney,jdbcType=DECIMAL},
+      T_SY_PASSWORD = #{record.tSyPassword,jdbcType=INTEGER},
+      T_SY_FEATURES = #{record.tSyFeatures,jdbcType=VARCHAR},
+      T_SY_PROVE_FILE = #{record.tSyProveFile,jdbcType=VARCHAR},
+      T_SY_PUBLISHED_DATE = #{record.tSyPublishedDate,jdbcType=DATE},
+      T_SY_X = #{record.tSyX,jdbcType=VARCHAR},
+      T_SY_Y = #{record.tSyY,jdbcType=VARCHAR},
+      T_SY_IMGPATH = #{record.tSyImgpath,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyPeopleInformation">
+    update t_sy_people_information
+    <set>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyName != null">
+        T_SY_NAME = #{tSyName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyAge != null">
+        T_SY_AGE = #{tSyAge,jdbcType=INTEGER},
+      </if>
+      <if test="tSySex != null">
+        T_SY_SEX = #{tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="tSyNation != null">
+        T_SY_NATION = #{tSyNation,jdbcType=INTEGER},
+      </if>
+      <if test="tSyCardId != null">
+        T_SY_CARD_ID = #{tSyCardId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCardType != null">
+        T_SY_CARD_TYPE = #{tSyCardType,jdbcType=INTEGER},
+      </if>
+      <if test="tSyPlace != null">
+        T_SY_PLACE = #{tSyPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyLostDate != null">
+        T_SY_LOST_DATE = #{tSyLostDate,jdbcType=DATE},
+      </if>
+      <if test="tSyLostAddress != null">
+        T_SY_LOST_ADDRESS = #{tSyLostAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBountyMoney != null">
+        T_SY_BOUNTY_MONEY = #{tSyBountyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD = #{tSyPassword,jdbcType=INTEGER},
+      </if>
+      <if test="tSyFeatures != null">
+        T_SY_FEATURES = #{tSyFeatures,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyProveFile != null">
+        T_SY_PROVE_FILE = #{tSyProveFile,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPublishedDate != null">
+        T_SY_PUBLISHED_DATE = #{tSyPublishedDate,jdbcType=DATE},
+      </if>
+      <if test="tSyX != null">
+        T_SY_X = #{tSyX,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyY != null">
+        T_SY_Y = #{tSyY,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyImgpath != null">
+        T_SY_IMGPATH = #{tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_PEOPLE_INFORMATION_ID = #{tSyPeopleInformationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyPeopleInformation">
+    update t_sy_people_information
+    set T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=INTEGER},
+      T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER},
+      T_SY_NAME = #{tSyName,jdbcType=VARCHAR},
+      T_SY_AGE = #{tSyAge,jdbcType=INTEGER},
+      T_SY_SEX = #{tSySex,jdbcType=INTEGER},
+      T_SY_NATION = #{tSyNation,jdbcType=INTEGER},
+      T_SY_CARD_ID = #{tSyCardId,jdbcType=VARCHAR},
+      T_SY_CARD_TYPE = #{tSyCardType,jdbcType=INTEGER},
+      T_SY_PLACE = #{tSyPlace,jdbcType=VARCHAR},
+      T_SY_LOST_DATE = #{tSyLostDate,jdbcType=DATE},
+      T_SY_LOST_ADDRESS = #{tSyLostAddress,jdbcType=VARCHAR},
+      T_SY_BOUNTY_MONEY = #{tSyBountyMoney,jdbcType=DECIMAL},
+      T_SY_PASSWORD = #{tSyPassword,jdbcType=INTEGER},
+      T_SY_FEATURES = #{tSyFeatures,jdbcType=VARCHAR},
+      T_SY_PROVE_FILE = #{tSyProveFile,jdbcType=VARCHAR},
+      T_SY_PUBLISHED_DATE = #{tSyPublishedDate,jdbcType=DATE},
+      T_SY_X = #{tSyX,jdbcType=VARCHAR},
+      T_SY_Y = #{tSyY,jdbcType=VARCHAR},
+      T_SY_IMGPATH = #{tSyImgpath,jdbcType=VARCHAR},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR}
+    where T_SY_PEOPLE_INFORMATION_ID = #{tSyPeopleInformationId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByItem" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    where (T_SY_X BETWEEN #{record.minlat} AND  #{record.maxlat})
+    and (T_SY_Y BETWEEN #{record.minlng} AND  #{record.maxlng})
+  </select>
+  
+  <select id="selectByDetailItem" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    where 
+    1=1
+  <if test="record.minlat!= null">
+      and  (T_SY_Y BETWEEN #{record.minlat} AND  #{record.maxlat})
+    and (T_SY_X BETWEEN #{record.minlng} AND  #{record.maxlng})
+    </if>
+   <if test="record.searchtype != null">
+      and T_SY_SEX= #{record.searchtype}
+    </if>
+   
+    <if test="record.tSwtypeMx != null">
+     and T_SY_SEX = #{record.tSwtypeMx}
+    </if>
+    <if test="record.searchname != null">
+     and T_SY_ITEM_NAME like '%'||#{record.searchname}||'%'
+    </if>		
+    
+    <if test="record.tSyDateStart != null">
+     and T_SY_LOST_DATE &lt;= #{record.tSyDateStart}
+    </if>	
+    
+     <if test="record.tSyDateEnd != null">
+     and T_SY_LOST_DATE &gt;= #{record.tSyDateEnd}
+    </if>
+    
+   <if test="record.uid != null">
+      and T_SY_USER_ID = #{record.uid}
+    </if>
+    
+     <if test="record.msgid != null">
+      and T_SY_MESSAGE_ID = #{record.msgid}
+    </if>
+    
+    order by T_SY_LOST_DATE desc limit #{record.page},20
+  </select>
+  
+   <select id="selectByMessageId" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    where (T_SY_MESSAGE_ID =  #{record.msgid,jdbcType=VARCHAR})
+  </select>
+   
+   <select id="selectByIdAndType" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_people_information
+    where (T_SY_MESSAGE_ID =  #{record.msgid,jdbcType=VARCHAR})
+  </select>
+  
+  
+  
+  
+   <select id="selectBySyPeopleInformationsMap" parameterType="com.sy.common.annotation.MapUtil" resultType="java.util.Map">
+    select 
+     b.T_SY_MESSAGE_ID,T_SY_NAME,T_SY_LOST_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_STATUS,T_SY_IMGPATH from ( 
+      select T_SY_MESSAGE_ID,T_SY_NAME,T_SY_LOST_ADDRESS,T_SY_BOUNTY_MONEY,T_SY_PUBLISHED_DATE,T_SY_IMGPATH,T_SY_LOST_DATE
+    from t_sy_people_information
+    where 
+    1=1
+  <if test="record.minlat!= null">
+      and  (T_SY_X BETWEEN #{record.minlat,jdbcType=VARCHAR} AND  #{record.maxlat,jdbcType=VARCHAR})
+    and (T_SY_Y BETWEEN #{record.minlng,jdbcType=VARCHAR} AND  #{record.maxlng,jdbcType=VARCHAR})
+    </if>
+   <if test="record.searchtype != null">
+      and T_SY_SEX= #{record.searchtype}
+    </if>
+   
+    <if test="record.tSwtypeMx != null">
+     and T_SY_SEX = #{record.tSwtypeMx}
+    </if>
+    <if test="record.searchname != null">
+     and T_SY_NAME like '%'||#{record.searchname}||'%'
+    </if>		
+    
+     <if test="record.tSyDateStart != null">
+     and T_SY_LOST_DATE &lt;= #{record.tSyDateStart}
+    </if>	
+    
+     <if test="record.tSyDateEnd != null">
+     and T_SY_LOST_DATE &gt;= #{record.tSyDateEnd}
+    </if>	
+    
+    
+   <if test="record.uid != null">
+      and T_SY_USER_ID = #{record.uid}
+    </if>
+    
+     <if test="record.msgid != null">
+      and T_SY_MESSAGE_ID = #{record.msgid}
+    </if>
+    )
+    a join (
+    select T_SY_MESSAGE_ID,T_SY_STATUS from t_sy_message where T_SY_DEL_STATUS=0
+    <if test="record.msgtype!=null">
+    and T_SY_MESSAGE_TYPE=#{record.msgtype}
+    </if>
+    )b on a.t_sy_message_id=b.t_sy_message_id   order by T_SY_LOST_DATE desc limit #{record.page},#{record.pageSize} 
+  </select> 
+  
+</mapper>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyBrowseMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyBrowse">
+    <id column="T_SY_BROWSE_ID" jdbcType="INTEGER" property="tSyBrowseId" />
+    <result column="T_SY_MESSAGE_ID" jdbcType="VARCHAR" property="tSyMessageId" />
+    <result column="T_SY_USER_ID" jdbcType="VARCHAR" property="tSyUserId" />
+    <result column="T_SY_DATE" jdbcType="DATE" property="tSyDate" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_BROWSE_ID, T_SY_MESSAGE_ID, T_SY_USER_ID, T_SY_DATE, T_SY_BZ1, T_SY_BZ2
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyBrowseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from "t_sy_browse"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from "t_sy_browse"
+    where T_SY_BROWSE_ID = #{tSyBrowseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from "t_sy_browse"
+    where T_SY_BROWSE_ID = #{tSyBrowseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyBrowseExample">
+    delete from "t_sy_browse"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyBrowse">
+    insert into t_sy_browse(T_SY_MESSAGE_ID, T_SY_USER_ID, T_SY_DATE, T_SY_BZ1, T_SY_BZ2)
+    values (#{tSyMessageId,jdbcType=VARCHAR}, #{tSyUserId,jdbcType=VARCHAR}, 
+      #{tSyDate,jdbcType=DATE}, #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyBrowse">
+    insert into "t_sy_browse"
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyBrowseId != null">
+        T_SY_BROWSE_ID,
+      </if>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID,
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyBrowseId != null">
+        #{tSyBrowseId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyMessageId != null">
+        #{tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyThingsName != null">
+        #{tSyThingsName,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyThingsType != null">
+        #{tSyThingsType,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDate != null">
+        #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyBrowseExample" resultType="java.lang.Long">
+    select count(*) from "t_sy_browse"
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update "t_sy_browse"
+    <set>
+      <if test="record.tSyBrowseId != null">
+        T_SY_BROWSE_ID = #{record.tSyBrowseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDate != null">
+        T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update "t_sy_browse"
+    set T_SY_BROWSE_ID = #{record.tSyBrowseId,jdbcType=INTEGER},
+      T_SY_MESSAGE_ID = #{record.tSyMessageId,jdbcType=VARCHAR},
+      T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyBrowse">
+    update "t_sy_browse"
+    <set>
+      <if test="tSyMessageId != null">
+        T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where T_SY_BROWSE_ID = #{tSyBrowseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyBrowse">
+    update "t_sy_browse"
+    set T_SY_MESSAGE_ID = #{tSyMessageId,jdbcType=VARCHAR},
+      T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR}
+    where T_SY_BROWSE_ID = #{tSyBrowseId,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteByCollect" parameterType="com.sy.common.busibean.SyBrowse">
+    delete from t_sy_browse where T_SY_BROWSE_ID = #{tSyBrowseId,jdbcType=INTEGER} and T_SY_MESSAGE_ID=#{tSyMessageId,jdbcType=VARCHAR}
+  </delete>
+</mapper>

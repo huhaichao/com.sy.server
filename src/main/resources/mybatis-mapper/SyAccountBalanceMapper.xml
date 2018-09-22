@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyAccountBalanceMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.bean.SyAccountBalance">
+    <id column="T_SY_BALANCE_ID" jdbcType="INTEGER" property="tSyBalanceId" />
+    <result column="T_SY_USER_ID" jdbcType="VARCHAR" property="tSyUserId" />
+    <result column="T_SY_ACCOUNT" jdbcType="VARCHAR" property="tSyAccount" />
+    <result column="T_SY_MONEY" jdbcType="DECIMAL" property="tSyMoney" />
+    <result column="T_SY_DATE" jdbcType="DATE" property="tSyDate" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+    <result column="T_SY_UPDATE_DATE" jdbcType="DATE" property="tSyUpdateDate" />
+    <result column="T_SY_STATUS" jdbcType="VARCHAR" property="tSyStatus" />
+    <result column="T_SY_COOL_MONEY" jdbcType="DECIMAL" property="tSyCoolMoney" />
+    <result column="T_SY_COOL_DATE" jdbcType="DATE" property="tSyCoolDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_BALANCE_ID, T_SY_USER_ID, T_SY_ACCOUNT, T_SY_MONEY, T_SY_DATE, T_SY_BZ1, T_SY_BZ2, 
+    T_SY_UPDATE_DATE, T_SY_STATUS, T_SY_COOL_MONEY, T_SY_COOL_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.bean.SyAccountBalanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_balance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_balance
+    where T_SY_BALANCE_ID = #{tSyBalanceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_balance
+    where T_SY_BALANCE_ID = #{tSyBalanceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.bean.SyAccountBalanceExample">
+    delete from t_sy_balance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.bean.SyAccountBalance">
+    insert into t_sy_balance (T_SY_BALANCE_ID, T_SY_USER_ID, T_SY_ACCOUNT, 
+      T_SY_MONEY, T_SY_DATE, T_SY_BZ1, 
+      T_SY_BZ2, T_SY_UPDATE_DATE, T_SY_STATUS, 
+      T_SY_COOL_MONEY, T_SY_COOL_DATE)
+    values (#{tSyBalanceId,jdbcType=INTEGER}, #{tSyUserId,jdbcType=VARCHAR}, #{tSyAccount,jdbcType=VARCHAR}, 
+      #{tSyMoney,jdbcType=DECIMAL}, #{tSyDate,jdbcType=DATE}, #{tSyBz1,jdbcType=VARCHAR}, 
+      #{tSyBz2,jdbcType=VARCHAR}, #{tSyUpdateDate,jdbcType=DATE}, #{tSyStatus,jdbcType=VARCHAR}, 
+      #{tSyCoolMoney,jdbcType=DECIMAL}, #{tSyCoolDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.bean.SyAccountBalance">
+    insert into t_sy_balance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyBalanceId != null">
+        T_SY_BALANCE_ID,
+      </if>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT,
+      </if>
+      <if test="tSyMoney != null">
+        T_SY_MONEY,
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+      <if test="tSyUpdateDate != null">
+        T_SY_UPDATE_DATE,
+      </if>
+      <if test="tSyStatus != null">
+        T_SY_STATUS,
+      </if>
+      <if test="tSyCoolMoney != null">
+        T_SY_COOL_MONEY,
+      </if>
+      <if test="tSyCoolDate != null">
+        T_SY_COOL_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyBalanceId != null">
+        #{tSyBalanceId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyAccount != null">
+        #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMoney != null">
+        #{tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyDate != null">
+        #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUpdateDate != null">
+        #{tSyUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="tSyStatus != null">
+        #{tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCoolMoney != null">
+        #{tSyCoolMoney,jdbcType=T_SY_MONEY},
+      </if>
+      <if test="tSyCoolDate != null">
+        #{tSyCoolDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.bean.SyAccountBalanceExample" resultType="java.lang.Long">
+    select count(*) from t_sy_balance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_balance
+    <set>
+      <if test="record.tSyBalanceId != null">
+        T_SY_BALANCE_ID = #{record.tSyBalanceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyAccount != null">
+        T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMoney != null">
+        T_SY_MONEY = #{record.tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyDate != null">
+        T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUpdateDate != null">
+        T_SY_UPDATE_DATE = #{record.tSyUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="record.tSyStatus != null">
+        T_SY_STATUS = #{record.tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCoolMoney != null">
+        T_SY_COOL_MONEY = #{record.tSyCoolMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tSyCoolDate != null">
+        T_SY_COOL_DATE = #{record.tSyCoolDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_balance
+    set T_SY_BALANCE_ID = #{record.tSyBalanceId,jdbcType=INTEGER},
+      T_SY_USER_ID = #{record.tSyUserId,jdbcType=VARCHAR},
+      T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      T_SY_MONEY = #{record.tSyMoney,jdbcType=DECIMAL},
+      T_SY_DATE = #{record.tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      T_SY_UPDATE_DATE = #{record.tSyUpdateDate,jdbcType=DATE},
+      T_SY_STATUS = #{record.tSyStatus,jdbcType=VARCHAR},
+      T_SY_COOL_MONEY = #{record.tSyCoolMoney,jdbcType=DECIMAL},
+      T_SY_COOL_DATE = #{record.tSyCoolDate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.bean.SyAccountBalance">
+    update t_sy_balance
+    <set>
+      <if test="tSyUserId != null">
+        T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMoney != null">
+        T_SY_MONEY = #{tSyMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyDate != null">
+        T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUpdateDate != null">
+        T_SY_UPDATE_DATE = #{tSyUpdateDate,jdbcType=DATE},
+      </if>
+      <if test="tSyStatus != null">
+        T_SY_STATUS = #{tSyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCoolMoney != null">
+        T_SY_COOL_MONEY = #{tSyCoolMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="tSyCoolDate != null">
+        T_SY_COOL_DATE = #{tSyCoolDate,jdbcType=DATE},
+      </if>
+    </set>
+    where T_SY_BALANCE_ID = #{tSyBalanceId,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateBySyAccountSelective" parameterType="com.sy.common.bean.SyAccountBalance">
+    update t_sy_balance  set  T_SY_UPDATE_DATE = #{tSyUpdateDate,jdbcType=DATE}
+      <if test="tSyMoney != null">
+        , T_SY_MONEY =T_SY_MONEY+#{tSyMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="tSyStatus != null">
+       , T_SY_STATUS = #{tSyStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="tSyCoolMoney != null">
+       , T_SY_COOL_MONEY = T_SY_COOL_MONEY+#{tSyCoolMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="tSyCoolDate != null">
+       , T_SY_COOL_DATE = #{tSyCoolDate,jdbcType=DATE}
+      </if>
+       where  T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.bean.SyAccountBalance">
+    update t_sy_balance
+    set T_SY_USER_ID = #{tSyUserId,jdbcType=VARCHAR},
+      T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      T_SY_MONEY = #{tSyMoney,jdbcType=DECIMAL},
+      T_SY_DATE = #{tSyDate,jdbcType=DATE},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      T_SY_UPDATE_DATE = #{tSyUpdateDate,jdbcType=DATE},
+      T_SY_STATUS = #{tSyStatus,jdbcType=VARCHAR},
+      T_SY_COOL_MONEY = #{tSyCoolMoney,jdbcType=DECIMAL},
+      T_SY_COOL_DATE = #{tSyCoolDate,jdbcType=DATE}
+    where T_SY_BALANCE_ID = #{tSyBalanceId,jdbcType=INTEGER}
+  </update>
+</mapper>

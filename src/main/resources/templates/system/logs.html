@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>日志信息</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<script src="../tempalte/js/jquery/jQuery-2.2.0.min.js"></script>
+<script src="../tempalte/js/charts/Chart.js"></script>
+<script src="../js/pubjs/tab.js"></script>
+<br>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <div class="tabList">
+        <ul>
+          <li class="cur">数据库日志</li>
+          <li>文本日志</li>
+        </ul>
+      </div>
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+                <td><b>日期：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+                </td>
+                <td>&nbsp;&nbsp;<b>日志类型：</b> </td>
+                <td valign="middle"><select name="dateType" style=" width:100px;" class="form-control">
+                    <option id="all" selected="selected">全部</option>
+                    <option id="error">error</option>
+                    <option id="log">log</option>
+                  </select>
+                </td>
+                <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="button"  class="btn btn-success btn-sm" value="  查   询  ">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="button" class="btn btn-primary btn-sm" value="  EXCEL  ">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="button" class="btn btn-primary btn-sm" value="  导出ZIP  ">
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" border="1" class="table table-striped">
+            <tr style=" background: #FFCC66; height:28px; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户名 </td>
+              <td> 登录IP </td>
+              <td> 操作类型 </td>
+              <td> 操作内容 </td>
+              <td> 操作时间 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td> 1 </td>
+              <td> 拾缘科技_后台管理系统 </td>
+              <td> 拾缘科技_后台管理系统 </td>
+              <td> 拾缘科技_后台管理系统 </td>
+              <td> 拾缘科技_后台管理系统拾缘科技_后台管理系统拾缘科技_后台管理系统拾缘科技_后台管理系统 </td>
+              <td> 拾缘科技_后台管理系统 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 2 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 3 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 4 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 5 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 6 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 7 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 8 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 9 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 10 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 11 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 12 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 13 </td>
+              <td> 2 </td>
+              <td> 3 </td>
+              <td> 4 </td>
+              <td> 5 </td>
+              <td> 6 </td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+        <div> </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

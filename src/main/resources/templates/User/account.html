@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>账户管理</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<!-- 弹出窗口 start -->
+<script  src="../js/jquery/jQuery-2.2.0.min.js"></script>
+<script  src="../js/bootstrap/js/bootstrap.min.js"></script>
+<!-- 弹出窗口 end -->
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="../financial/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+             });
+        });
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <!--<div class="tabList">
+        <ul>
+          <li class="cur">账户管理</li>
+        </ul>
+      </div> -->
+      <div class="tabCon">
+        <div class="cur">
+          <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed;" class="glyphicon-italic">
+              <tr>
+				<td><b>日期：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+                </td>
+				<td valign="middle">&nbsp;&nbsp; <b>用户：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="user2" class="form-control"  /></td>
+				<td valign="middle">&nbsp;&nbsp; <b>账户：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="zh" class="form-control"  /></td>
+				<td valign="middle">&nbsp;&nbsp; <b>金额：</b> </td>
+                <td valign="middle"><input type="text" style=" width:220px;" name="je" class="form-control"  /></td>
+				<td valign="middle">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="button" name="sel" value="  查   询  " class="btn btn-success">
+                </td>
+              </tr>
+            </table>
+          </form>
+          <table id="hacker" width="100%" class="table table-striped">
+            <tr style=" background: #FFCC66; height:28px; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户 </td>
+              <td> 账户 </td>
+              <td> 余额 </td>
+			  <td> 日期 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 1 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+             <tr style=" text-align:center; height:25px;">
+              <td> 2 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+			 <tr style=" text-align:center; height:25px;">
+              <td> 3 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+			 <tr style=" text-align:center; height:25px;">
+              <td> 4 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+			 <tr style=" text-align:center; height:25px;">
+              <td> 5 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+			 <tr style=" text-align:center; height:25px;">
+              <td> 6 </td>
+              <td> 张三 </td>
+              <td> 10020101 </td>
+              <td> ￥1000.00 </td>
+			  <td> 2016-12-26 </td>
+              <td> 
+			  	<input type="button" name="see" value="  查 看  " class="btn btn-info" data-toggle="modal" data-target="#sel_qx_Info"/>&nbsp;
+			   </td>
+            </tr>
+          </table>
+		   <table  width="100%" border="0">
+            <tr>
+              <td  align="right">
+                <ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 查看窗口 start -->
+<div class="modal fade" id="sel_qx_Info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
+   <div class="modal-dialog"  style="width:1200px;">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               <b style="color: #FF9900;">浏览账户</b>
+            </h4>
+         </div>
+         <div class="modal-body">
+		 <form action="#">
+            <table style="margin-bottom:10px;table-layout:fixed; border: solid 1px #000000;"  class="table table-striped">
+			 <tr>
+                <td>&nbsp;&nbsp;<b>用户：</b> </td>
+                <td valign="middle" colspan="5">
+					<input type="text" style=" width:420px;" name="yhid" class="form-control" value="张三"  disabled="disabled"/>
+				</td>
+			  </tr>
+              <tr>
+                <td>&nbsp;&nbsp;<b>消息ID：</b> </td>
+                <td valign="middle" colspan="5">
+					<input type="text" style=" width:420px;" name="xxid" class="form-control"  value="00001"  disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>账户号码：</b> </td>
+                <td valign="middle" colspan="5">
+					<input type="text" style=" width:420px;" name="jsmc" class="form-control"  value="10020101"  disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>余额：</b> </td>
+                <td valign="middle" colspan="5">
+					<input type="text" style=" width:420px;" name="jsmc" class="form-control"  value="￥1000.00"  disabled="disabled"/>
+				</td>
+			  </tr>
+			  <tr>
+                <td>&nbsp;&nbsp;<b>日期：</b> </td>
+                <td valign="middle" colspan="5">
+					<input type="text" style=" width:220px;" name="date4" id="date4" class="form-control" value="2016-12-26" disabled="disabled" />
+				</td>
+			  </tr>
+            </table>
+          </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">关闭
+            </button>
+         </div>
+      </div>
+	</div>
+  </div>
+  <!-- 查看窗口 end -->
+</body>
+</html>

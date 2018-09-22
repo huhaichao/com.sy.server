@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sy.server.mapper.SyUserMapper">
+  <resultMap id="BaseResultMap" type="com.sy.common.busibean.SyUser">
+    <id column="T_SY_USER_ID" jdbcType="INTEGER" property="tSyUserId" />
+    <result column="T_SY_ACCOUNT" jdbcType="VARCHAR" property="tSyAccount" />
+    <result column="T_SY_PASSWORD" jdbcType="VARCHAR" property="tSyPassword" />
+    <result column="T_SY_PAY_PASSWORD" jdbcType="INTEGER" property="tSyPayPassword" />
+    <result column="T_SY_USERNAME" jdbcType="VARCHAR" property="tSyUsername" />
+    <result column="T_SY_NICKNAME" jdbcType="VARCHAR" property="tSyNickname" />
+    <result column="T_SY_SEX" jdbcType="INTEGER" property="tSySex" />
+    <result column="T_SY_DATEOFBIRTH" jdbcType="DATE" property="tSyDateofbirth" />
+    <result column="T_SY_CARDID" jdbcType="VARCHAR" property="tSyCardid" />
+    <result column="T_SY_MAIL" jdbcType="VARCHAR" property="tSyMail" />
+    <result column="T_SY_PHONE" jdbcType="VARCHAR" property="tSyPhone" />
+    <result column="T_SY_REMARK" jdbcType="VARCHAR" property="tSyRemark" />
+    <result column="T_SY_INTEGRAL" jdbcType="INTEGER" property="tSyIntegral" />
+    <result column="T_SY_IMGPATH" jdbcType="VARCHAR" property="tSyImgpath" />
+    <result column="T_SY_USER_STATUS" jdbcType="INTEGER" property="tSyUserStatus" />
+    <result column="T_SY_ACCOUNT_STATE" jdbcType="INTEGER" property="tSyAccountState" />
+    <result column="T_SY_ROLEID" jdbcType="VARCHAR" property="tSyRoleid" />
+    <result column="T_SY_CREATE_TIME" jdbcType="DATE" property="tSyCreateTime" />
+    <result column="T_SY_LASTLOGINTIME" jdbcType="DATE" property="tSyLastlogintime" />
+    <result column="T_SY_ISONLINE" jdbcType="INTEGER" property="tSyIsonline" />
+    <result column="T_SY_ISLIMIR" jdbcType="INTEGER" property="tSyIslimir" />
+    <result column="T_SY_BZ1" jdbcType="VARCHAR" property="tSyBz1" />
+    <result column="T_SY_BZ2" jdbcType="VARCHAR" property="tSyBz2" />
+    <result column="T_SY_DEL_STATUS" jdbcType="VARCHAR" property="tSyDelStatus" />
+    <result column="T_SY_DEL_DATE" jdbcType="DATE" property="tSyDelDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    T_SY_USER_ID, T_SY_ACCOUNT, T_SY_PASSWORD, T_SY_PAY_PASSWORD, T_SY_USERNAME, T_SY_NICKNAME, 
+    T_SY_SEX, T_SY_DATEOFBIRTH, T_SY_CARDID, T_SY_MAIL, T_SY_PHONE, T_SY_REMARK, T_SY_INTEGRAL, 
+    T_SY_IMGPATH, T_SY_USER_STATUS, T_SY_ACCOUNT_STATE, T_SY_ROLEID, T_SY_CREATE_TIME, 
+    T_SY_LASTLOGINTIME, T_SY_ISONLINE, T_SY_ISLIMIR, T_SY_BZ1, T_SY_BZ2, T_SY_DEL_STATUS, 
+    T_SY_DEL_DATE
+  </sql>
+  <select id="selectByExample" parameterType="com.sy.common.busibean.SyUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sy_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sy_user
+    where T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectLostAndPickById" parameterType="map" resultType="map">
+    SELECT
+	tsu.T_SY_ACCOUNT,
+	tsu.T_SY_PAY_PASSWORD,
+	tsu.T_SY_USER_ID,
+	tsb.T_SY_MONEY,
+	tsb.T_SY_COOL_MONEY,
+	tsb.T_SY_MONEY + tsb.T_SY_COOL_MONEY t_sy_balance 
+	FROM
+		t_sy_user tsu
+	LEFT JOIN t_sy_balance tsb ON tsu.T_SY_ACCOUNT = tsb.T_SY_ACCOUNT
+	AND tsu.T_SY_USER_ID = tsb.t_sy_ u
+    where tsu.T_SY_USER_ID in (#{record.lostUserId,jdbcType=INTEGER},#{record.lostUserId,jdbcType=INTEGER})
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sy_user
+    where T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.common.busibean.SyUserExample">
+    delete from t_sy_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.common.busibean.SyMessage" useGeneratedKeys="true" keyProperty="tSyUserId">
+    <selectKey keyProperty="tSyUserId" resultType="java.lang.Integer" order="AFTER">
+            select LAST_INSERT_ID()
+    </selectKey>
+    insert into t_sy_user (T_SY_USER_ID, T_SY_ACCOUNT, T_SY_PASSWORD, 
+      T_SY_PAY_PASSWORD, T_SY_USERNAME, T_SY_NICKNAME, 
+      T_SY_SEX, T_SY_DATEOFBIRTH, T_SY_CARDID, 
+      T_SY_MAIL, T_SY_PHONE, T_SY_REMARK, 
+      T_SY_INTEGRAL, T_SY_IMGPATH, T_SY_USER_STATUS, 
+      T_SY_ACCOUNT_STATE, T_SY_ROLEID, T_SY_CREATE_TIME, 
+      T_SY_LASTLOGINTIME, T_SY_ISONLINE, T_SY_ISLIMIR, 
+      T_SY_BZ1, T_SY_BZ2, T_SY_DEL_STATUS, 
+      T_SY_DEL_DATE)
+    values (#{tSyUserId,jdbcType=INTEGER}, #{tSyAccount,jdbcType=VARCHAR}, #{tSyPassword,jdbcType=VARCHAR}, 
+      #{tSyPayPassword,jdbcType=INTEGER}, #{tSyUsername,jdbcType=VARCHAR}, #{tSyNickname,jdbcType=VARCHAR}, 
+      #{tSySex,jdbcType=INTEGER}, #{tSyDateofbirth,jdbcType=DATE}, #{tSyCardid,jdbcType=VARCHAR}, 
+      #{tSyMail,jdbcType=VARCHAR}, #{tSyPhone,jdbcType=VARCHAR}, #{tSyRemark,jdbcType=VARCHAR}, 
+      #{tSyIntegral,jdbcType=INTEGER}, #{tSyImgpath,jdbcType=VARCHAR}, #{tSyUserStatus,jdbcType=INTEGER}, 
+      #{tSyAccountState,jdbcType=INTEGER}, #{tSyRoleid,jdbcType=VARCHAR}, #{tSyCreateTime,jdbcType=DATE}, 
+      #{tSyLastlogintime,jdbcType=DATE}, #{tSyIsonline,jdbcType=INTEGER}, #{tSyIslimir,jdbcType=INTEGER}, 
+      #{tSyBz1,jdbcType=VARCHAR}, #{tSyBz2,jdbcType=VARCHAR}, #{tSyDelStatus,jdbcType=VARCHAR}, 
+      #{tSyDelDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.common.busibean.SyUser">
+    insert into t_sy_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tSyUserId != null">
+        T_SY_USER_ID,
+      </if>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT,
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD,
+      </if>
+      <if test="tSyPayPassword != null">
+        T_SY_PAY_PASSWORD,
+      </if>
+      <if test="tSyUsername != null">
+        T_SY_USERNAME,
+      </if>
+      <if test="tSyNickname != null">
+        T_SY_NICKNAME,
+      </if>
+      <if test="tSySex != null">
+        T_SY_SEX,
+      </if>
+      <if test="tSyDateofbirth != null">
+        T_SY_DATEOFBIRTH,
+      </if>
+      <if test="tSyCardid != null">
+        T_SY_CARDID,
+      </if>
+      <if test="tSyMail != null">
+        T_SY_MAIL,
+      </if>
+      <if test="tSyPhone != null">
+        T_SY_PHONE,
+      </if>
+      <if test="tSyRemark != null">
+        T_SY_REMARK,
+      </if>
+      <if test="tSyIntegral != null">
+        T_SY_INTEGRAL,
+      </if>
+      <if test="tSyImgpath != null">
+        T_SY_IMGPATH,
+      </if>
+      <if test="tSyUserStatus != null">
+        T_SY_USER_STATUS,
+      </if>
+      <if test="tSyAccountState != null">
+        T_SY_ACCOUNT_STATE,
+      </if>
+      <if test="tSyRoleid != null">
+        T_SY_ROLEID,
+      </if>
+      <if test="tSyCreateTime != null">
+        T_SY_CREATE_TIME,
+      </if>
+      <if test="tSyLastlogintime != null">
+        T_SY_LASTLOGINTIME,
+      </if>
+      <if test="tSyIsonline != null">
+        T_SY_ISONLINE,
+      </if>
+      <if test="tSyIslimir != null">
+        T_SY_ISLIMIR,
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1,
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2,
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS,
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tSyUserId != null">
+        #{tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="tSyAccount != null">
+        #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPassword != null">
+        #{tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPayPassword != null">
+        #{tSyPayPassword,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUsername != null">
+        #{tSyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyNickname != null">
+        #{tSyNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tSySex != null">
+        #{tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDateofbirth != null">
+        #{tSyDateofbirth,jdbcType=DATE},
+      </if>
+      <if test="tSyCardid != null">
+        #{tSyCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMail != null">
+        #{tSyMail,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPhone != null">
+        #{tSyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyRemark != null">
+        #{tSyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyIntegral != null">
+        #{tSyIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="tSyImgpath != null">
+        #{tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserStatus != null">
+        #{tSyUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="tSyAccountState != null">
+        #{tSyAccountState,jdbcType=INTEGER},
+      </if>
+      <if test="tSyRoleid != null">
+        #{tSyRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCreateTime != null">
+        #{tSyCreateTime,jdbcType=DATE},
+      </if>
+      <if test="tSyLastlogintime != null">
+        #{tSyLastlogintime,jdbcType=DATE},
+      </if>
+      <if test="tSyIsonline != null">
+        #{tSyIsonline,jdbcType=INTEGER},
+      </if>
+      <if test="tSyIslimir != null">
+        #{tSyIslimir,jdbcType=INTEGER},
+      </if>
+      <if test="tSyBz1 != null">
+        #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        #{tSyDelDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.common.busibean.SyUserExample" resultType="java.lang.Long">
+    select count(*) from t_sy_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sy_user
+    <set>
+      <if test="record.tSyUserId != null">
+        T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyAccount != null">
+        T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPassword != null">
+        T_SY_PASSWORD = #{record.tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPayPassword != null">
+        T_SY_PAY_PASSWORD = #{record.tSyPayPassword,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyUsername != null">
+        T_SY_USERNAME = #{record.tSyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyNickname != null">
+        T_SY_NICKNAME = #{record.tSyNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSySex != null">
+        T_SY_SEX = #{record.tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyDateofbirth != null">
+        T_SY_DATEOFBIRTH = #{record.tSyDateofbirth,jdbcType=DATE},
+      </if>
+      <if test="record.tSyCardid != null">
+        T_SY_CARDID = #{record.tSyCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyMail != null">
+        T_SY_MAIL = #{record.tSyMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyPhone != null">
+        T_SY_PHONE = #{record.tSyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyRemark != null">
+        T_SY_REMARK = #{record.tSyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyIntegral != null">
+        T_SY_INTEGRAL = #{record.tSyIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyImgpath != null">
+        T_SY_IMGPATH = #{record.tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyUserStatus != null">
+        T_SY_USER_STATUS = #{record.tSyUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyAccountState != null">
+        T_SY_ACCOUNT_STATE = #{record.tSyAccountState,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyRoleid != null">
+        T_SY_ROLEID = #{record.tSyRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyCreateTime != null">
+        T_SY_CREATE_TIME = #{record.tSyCreateTime,jdbcType=DATE},
+      </if>
+      <if test="record.tSyLastlogintime != null">
+        T_SY_LASTLOGINTIME = #{record.tSyLastlogintime,jdbcType=DATE},
+      </if>
+      <if test="record.tSyIsonline != null">
+        T_SY_ISONLINE = #{record.tSyIsonline,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyIslimir != null">
+        T_SY_ISLIMIR = #{record.tSyIslimir,jdbcType=INTEGER},
+      </if>
+      <if test="record.tSyBz1 != null">
+        T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyBz2 != null">
+        T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tSyDelDate != null">
+        T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_sy_user
+    set T_SY_USER_ID = #{record.tSyUserId,jdbcType=INTEGER},
+      T_SY_ACCOUNT = #{record.tSyAccount,jdbcType=VARCHAR},
+      T_SY_PASSWORD = #{record.tSyPassword,jdbcType=VARCHAR},
+      T_SY_PAY_PASSWORD = #{record.tSyPayPassword,jdbcType=INTEGER},
+      T_SY_USERNAME = #{record.tSyUsername,jdbcType=VARCHAR},
+      T_SY_NICKNAME = #{record.tSyNickname,jdbcType=VARCHAR},
+      T_SY_SEX = #{record.tSySex,jdbcType=INTEGER},
+      T_SY_DATEOFBIRTH = #{record.tSyDateofbirth,jdbcType=DATE},
+      T_SY_CARDID = #{record.tSyCardid,jdbcType=VARCHAR},
+      T_SY_MAIL = #{record.tSyMail,jdbcType=VARCHAR},
+      T_SY_PHONE = #{record.tSyPhone,jdbcType=VARCHAR},
+      T_SY_REMARK = #{record.tSyRemark,jdbcType=VARCHAR},
+      T_SY_INTEGRAL = #{record.tSyIntegral,jdbcType=INTEGER},
+      T_SY_IMGPATH = #{record.tSyImgpath,jdbcType=VARCHAR},
+      T_SY_USER_STATUS = #{record.tSyUserStatus,jdbcType=INTEGER},
+      T_SY_ACCOUNT_STATE = #{record.tSyAccountState,jdbcType=INTEGER},
+      T_SY_ROLEID = #{record.tSyRoleid,jdbcType=VARCHAR},
+      T_SY_CREATE_TIME = #{record.tSyCreateTime,jdbcType=DATE},
+      T_SY_LASTLOGINTIME = #{record.tSyLastlogintime,jdbcType=DATE},
+      T_SY_ISONLINE = #{record.tSyIsonline,jdbcType=INTEGER},
+      T_SY_ISLIMIR = #{record.tSyIslimir,jdbcType=INTEGER},
+      T_SY_BZ1 = #{record.tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{record.tSyBz2,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{record.tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{record.tSyDelDate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.common.busibean.SyUser">
+    update t_sy_user
+    <set>
+      <if test="tSyAccount != null">
+        T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPassword != null">
+        T_SY_PASSWORD = #{tSyPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPayPassword != null">
+        T_SY_PAY_PASSWORD = #{tSyPayPassword,jdbcType=INTEGER},
+      </if>
+      <if test="tSyUsername != null">
+        T_SY_USERNAME = #{tSyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyNickname != null">
+        T_SY_NICKNAME = #{tSyNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="tSySex != null">
+        T_SY_SEX = #{tSySex,jdbcType=INTEGER},
+      </if>
+      <if test="tSyDateofbirth != null">
+        T_SY_DATEOFBIRTH = #{tSyDateofbirth,jdbcType=DATE},
+      </if>
+      <if test="tSyCardid != null">
+        T_SY_CARDID = #{tSyCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyMail != null">
+        T_SY_MAIL = #{tSyMail,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyPhone != null">
+        T_SY_PHONE = #{tSyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyRemark != null">
+        T_SY_REMARK = #{tSyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyIntegral != null">
+        T_SY_INTEGRAL = #{tSyIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="tSyImgpath != null">
+        T_SY_IMGPATH = #{tSyImgpath,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyUserStatus != null">
+        T_SY_USER_STATUS = #{tSyUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="tSyAccountState != null">
+        T_SY_ACCOUNT_STATE = #{tSyAccountState,jdbcType=INTEGER},
+      </if>
+      <if test="tSyRoleid != null">
+        T_SY_ROLEID = #{tSyRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyCreateTime != null">
+        T_SY_CREATE_TIME = #{tSyCreateTime,jdbcType=DATE},
+      </if>
+      <if test="tSyLastlogintime != null">
+        T_SY_LASTLOGINTIME = #{tSyLastlogintime,jdbcType=DATE},
+      </if>
+      <if test="tSyIsonline != null">
+        T_SY_ISONLINE = #{tSyIsonline,jdbcType=INTEGER},
+      </if>
+      <if test="tSyIslimir != null">
+        T_SY_ISLIMIR = #{tSyIslimir,jdbcType=INTEGER},
+      </if>
+      <if test="tSyBz1 != null">
+        T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyBz2 != null">
+        T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelStatus != null">
+        T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tSyDelDate != null">
+        T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE},
+      </if>
+    </set>
+    where T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.common.busibean.SyUser">
+    update t_sy_user
+    set T_SY_ACCOUNT = #{tSyAccount,jdbcType=VARCHAR},
+      T_SY_PASSWORD = #{tSyPassword,jdbcType=VARCHAR},
+      T_SY_PAY_PASSWORD = #{tSyPayPassword,jdbcType=INTEGER},
+      T_SY_USERNAME = #{tSyUsername,jdbcType=VARCHAR},
+      T_SY_NICKNAME = #{tSyNickname,jdbcType=VARCHAR},
+      T_SY_SEX = #{tSySex,jdbcType=INTEGER},
+      T_SY_DATEOFBIRTH = #{tSyDateofbirth,jdbcType=DATE},
+      T_SY_CARDID = #{tSyCardid,jdbcType=VARCHAR},
+      T_SY_MAIL = #{tSyMail,jdbcType=VARCHAR},
+      T_SY_PHONE = #{tSyPhone,jdbcType=VARCHAR},
+      T_SY_REMARK = #{tSyRemark,jdbcType=VARCHAR},
+      T_SY_INTEGRAL = #{tSyIntegral,jdbcType=INTEGER},
+      T_SY_IMGPATH = #{tSyImgpath,jdbcType=VARCHAR},
+      T_SY_USER_STATUS = #{tSyUserStatus,jdbcType=INTEGER},
+      T_SY_ACCOUNT_STATE = #{tSyAccountState,jdbcType=INTEGER},
+      T_SY_ROLEID = #{tSyRoleid,jdbcType=VARCHAR},
+      T_SY_CREATE_TIME = #{tSyCreateTime,jdbcType=DATE},
+      T_SY_LASTLOGINTIME = #{tSyLastlogintime,jdbcType=DATE},
+      T_SY_ISONLINE = #{tSyIsonline,jdbcType=INTEGER},
+      T_SY_ISLIMIR = #{tSyIslimir,jdbcType=INTEGER},
+      T_SY_BZ1 = #{tSyBz1,jdbcType=VARCHAR},
+      T_SY_BZ2 = #{tSyBz2,jdbcType=VARCHAR},
+      T_SY_DEL_STATUS = #{tSyDelStatus,jdbcType=VARCHAR},
+      T_SY_DEL_DATE = #{tSyDelDate,jdbcType=DATE}
+    where T_SY_USER_ID = #{tSyUserId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPhone" parameterType="com.sy.common.annotation.MapUtil" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SY_USER  
+    where (T_SY_PHONE = #{record.phone,jdbcType=VARCHAR})  
+  </select>
+  
+</mapper>

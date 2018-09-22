@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>回收站</title>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/pubcss/tab.css">
+<link rel="stylesheet" href="../css/pubcss/chg.css">
+<!-- 日期控件调用 start -->
+<!--<link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="../date_js_css/font-awesome.min.css">
+<link rel="stylesheet" href="../date_js_css/daterangepicker-bs3.css">
+<!-- 日期控件调用 end -->
+<script src="../js/pubjs/tab.js"></script>
+<script src="../js/pubjs/chg.js"></script>
+<!-- 日期控件调用 start -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../date_js_css/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="../date_js_css/moment.js"></script>
+<script type="text/javascript" src="../date_js_css/daterangepicker.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $('#date2').daterangepicker(null, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);  
+             });
+            initquery();
+        });
+        
+        function initquery() {  
+    	    $("#empUserList").bootstrapTable({  
+    	        url: 'roleserch',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                contentType: "application/x-www-form-urlencoded",
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortable: false,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                       //初始化加载第一页，默认第一页
+                pageSize: 12,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                queryParamsType : "undefined",
+                queryParams: function queryParams(params) {   //设置查询参数
+                	var array=$("#date2").val().split(" - ");
+                    var param = {
+                            //这里是在ajax发送请求的时候设置一些参数 params有什么东西，自己看看源码就知道了
+                            pageNo: params.pageNumber,
+                            pageSize: params.pageSize,
+                            starDate:array[0],
+                            endDate:array[1],
+                            roleName:$("#role2").val()
+                          };
+                          return param;
+                        },
+                strictSearch: true,
+                clickToSelect: true,                //是否启用点击选中行
+                height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "tSyRoleId",                     //每一行的唯一标识，一般为主键列
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+    	        columns : [{  
+    	            field : 'id',  
+    	            checkbox : true,  
+    	            align : 'center',  
+    	            valign : 'middle'  
+    	        }, {  
+    	            title : '序号',  
+    	            field : 'tSyRoleId', // 字段  
+    	            align : 'center', // 对齐方式（左 中 右）  
+    	            valign : 'middle', //  
+    	            sortable : true  
+    	        },{  
+    	            title : '角色名',  
+    	            field : 'tSyRoleName', // 字段  
+    	            align : 'center', // 对齐方式（左 中 右）  
+    	            valign : 'middle', //  
+    	            sortable : true  
+    	        }, {  
+    	            title : '创建日期',  
+    	            field : 'tSyRoleCreatedate',  
+    	            align : 'center',  
+    	            valign : 'middle',  
+    	            sortable : true  
+    	        }, {  
+    	            title : '描述',  
+    	            field : 'tSyRoleDescription',  
+    	            align : 'center',  
+    	            valign : 'middle',  
+    	            sortable : true  
+    	        } ],  
+    	        responseHandler : function(res) {  
+    	            return {  
+    	                total : res.total,  
+    	                rows : res.records  
+    	                
+
+    	            };  
+    	        },  
+    	        onCheck:function(){  
+    	            return false;
+    	        },  
+    	        onCheckAll:function(){  
+    	        	return false;
+    	        },  
+    	        onUncheckAll:function(){ 
+    	        	return false;
+    	        },  
+    	        onUncheck:function(){  
+    	        	return false;
+    	        }  
+    	    })  
+    	}  
+        
+        
+        
+</script>
+<!-- 日期控件调用 end -->
+</head>
+<body>
+<div style="float: left; width: 100%; margin-right: 0.8%;">
+  <div style="height: 720px; border: 1px solid #fff; background-color: #fff;">
+    <div id="tab" style="margin-left:10px;">
+      <div class="tabList">
+        <ul>
+          <li class="cur">发布寻人</li>
+          <li>发布寻物</li>
+          <li>用户信息</li>
+          <li>管理用户</li>
+          <li>角色管理</li>
+        </ul>
+      </div>
+      <div class="tabCon">
+        <form action="#">
+          <table style="margin-bottom:10px;table-layout:fixed; margin-top:10px; margin-left:10px; margin-right:10px;" class="glyphicon-italic">
+            <tr>
+              <td><b>&nbsp;&nbsp;删除日期：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="date2" id="date2" class="form-control" value="2016-12-26 - 2016-12-26" />
+              </td>
+              <td>&nbsp;&nbsp;<b>用户：</b> </td>
+              <td valign="middle"><input type="text" style=" width:220px;" name="user2" class="form-control" />
+              </td>
+              <td>&nbsp;&nbsp;<b>类型：</b> </td>
+              <td valign="middle"><select name="type3" style=" width:100px;" class="form-control">
+                  <option id="all" selected="selected">全部</option>
+                  <option id="0">拾物</option>
+                  <option id="1">失物</option>
+                </select>
+              </td>
+              <td valign="middle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" name="button2"  class="btn btn-success btn-sm" value="  查   询  ">
+              </td>
+            </tr>
+          </table>
+        </form>
+        <div class="cur">
+          <table id="hacker" width="100%" border="1" class="table table-striped">
+            <tr style=" background: #FFCC66; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户 </td>
+              <td> 姓名 </td>
+              <td> 性别 </td>
+              <td> 走失地点 </td>
+              <td> 走失日期 </td>
+              <td> 发布日期 </td>
+              <td> 删除日期 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>1</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市公安局通州分局梨园派出所</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>2</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>3</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>4</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>5</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>6</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>7</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>8</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>9</td>
+              <td> 周杰伦 </td>
+              <td>张三</td>
+              <td>男</td>
+              <td>北京市</td>
+              <td>2016-12-26</td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table id="hacker" width="100%" class="table table-bordered">
+            <tr style=" background: #FFCC66; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 用户 </td>
+              <td> 物品姓名 </td>
+              <td> 物品类型 </td>
+              <td> 类型 </td>
+              <td> 丢失地点 </td>
+              <td> 丢失日期 </td>
+              <td> 发布日期 </td>
+              <td> 删除日期 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">1</td>
+              <td align="center"> 周杰伦 </td>
+              <td align="center">Mac笔记本电脑</td>
+              <td align="center">电子产品</td>
+              <td align="center">拾物</td>
+              <td align="center">北京市昌平区</td>
+              <td align="center">2016-11-11</td>
+              <td align="center">2016-11-11</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">2</td>
+              <td align="center"> 周杰伦 </td>
+              <td align="center">钱包</td>
+              <td align="center">生活用品</td>
+              <td align="center">拾物</td>
+              <td align="center">北京市海淀区</td>
+              <td align="center">2016-07-01</td>
+              <td align="center">2016-07-01</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td align="center">3</td>
+              <td align="center"> 周杰伦 </td>
+              <td align="center">自行车</td>
+              <td align="center">生活用品</td>
+              <td align="center">失物</td>
+              <td align="center">北京市大兴区</td>
+              <td align="center">2016-02-01</td>
+              <td align="center">2016-02-01</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table id="hacker" width="100%" class="table table-bordered">
+            <tr style=" background: #FFCC66; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 姓名 </td>
+              <td> 性别 </td>
+              <td> 昵称 </td>
+              <td> 积分 </td>
+              <td> 创建日期 </td>
+              <td> 删除日期 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>1</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>小三</td>
+              <td><span class="label label-success">100</span> </td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>2</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>小三</td>
+              <td><span class="label label-success">101</span> </td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>3</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>小三</td>
+              <td><span class="label label-success">100</span> </td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>4</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>小三</td>
+              <td><span class="label label-danger">99</span> </td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+            <tr style=" text-align:center;">
+              <td>5</td>
+              <td>张三</td>
+              <td>男</td>
+              <td>小三</td>
+              <td><span class="label label-danger">90</span> </td>
+              <td>2016-12-26</td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/></td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+        <div>
+          <table id="hacker" width="100%" class="table table-bordered">
+            <tr style=" background: #FFCC66; height:28px; width:100%; text-align:center;">
+              <td> 序号 </td>
+              <td> 角色名称 </td>
+              <td> 创建时间 </td>
+              <td> 角色描述 </td>
+              <td> 删除日期 </td>
+              <td> 操作 </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 1 </td>
+              <td> 中级管理员 </td>
+              <td> 2016-12-26 </td>
+              <td> 管理后台 </td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+            <tr style=" text-align:center; height:25px;">
+              <td> 2 </td>
+              <td> 初级管理员 </td>
+              <td> 2016-12-26 </td>
+              <td> 管理后台 </td>
+              <td><span style=" color: #FF0000;">2016-12-26</span></td>
+              <td><input type="button" name="hy" value="  还   原  " class="btn btn-primary btn-sm"/>
+                <input type="button" name="del" value="  彻底删除  " class="btn btn-danger btn-sm"/>
+              </td>
+            </tr>
+          </table>
+          <table  width="100%" border="0">
+            <tr>
+              <td  align="right"><ul class="pagination pagination">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
